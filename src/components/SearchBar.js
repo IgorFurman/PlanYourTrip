@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+const SearchBar = ({ setPlaces }) => {
+  const [search, setSearch] = useState('');
 
-  const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleSearchClick = () => {
-    onSearch(query);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+// API request here
   };
 
   return (
-    <div className="search-bar">
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Szukaj miejsca"
-        value={query}
-        onChange={handleInputChange}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Wyszukaj miejsce"
       />
-      <button onClick={handleSearchClick}>szukaj</button>
-    </div>
+      <button type="submit">Wyszukaj</button>
+    </form>
   );
 };
 
