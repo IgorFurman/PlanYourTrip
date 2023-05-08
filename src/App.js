@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import MapContainer from './components/MapContainer';
-import PlacesList from './components/PlacesList';
+import AttractionsList from './components/AttractionsList';
 
-function App() {
+const App = () => {
   const [places, setPlaces] = useState([]);
+  const [center, setCenter] = useState({ lat: 51.509865, lng: -0.118092 });
 
   return (
-    <div className="App">
-      <SearchBar setPlaces={setPlaces} />
-      <MapContainer places={places} />
-      <PlacesList places={places} />
+    <div>
+      <SearchBar setPlaces={setPlaces} setCenter={setCenter} />
+      <MapContainer places={places} center={center} />
+      <AttractionsList places={places} />
     </div>
   );
-}
+};
 
 export default App;
