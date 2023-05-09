@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Container, Button, Input, List, ListItem } from '../styles.js';
 const AttractionsList = ({ places, setCenter, setZoom }) => {
   const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
 
@@ -16,18 +16,18 @@ const AttractionsList = ({ places, setCenter, setZoom }) => {
   return (
     <div>
       <h2>Atrakcje turystyczne:</h2>
-      <ul>
+      <List>
         {places.map((place) => (
-          <li key={place.place_id}>
+          <ListItem key={place.place_id}>
             <div>
               <strong>{place.name}</strong>
               <p>Adres: {place.formatted_address}</p>
               <p>Ocena: {place.rating ? `${place.rating} ⭐` : 'Brak oceny'}</p>
               <button onClick={() => handleShowOnMapClick(place)}>Pokaż na mapie</button>
             </div>
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
       {lastSelectedPlace && (
         <div>
           <h3>{lastSelectedPlace.name}</h3>

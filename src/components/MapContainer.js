@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { Container, Button, Input, List, ListItem } from '../styles.js'
 
 const Marker = ({ text }) => <div style={{ color: 'red' }}>{text}</div>;
 

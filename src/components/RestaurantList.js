@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import GoogleMapReact from 'google-map-react';
+import { Container, Button, Input, List, ListItem } from '../styles.js'
 
-const RestaurantsList = ({ restaurants }) => {
-  if (!restaurants || restaurants.length === 0) {
-    return <div>Brak restauracji</div>;
+const Marker = ({ text }) => <div style={{ color: 'red' }}>{text}</div>;
+
+const MapContainer = ({ places, center, selectedPlace, zoom }) => {
+
+  if (!places || places.length === 0) {
+    return <div>Wczytywanie mapy...</div>;
   }
 
   return (
-    <div>
-      <h2>Restauracje:</h2>
-      <ul>
-        {restaurants.map((restaurant) => (
-          <li key={restaurant.place_id}>
-            <div>
-              <strong>{restaurant.name}</strong>
-              <p>Adres: {restaurant.formatted_address}</p>
-              <p>Ocena: {restaurant.rating ? `${restaurant.rating} ⭐` : 'Brak oceny'}</p>
-              <a href={`https://www.google.com/search?q=${restaurant.name}`} target="_blank" rel="noreferrer">Więcej informacji</a>
-            </div>
-          </li>
-        ))}
-      </ul>
-      </div>
+    <div style={{ height: '50vh', width: '90%' }}>
+        <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
+        center={center}
+        zoom={zoom}
+      >
+        {selectedPlace && (
+          <Marker
+            lat={selectedPlace.geometry.location.lat}
+            lng={selectedPlace.geometry.location.lng}
+            text={selectedPlace.name}
+          />
+        )}
+      </GoogleMapReact>
+    </div>
   );
 };
 
-export default RestaurantsList;
+export default MapContainer;

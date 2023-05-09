@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { Container, Button, Input, List, ListItem, Header } from '../styles.js';
 const SearchBar = ({ setPlaces, setCenter, setLastSearchedCity }) => {
   const [search, setSearch] = useState('');
  
@@ -22,6 +22,7 @@ const SearchBar = ({ setPlaces, setCenter, setLastSearchedCity }) => {
   };
 
   return (
+	<Header>
     <form onSubmit={handleSubmit}>
       <input
         type='text'
@@ -31,6 +32,7 @@ const SearchBar = ({ setPlaces, setCenter, setLastSearchedCity }) => {
       />
       <button type='submit'>Wyszukaj</button>
     </form>
+	</Header>
   );
 };
 

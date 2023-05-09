@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Button, Input, List, ListItem } from '../styles.js'
 const HotelsList = ({ hotels }) => {
     if (!hotels || hotels.length === 0) {
       return <div>Brak hoteli</div>;
@@ -7,18 +8,18 @@ const HotelsList = ({ hotels }) => {
     return (
       <div>
         <h2>Hotele:</h2>
-        <ul>
+        <List>
           {hotels.map((hotel) => (
-            <li key={hotel.place_id}>
+            <ListItem key={hotel.place_id}>
               <div>
                 <strong>{hotel.name}</strong>
                 <p>Adres: {hotel.formatted_address}</p>
                 <p>Ocena: {hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}</p>
                 <a href={`https://www.google.com/search?q=${hotel.name}`} target="_blank" rel="noreferrer">Więcej informacji</a>
               </div>
-            </li>
+            </ListItem>
           ))}
-        </ul>
+        </List>
         </div>
   );
 };
