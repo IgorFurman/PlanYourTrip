@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const SearchBar = ({ setPlaces, setCenter }) => {
+const SearchBar = ({ setPlaces, setCenter, setLastSearchedCity }) => {
   const [search, setSearch] = useState('');
  
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await axios.get(`http://localhost:5000/api/place/textsearch?query=${search}`);
-
-
-      if (
-        response.data &&
-        response.data.results &&
-        response.data.results.length > 0
-      ) {
+      if (response.data && response.data.results && response.data.results.length > 0) {
         setPlaces(response.data.results);
         const { lat, lng } = response.data.results[0].geometry.location;
         setCenter({ lat, lng });
+        setLastSearchedCity(search); 
       } else {
         console.log('No results found.');
       }
