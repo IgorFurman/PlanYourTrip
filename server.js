@@ -1,19 +1,29 @@
 const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
 const app = express();
-const path = require('path');
+require('dotenv').config();
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Content-Security-Policy', "default-src 'self'");
-  next();
-});
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors());
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/api/place/textsearch', async (req, res) => {
+
+  try {
+    const { query } = req.query;
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&type=tourist_attraction&key=${process.env.GOOGLE_MAPS_API_KEY}`
+    );
+    
+    res.send(response.data);
+  } catch (error) {
+    console.error('Error searching Google Places API:', error);
+    res.status(500).send('Error searching Google Places API');
+  }
 });
 
 app.listen(5000, () => {
   console.log('Server is listening on port 5000');
 });
+
+

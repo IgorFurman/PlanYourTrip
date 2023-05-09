@@ -3,18 +3,12 @@ import axios from 'axios';
 
 const SearchBar = ({ setPlaces, setCenter }) => {
   const [search, setSearch] = useState('');
-
+ 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-        const response = await axios.get(
-            `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${search}&type=tourist_attraction&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-              },
-            }
-          );
+      const response = await axios.get(`http://localhost:5000/api/place/textsearch?query=${search}`);
+
 
       if (
         response.data &&
