@@ -5,30 +5,34 @@ import AttractionsList from './components/AttractionsList';
 import HotelSearch from './components/HotelSearch';
 import HotelsList from './components/HotelsList';
 import RestaurantSearch from './components/RestaurantSearch';
-import RestaurantList from './components/RestaurantList';
+import RestaurantsList from './components/RestaurantsList';
+import PlaceDetails from './components/PlaceDetails';
+
+import { Container } from './styles';
 
 const App = () => {
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [places, setPlaces] = useState([]);
   const [center, setCenter] = useState({ lat: 51.509865, lng: -0.118092 });
+  const [lastSearchedCity, setLastSearchedCity] = useState('London');
+  const [lastSearchedCoordinates, setLastSearchedCoordinates] = useState({ lat: 51.509865, lng: -0.118092 });
   const [hotels, setHotels] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
-  const [lastSearchedCity, setLastSearchedCity] = useState('');
   const [zoom, setZoom] = useState(15);
-
-  const setSelectedPlace = (place) => {
-    setCenter(place.geometry.location);
-  };
 
   return (
     <div>
-      <SearchBar setPlaces={setPlaces} setCenter={setCenter} setLastSearchedCity={setLastSearchedCity}/>
+      <SearchBar setPlaces={setPlaces} setCenter={setCenter} setLastSearchedCity={setLastSearchedCity} setLastSearchedCoordinates={setLastSearchedCoordinates} />
       <HotelSearch setHotels={setHotels} lastSearchedCity={lastSearchedCity} />
       <RestaurantSearch setRestaurants={setRestaurants} lastSearchedCity={lastSearchedCity} />
-      <MapContainer places={places} center={center} zoom={zoom} />
-      <AttractionsList places={places} setSelectedPlace={setSelectedPlace} setCenter={setCenter} setZoom={setZoom} />
-      <HotelsList hotels={hotels} />
-      <RestaurantList restaurants={restaurants} />
       
+      <MapContainer setSelectedPlace={setSelectedPlace} places={places} center={lastSearchedCoordinates} zoom={zoom} />
+      
+      {selectedPlace && <PlaceDetails place={selectedPlace} />}
+      
+      <AttractionsList places={places} setCenter={setCenter} setZoom={setZoom} />
+      <HotelsList hotels={hotels} setCenter={setCenter} setZoom={setZoom} />
+      <RestaurantsList restaurants={restaurants} setCenter={setCenter} setZoom={setZoom} />
     </div>
   );
 };

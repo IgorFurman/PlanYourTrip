@@ -1,31 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Container, Button, Input, List, ListItem } from '../styles.js'
+import { MapContainerStyled, PinStyled, InfoWindow } from '../styles.js'
+import Pin from '../images/pin.png'
 
-const Marker = ({ text }) => <div style={{ color: 'red' }}>{text}</div>;
+const Marker = ({ text, place, setSelectedPlace, selected }) => (
+  <div onClick={() => setSelectedPlace(place)}>
+    <PinStyled src={Pin} alt={text} />
+    {selected && (
+      <InfoWindow>
+        <h2>{place.name}</h2>
+        {/* Include other details about the place here */}
+      </InfoWindow>
+    )}
+  </div>
+);
 
-const MapContainer = ({ places, center, selectedPlace, zoom }) => {
+const MapContainer = ({ places, center, lastSearchedCity, zoom, setSelectedPlace, selectedPlace }) => {
+  const [mapCenter, setMapCenter] = useState(center);
 
-  if (!places || places.length === 0) {
-    return <div>Wczytywanie mapy...</div>;
-  }
+  useEffect(() => {
+    setMapCenter(center);
+  }, [center]);
 
   return (
-    <div style={{ height: '50vh', width: '90%' }}>
-        <GoogleMapReact
+    <MapContainerStyled>
+      <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
-        center={center}
+        defaultCenter={center}
+        center={mapCenter}
+        defaultZoom={zoom}
         zoom={zoom}
       >
-        {selectedPlace && (
+        {places.map((place, index) => (
           <Marker
-            lat={selectedPlace.geometry.location.lat}
-            lng={selectedPlace.geometry.location.lng}
-            text={selectedPlace.name}
+            lat={place.geometry.location.lat}
+            lng={place.geometry.location.lng}
+            text={place.name}
+            key={`${place.place_id}-${index}`}
+            place={place}
+            setSelectedPlace={setSelectedPlace}
+            selected={selectedPlace && selectedPlace.place_id === place.place_id}
           />
-        )}
+        ))}
       </GoogleMapReact>
-    </div>
+    </MapContainerStyled>
   );
 };
 

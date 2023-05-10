@@ -42,7 +42,7 @@ export const ListItem = styled.li`
 	margin-bottom: 10px;
 `;
 
-export const Button = styled.button`
+export const ButtonSearch = styled.button`
 	background-color: #007bff;
 	color: white;
 	padding: 10px 20px;
@@ -51,6 +51,18 @@ export const Button = styled.button`
 	cursor: pointer;
 	&:hover {
 		background-color: #0056b3;
+	}
+`;
+export const ButtonList = styled.button`
+	background-color: #808080;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	font-size: 12px;
+	&:hover {
+		background-color: #a9a9a9;
 	}
 `;
 
@@ -62,23 +74,45 @@ export const Input = styled.input`
 	box-sizing: border-box;
 	margin-bottom: 10px;
 `;
-export const MapContainer = styled.div`
+export const MapContainerStyled = styled.div`
 	height: 90vh;
-	width: 100%;
+	width: auto;
+	margin: 20px;
 	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
 		rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
 		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 `;
-export const Heading = styled.h2`
-
-`;
+export const Heading = styled.h2``;
 
 export const Header = styled.header`
-display: flex;
-width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #203A43;
-  padding: 20px;
-  color: white;
-`
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #203a43;
+	padding: 20px;
+	color: white;
+`;
+export const Logo = styled.img`
+	width: 50px;
+	height: 50px;
+`;
+
+export const PinStyled = styled.img`
+	width: 40px;
+	height: 50px;
+	cursor: pointer;
+	z-index:10;
+	
+`;
+export const InfoWindow = styled.div`
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  position: absolute;
+  left: -120px;
+  top: 35px;
+  width: 250px;
+  z-index: 1;
+`;

@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from '../styles.js'
+import { ButtonSearch } from '../styles.js';
 const RestaurantSearch = ({ lastSearchedCity, setRestaurants }) => {
 	const getRestaurants = async (e) => {
 		e.preventDefault();
 		try {
-      const response = await axios.get(`http://localhost:5000/api/place/restaurants?query=${lastSearchedCity}`);
-      // ...
+			const response = await axios.get(
+				`http://localhost:5000/api/place/restaurants?query=${lastSearchedCity}`
+			);
+	
 			if (
 				response.data &&
 				response.data.results &&
@@ -14,7 +16,7 @@ const RestaurantSearch = ({ lastSearchedCity, setRestaurants }) => {
 			) {
 				setRestaurants(response.data.results);
 			} else {
-				console.log('No restaurants found.');
+				setRestaurants([]);
 			}
 		} catch (error) {
 			console.error('Error searching Google Places API:', error);
@@ -22,7 +24,9 @@ const RestaurantSearch = ({ lastSearchedCity, setRestaurants }) => {
 		}
 	};
 
-	return <Button onClick={getRestaurants}>Pokaż restauracje</Button>;
+	return (
+		<ButtonSearch onClick={getRestaurants}>Pokaż restauracje</ButtonSearch>
+	);
 };
 
 export default RestaurantSearch;

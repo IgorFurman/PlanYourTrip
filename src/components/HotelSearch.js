@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar';
-import { Container, Button, Input, List, ListItem } from '../styles.js'
+import { Container, ButtonSearch, Input, List, ListItem } from '../styles.js'
 
 const HotelSearch = ({ lastSearchedCity, setHotels }) => {
   const getHotels = async (e) => {
+    console.log(lastSearchedCity);
     e.preventDefault()
     try {
       const response = await axios.get(`http://localhost:5000/api/place/hotels?query=${lastSearchedCity}`);
@@ -21,7 +22,7 @@ const HotelSearch = ({ lastSearchedCity, setHotels }) => {
   };
 
   return (
-    <Button onClick={getHotels}>Pokaż hotele</Button>
+    <ButtonSearch onClick={getHotels}>Pokaż hotele</ButtonSearch>
   );
 };
 
