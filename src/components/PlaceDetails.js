@@ -1,12 +1,12 @@
 import React from 'react';
-import {ButtonList} from '../styles'
+import {ButtonList, PlaceDetailsStyled} from '../styles'
 
 const PlaceDetails = ({ place, addToVisit, removeFromVisit, placesToVisit }) => {
   const isPlaceInVisitList = (placeId) => {
 		return placesToVisit.some(place => place.place_id === placeId);
 	}
 	return (
-		<div>
+		<PlaceDetailsStyled>
 			<h2>{place.name}</h2>
 			<p>{place.formatted_address}</p>
 			{place.rating && <p>Rating: {place.rating}</p>}
@@ -27,7 +27,7 @@ const PlaceDetails = ({ place, addToVisit, removeFromVisit, placesToVisit }) => 
 					Usuń z listy do odwiedzenia
 				</ButtonList>
 			)}
-		</div>
+		</PlaceDetailsStyled>
 	);
 };
 

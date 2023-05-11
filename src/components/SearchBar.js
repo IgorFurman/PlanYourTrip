@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Header, Input,  ButtonSearch, Logo } from '../styles.js';
+import HotelSearch from './HotelSearch';
+import RestaurantSearch from './RestaurantSearch';
 
-import LogoImg from '../images/PlanYourTrip-logo.png'
+import { Header, Input, ButtonSearch, Logo, ButtonContainer } from '../styles.js';
+import LogoImg from '../images/PlanYourTrip-logo.png';
 
 const SearchBar = ({
 	setPlaces,
 	setMapSettings,
 	setLastSearchedCity,
 	setLastSearchedCoordinates,
+	setHotels,
+	setRestaurants,
 }) => {
 	const [search, setSearch] = useState('');
 
@@ -26,7 +30,7 @@ const SearchBar = ({
 				setPlaces(response.data.results);
 				const { lat, lng } = response.data.results[0].geometry.location;
 				setMapSettings({ center: { lat, lng }, zoom: 15 });
-				setLastSearchedCoordinates({ lat, lng }); 
+				setLastSearchedCoordinates({ lat, lng });
 				setLastSearchedCity(search);
 			} else {
 				console.log('No results found.');
@@ -40,13 +44,23 @@ const SearchBar = ({
 		<Header>
 			<form onSubmit={handleSubmit}>
 				<Input
-					type='text'
+					type="text"
 					value={search}
 					onChange={(e) => setSearch(e.target.value)}
 				/>
-				<ButtonSearch type='submit'>Szukaj</ButtonSearch>
+				<ButtonSearch type="submit">Szukaj</ButtonSearch>
+				{/* <ButtonContainer>
+					<HotelSearch 
+						lastSearchedCity={search} 
+						setHotels={setHotels} 
+					/>
+					<RestaurantSearch 
+						lastSearchedCity={search} 
+						setRestaurants={setRestaurants} 
+					/>
+				</ButtonContainer> */}
 			</form>
-			<Logo src={LogoImg} alt="Plan Your Trip logo" />
+			<img className="logo" src={LogoImg} alt="Plan Your Trip logo" />
 		</Header>
 	);
 };

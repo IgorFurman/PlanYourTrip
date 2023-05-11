@@ -1,17 +1,16 @@
 import React from 'react';
 import axios from 'axios';
-import SearchBar from './SearchBar';
-import { Container, ButtonSearch, Input, List, ListItem } from '../styles.js'
+import { ButtonSearch } from '../styles.js';
 
-const HotelSearch = ({ lastSearchedCity, setHotels }) => {
+const HotelSearch = ({ lastSearchedCity, setHotels, handleShowHotels }) => {
   const getHotels = async (e) => {
-    console.log(lastSearchedCity);
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await axios.get(`http://localhost:5000/api/place/hotels?query=${lastSearchedCity}`);
-      
+
       if (response.data && response.data.results && response.data.results.length > 0) {
         setHotels(response.data.results);
+        handleShowHotels(); 
       } else {
         console.log('No hotels found.');
       }

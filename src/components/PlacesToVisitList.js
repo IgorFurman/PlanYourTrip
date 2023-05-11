@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ButtonList } from '../styles.js';
+import { List, ListItem, ButtonList, ListContainer } from '../styles.js';
 
 const PlacesToVisitList = ({ placesToVisit, removeFromVisit }) => {
 
@@ -12,7 +12,7 @@ const PlacesToVisitList = ({ placesToVisit, removeFromVisit }) => {
   }
 
   return (
-    <div>
+    <ListContainer>
       <h2>Lista miejsc do odwiedzenia:</h2>
       <List>
         {placesToVisit.map((place, index) => (
@@ -30,7 +30,7 @@ const PlacesToVisitList = ({ placesToVisit, removeFromVisit }) => {
           </ListItem>
         ))}
       </List>
-    </div>
+    </ListContainer>
   );
 };
 
