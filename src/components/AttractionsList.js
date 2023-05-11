@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Container, ButtonList, Input, List, ListItem } from '../styles.js';
 
-const AttractionsList = ({ places, setMapSettings, setSelectedPlace }) => {
+const AttractionsList = ({ places, setMapSettings, setSelectedPlace, placesToVisit, addToVisit, removeFromVisit }) => {
 	const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
 	const [isListVisible, setIsListVisible] = useState(true);
+	const [isHighestRatedFiltered, setIsHighestRatedFiltered] = useState(false);
 
 	const handleShowOnMapClick = (place) => {
 		setSelectedPlace(place);
@@ -14,11 +15,16 @@ const AttractionsList = ({ places, setMapSettings, setSelectedPlace }) => {
 			},
 			zoom: 15,
 		});
+		window.scrollTo({ top: 80, behavior: 'smooth' });
 	};
 
 	const handleToggleListVisibility = () => {
 		setIsListVisible(!isListVisible);
 	};
+
+	const isPlaceInVisitList = (placeId) => {
+		return placesToVisit.some(place => place.place_id === placeId);
+	}
 
 	if (!places || places.length === 0) {
 		return <div>Brak atrakcji turystycznych</div>;
@@ -43,6 +49,11 @@ const AttractionsList = ({ places, setMapSettings, setSelectedPlace }) => {
 								<ButtonList onClick={() => handleShowOnMapClick(place)}>
 									Pokaż na mapie
 								</ButtonList>
+								{!isPlaceInVisitList(place.place_id) ? (
+									<ButtonList onClick={() => addToVisit(place)}>Dodaj do listy do odwiedzenia</ButtonList>
+								) : (
+									<ButtonList onClick={() => removeFromVisit(place.place_id)}>Usuń z listy do odwiedzenia</ButtonList>
+								)}
 							</div>
 						</ListItem>
 					))}

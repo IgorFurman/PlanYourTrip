@@ -99,20 +99,33 @@ export const Logo = styled.img`
 `;
 
 export const PinStyled = styled.img`
-	width: 40px;
-	height: 50px;
-	cursor: pointer;
-	z-index:10;
-	
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  transform: translate(-50%, -100%);
 `;
-export const InfoWindow = styled.div`
-position: absolute;
+export const InfoWindowStyled = styled.div`
+  position: absolute;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
   padding: 10px;
-left: -120px;
-  top: 35px;
-  width: 250px;
-  z-index: 1;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0);
+  min-width: 200px;
+  max-width: 300px;
+  z-index: 10;
+`;
+export const DetailsContainer = styled.div`
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  min-width: 200px;
+  max-width: 300px;
+  z-index: 10;
 `;
