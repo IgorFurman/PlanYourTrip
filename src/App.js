@@ -13,26 +13,33 @@ import { Container } from './styles';
 const App = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [places, setPlaces] = useState([]);
-  const [center, setCenter] = useState({ lat: 51.509865, lng: -0.118092 });
   const [lastSearchedCity, setLastSearchedCity] = useState('London');
   const [lastSearchedCoordinates, setLastSearchedCoordinates] = useState({ lat: 51.509865, lng: -0.118092 });
   const [hotels, setHotels] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
-  const [zoom, setZoom] = useState(15);
+  const [mapSettings, setMapSettings] = useState({ center: lastSearchedCoordinates, zoom: 15 });
+
+  const handleSetSelectedPlace = (place) => {
+    setSelectedPlace(place);
+    setMapSettings({ center: { lat: place.geometry.location.lat, lng: place.geometry.location.lng }, zoom: 15 });
+  }
 
   return (
     <div>
-      <SearchBar setPlaces={setPlaces} setCenter={setCenter} setLastSearchedCity={setLastSearchedCity} setLastSearchedCoordinates={setLastSearchedCoordinates} />
+      <SearchBar  setPlaces={setPlaces}
+        setMapSettings={setMapSettings}
+        setLastSearchedCity={setLastSearchedCity}
+        setLastSearchedCoordinates={setLastSearchedCoordinates} />
       <HotelSearch setHotels={setHotels} lastSearchedCity={lastSearchedCity} />
       <RestaurantSearch setRestaurants={setRestaurants} lastSearchedCity={lastSearchedCity} />
       
-      <MapContainer setSelectedPlace={setSelectedPlace} places={places} center={lastSearchedCoordinates} zoom={zoom} />
+      <MapContainer setSelectedPlace={handleSetSelectedPlace} places={places} mapSettings={mapSettings} />
       
       {selectedPlace && <PlaceDetails place={selectedPlace} />}
       
-      <AttractionsList places={places} setCenter={setCenter} setZoom={setZoom} />
-      <HotelsList hotels={hotels} setCenter={setCenter} setZoom={setZoom} />
-      <RestaurantsList restaurants={restaurants} setCenter={setCenter} setZoom={setZoom} />
+      <AttractionsList places={places} setMapSettings={setMapSettings} setSelectedPlace={handleSetSelectedPlace} />
+      <HotelsList hotels={hotels} setMapSettings={setMapSettings} />
+      <RestaurantsList restaurants={restaurants} setMapSettings={setMapSettings} />
     </div>
   );
 };

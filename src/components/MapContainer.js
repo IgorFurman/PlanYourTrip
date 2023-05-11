@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { MapContainerStyled, PinStyled, InfoWindow } from '../styles.js'
-import Pin from '../images/pin.png'
+import { MapContainerStyled, PinStyled, InfoWindow } from '../styles.js';
+import Pin from '../images/pin.png';
 
 const Marker = ({ text, place, setSelectedPlace, selected }) => (
   <div onClick={() => setSelectedPlace(place)}>
@@ -9,27 +9,46 @@ const Marker = ({ text, place, setSelectedPlace, selected }) => (
     {selected && (
       <InfoWindow>
         <h2>{place.name}</h2>
-        {/* Include other details about the place here */}
+        <p>{place.formatted_address}</p>
+        {place.rating && <p>Rating: {place.rating}</p>}
+        {place.website && (
+          <p>
+            <a href={place.website}>Website</a>
+          </p>
+        )}
+        {place.photos && place.photos.length > 0 && (
+          <img src={place.photos[0]} alt={place.name} />
+        )}
       </InfoWindow>
     )}
   </div>
 );
 
-const MapContainer = ({ places, center, lastSearchedCity, zoom, setSelectedPlace, selectedPlace }) => {
-  const [mapCenter, setMapCenter] = useState(center);
+const MapContainer = ({
+  places,
+  setSelectedPlace,
+  selectedPlace,
+  mapSettings,
+}) => {
+  const mapRef = useRef();
 
   useEffect(() => {
-    setMapCenter(center);
-  }, [center]);
+    if (mapRef.current) {
+      mapRef.current.panTo(mapSettings.center);
+      mapRef.current.setZoom(mapSettings.zoom);
+    }
+  }, [mapSettings]);
 
   return (
     <MapContainerStyled>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
-        defaultCenter={center}
-        center={mapCenter}
-        defaultZoom={zoom}
-        zoom={zoom}
+        center={mapSettings.center}
+        zoom={mapSettings.zoom}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map }) => {
+          mapRef.current = map;
+        }}
       >
         {places.map((place, index) => (
           <Marker

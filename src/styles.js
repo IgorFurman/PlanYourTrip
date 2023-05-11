@@ -106,12 +106,12 @@ export const PinStyled = styled.img`
 	
 `;
 export const InfoWindow = styled.div`
+position: absolute;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
   padding: 10px;
-  position: absolute;
-  left: -120px;
+left: -120px;
   top: 35px;
   width: 250px;
   z-index: 1;

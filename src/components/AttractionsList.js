@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Container, ButtonList, Input, List, ListItem } from '../styles.js';
 
-const AttractionsList = ({ places, setCenter, setZoom }) => {
+const AttractionsList = ({ places, setMapSettings, setSelectedPlace }) => {
 	const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
 	const [isListVisible, setIsListVisible] = useState(true);
 
 	const handleShowOnMapClick = (place) => {
-		setCenter({
-			lat: place.geometry.location.lat,
-			lng: place.geometry.location.lng,
+		setSelectedPlace(place);
+		setMapSettings({
+			center: {
+				lat: place.geometry.location.lat,
+				lng: place.geometry.location.lng,
+			},
+			zoom: 15,
 		});
-		setZoom(18);
 	};
 
 	const handleToggleListVisibility = () => {

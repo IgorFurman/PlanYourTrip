@@ -6,7 +6,7 @@ import LogoImg from '../images/PlanYourTrip-logo.png'
 
 const SearchBar = ({
 	setPlaces,
-	setCenter,
+	setMapSettings,
 	setLastSearchedCity,
 	setLastSearchedCoordinates,
 }) => {
@@ -25,7 +25,7 @@ const SearchBar = ({
 			) {
 				setPlaces(response.data.results);
 				const { lat, lng } = response.data.results[0].geometry.location;
-				setCenter({ lat, lng });
+				setMapSettings({ center: { lat, lng }, zoom: 15 });
 				setLastSearchedCoordinates({ lat, lng }); 
 				setLastSearchedCity(search);
 			} else {
