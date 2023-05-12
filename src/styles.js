@@ -150,7 +150,7 @@ export const Header = styled.header`
 `;
 export const PinStyled = styled.img`
 	width: 25px;
-	height: 20px;
+	height: 30px;
 	cursor: pointer;
 	z-index: 1;
 	position: relative;
@@ -209,11 +209,20 @@ export const ListContainer = styled.div`
 
 
 export const PlaceDetailsStyled = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: flex-start;
 border: 1px solid #ccc;
 	border-radius: 5px;
 	padding: 15px;
 	margin: 10px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	img {
+		width: 300px;
+		height: 300px;
+		margin-bottom: 15px;
+	}
 	@media (max-width: 576px) {
 		padding: 10px;
 		margin: 5px;

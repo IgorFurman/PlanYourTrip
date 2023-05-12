@@ -63,6 +63,10 @@ const App = () => {
     }
   };
 
+  const addPlaces = (newPlaces) => {
+    setPlaces((prevPlaces) => [...prevPlaces, ...newPlaces]);
+  };
+
   return (
     <div>
       <SearchBar
@@ -83,11 +87,13 @@ const App = () => {
         setHotels={setHotels}
         lastSearchedCity={lastSearchedCity}
         handleShowHotels={handleShowHotels}
+        addPlaces={addPlaces}
       />
       <RestaurantSearch
         setRestaurants={setRestaurants}
         lastSearchedCity={lastSearchedCity}
         handleShowRestaurants={handleShowRestaurants}
+        addPlaces={addPlaces}
       />
       <PlacesToVisitList
         placesToVisit={placesToVisit}

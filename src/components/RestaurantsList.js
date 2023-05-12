@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, ButtonList, Input, List, ListItem } from '../styles.js'
+import { Container, ButtonList, Input, List, ListItem } from '../styles'
 
 const RestaurantsList = ({ restaurants, setCenter, setZoom }) => {
   const handleShowOnMapClick = (restaurant) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, ButtonList, ListContainer } from '../styles.js';
+import { List, ListItem, ButtonList, ListContainer } from '../styles';
 
 const PlacesToVisitList = ({ placesToVisit, removeFromVisit }) => {
 

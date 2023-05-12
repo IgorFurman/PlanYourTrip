@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, ButtonList, Input, List, ListItem } from '../styles.js'
+import { Container, ButtonList, Input, List, ListItem } from '../styles'
 const HotelsList = ({ hotels, setCenter, setZoom }) => {
   const handleShowOnMapClick = (hotel) => {
   setCenter({
@@ -23,7 +23,7 @@ const HotelsList = ({ hotels, setCenter, setZoom }) => {
               <strong>{hotel.name}</strong>
               <p>Adres: {hotel.formatted_address}</p>
               <p>Ocena: {hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}</p>
-              <a href={`https://www.google.com/search?q=${hotel.name}`} target="_blank" rel="noreferrer">Więcej informacji</a>
+             
               <ButtonList onClick={() => handleShowOnMapClick(hotel)}>Pokaż na mapie</ButtonList>
             </div>
           </ListItem>
