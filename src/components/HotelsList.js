@@ -17,8 +17,8 @@ const HotelsList = ({ hotels, setCenter, setZoom }) => {
     <div>
       <h2>Hotele:</h2>
       <List>
-        {hotels.map((hotel) => (
-          <ListItem key={hotel.place_id}>
+        {hotels.map((hotel, index) => (
+          <ListItem key={`${hotel.place_id}- ${index}`}>
             <div>
               <strong>{hotel.name}</strong>
               <p>Adres: {hotel.formatted_address}</p>

@@ -11,6 +11,10 @@ import PlacesToVisitList from './components/PlacesToVisitList';
 
 import { Container } from './styles';
 
+
+
+
+
 const App = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [places, setPlaces] = useState([]);

@@ -18,13 +18,13 @@ const RestaurantsList = ({ restaurants, setCenter, setZoom }) => {
     <div>
       <h2>Restauracje:</h2>
       <List>
-        {restaurants.map((restaurant) => (
-          <ListItem key={restaurant.place_id}>
+        {restaurants.map((restaurant, index) => (
+          <ListItem key={`${restaurant.place_id}-${index}`}>
             <div>
               <strong>{restaurant.name}</strong>
               <p>Adres: {restaurant.formatted_address}</p>
               <p>Ocena: {restaurant.rating ? `${restaurant.rating} ⭐` : 'Brak oceny'}</p>
-              <a href={`https://www.google.com/search?q=${restaurant.name}`} target="_blank" rel="noreferrer">Więcej informacji</a>
+             
               <ButtonList onClick={() => handleShowOnMapClick(restaurant)}>Pokaż na mapie</ButtonList>
             </div>
           </ListItem>
