@@ -207,25 +207,66 @@ export const ListContainer = styled.div`
 	}
 `;
 
-
 export const PlaceDetailsStyled = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: flex-start;
-border: 1px solid #ccc;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	border: 1px solid #ccc;
 	border-radius: 5px;
 	padding: 15px;
-	margin: 10px;
+	margin: 0 auto;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	img {
-		width: 300px;
-		height: 300px;
-		margin-bottom: 15px;
-	}
+	width: 90%;
 	@media (max-width: 576px) {
 		padding: 10px;
 		margin: 5px;
 	}
+`;
 
-`
+export const WebsideLink = styled.a`
+	text-decoration: none;
+	color: black;
+	transition: color 0.3s;
+	&:hover {
+		color: blue;
+	}
+`;
+
+export const OpeningHours = styled.div`
+	p {
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	ul {
+		display: flex;
+		flex-direction: column;
+		list-style: none;
+		padding-left: 0;
+	}
+`;
+
+export const CarouselWrapper = styled.div`
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	overflow: hidden;
+	padding: 15px 0;
+`;
+
+export const CarouselItem = styled.div`
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	width: 100%;
+`;
+
+export const CarouselImage = styled.img`
+	height: 400px;
+	width: 90%;
+	object-fit: cover;
+`;

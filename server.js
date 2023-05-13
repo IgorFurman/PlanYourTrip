@@ -50,6 +50,19 @@ app.get('/api/place/attractions', async (req, res) => {
     res.status(500).send('Error searching Google Places API');
   }
 });
+app.get('/api/place/details', async (req, res) => {
+  try {
+    const { placeId } = req.query;
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`
+    );
+    res.send(response.data.result);
+  } catch (error) {
+    console.error('Error fetching place details from Google Places API:', error);
+    console.error('Response:', error.response && error.response.data);
+    res.status(500).send('Error fetching place details');
+  }
+});
 
 app.listen(5000, () => {
   console.log('Server is listening on port 5000');

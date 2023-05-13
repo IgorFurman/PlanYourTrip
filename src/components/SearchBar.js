@@ -13,7 +13,8 @@ const SearchBar = ({
 	setLastSearchedCoordinates,
 	setHotels,
 	setRestaurants,
-	setSelectedPlace
+	setSelectedPlace,
+	setIsCitySearched
 }) => {
 	const [search, setSearch] = useState('');
 
@@ -36,6 +37,7 @@ const SearchBar = ({
 				setSelectedPlace(null);
 			setHotels([]);
 			setRestaurants([]);
+			setIsCitySearched(true)
 			} else {
 				console.log('No results found.');
 			}
@@ -53,16 +55,7 @@ const SearchBar = ({
 					onChange={(e) => setSearch(e.target.value)}
 				/>
 				<ButtonSearch type="submit">Szukaj</ButtonSearch>
-				{/* <ButtonContainer>
-					<HotelSearch 
-						lastSearchedCity={search} 
-						setHotels={setHotels} 
-					/>
-					<RestaurantSearch 
-						lastSearchedCity={search} 
-						setRestaurants={setRestaurants} 
-					/>
-				</ButtonContainer> */}
+				
 			</form>
 			<img className="logo" src={LogoImg} alt="Plan Your Trip logo" />
 		</Header>

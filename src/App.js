@@ -26,6 +26,7 @@ const App = () => {
 		center: lastSearchedCoordinates,
 		zoom: 15,
 	});
+  const [isCitySearched, setIsCitySearched] = useState(false);
 
 	const hotelsListRef = useRef(null);
 	const restaurantsListRef = useRef();
@@ -79,6 +80,7 @@ const App = () => {
             setSelectedPlace={setSelectedPlace}
             setHotels = {setHotels }
             setRestaurants = {setRestaurants}
+            setIsCitySearched={setIsCitySearched}
 					/>
 				}
 				placeDetails={
@@ -97,6 +99,7 @@ const App = () => {
 						lastSearchedCity={lastSearchedCity}
 						handleShowHotels={handleShowHotels}
 						addPlaces={addPlaces}
+            isCitySearched={isCitySearched}
 					/>
 				}
 				restaurantSearch={
@@ -105,6 +108,7 @@ const App = () => {
 						lastSearchedCity={lastSearchedCity}
 						handleShowRestaurants={handleShowRestaurants}
 						addPlaces={addPlaces}
+            isCitySearched={isCitySearched}
 					/>
 				}
 				placesToVisitList={
