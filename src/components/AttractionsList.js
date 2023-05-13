@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container, ButtonList, Input, List, ListItem } from '../styles';
+
+import { ScrollContext } from './ScrollContext';
 
 const AttractionsList = ({
 	places,
@@ -13,6 +15,8 @@ const AttractionsList = ({
 	const [isListVisible, setIsListVisible] = useState(true);
 	const [isHighestRatedFiltered, setIsHighestRatedFiltered] = useState(false);
 
+	const { calculateHeight } = useContext(ScrollContext);
+
 	const handleShowOnMapClick = (place) => {
 		setSelectedPlace(place);
 		setMapSettings({
@@ -20,9 +24,9 @@ const AttractionsList = ({
 				lat: place.geometry.location.lat,
 				lng: place.geometry.location.lng,
 			},
-			zoom: 15,
+			zoom: 18,
 		});
-		window.scrollTo({ top: 80, behavior: 'smooth' });
+		window.scrollTo({ top: calculateHeight(), behavior: 'smooth' });
 	};
 
 	const handleToggleListVisibility = () => {

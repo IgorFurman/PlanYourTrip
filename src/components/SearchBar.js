@@ -13,6 +13,7 @@ const SearchBar = ({
 	setLastSearchedCoordinates,
 	setHotels,
 	setRestaurants,
+	setSelectedPlace
 }) => {
 	const [search, setSearch] = useState('');
 
@@ -32,6 +33,9 @@ const SearchBar = ({
 				setMapSettings({ center: { lat, lng }, zoom: 15 });
 				setLastSearchedCoordinates({ lat, lng });
 				setLastSearchedCity(search);
+				setSelectedPlace(null);
+			setHotels([]);
+			setRestaurants([]);
 			} else {
 				console.log('No results found.');
 			}
