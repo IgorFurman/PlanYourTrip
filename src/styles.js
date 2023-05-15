@@ -102,6 +102,7 @@ export const Input = styled.input`
 `;
 
 export const MapContainerStyled = styled.div`
+position: relative;
 	height: 90vh;
 	width: auto;
 	margin: 20px;
@@ -176,14 +177,13 @@ export const InfoWindowStyled = styled.div`
 `;
 
 export const DetailsContainer = styled.div`
-	position: absolute;
 	background-color: white;
 	border-radius: 5px;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 	padding: 10px;
 	min-width: 200px;
 	max-width: 300px;
-	z-index: 10;
+	overflow: hidden;
 	@media (max-width: 576px) {
 		padding: 5px;
 		min-width: 150px;
@@ -210,7 +210,7 @@ export const ListContainer = styled.div`
 export const PlaceDetailsStyled = styled.div`
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: flex-start;
 	flex-wrap: wrap;
 	border: 1px solid #ccc;
@@ -249,8 +249,8 @@ export const OpeningHours = styled.div`
 
 export const CarouselWrapper = styled.div`
 	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
 	overflow: hidden;
 	padding: 15px 0;
@@ -266,7 +266,35 @@ export const CarouselItem = styled.div`
 `;
 
 export const CarouselImage = styled.img`
-	height: 400px;
+	height: 500px;
 	width: 90%;
 	object-fit: cover;
+`;
+
+
+// map legend 
+export const LegendContainer = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+	z-index: 999;
+`;
+
+export const LegendItem = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+`;
+
+export const LegendPin = styled.img`
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+`;
+
+export const LegendLabel = styled.span`
+  font-size: 14px;
 `;

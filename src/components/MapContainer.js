@@ -6,6 +6,7 @@ import {
 	InfoWindowStyled,
 	DetailsContainer,
 } from '../styles.js';
+import MapLegend from './MapLegend';
 import AttractionsPin from '../images/AttractionsPin.png';
 import HotelsPin from '../images/HotelsPin.png';
 import RestaurantsPin from '../images/RestaurantsPin.png';
@@ -47,6 +48,7 @@ const MapContainer = ({
 	};
 	return (
 		<MapContainerStyled ref={mapRef}>
+			<MapLegend />
 			<GoogleMapReact
 				bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
 				center={mapSettings.center}
@@ -74,7 +76,6 @@ const MapContainer = ({
 						left: detailsPosition.x,
 					}}
 				>
-					{/* <PlaceDetails place={selectedPlace} /> */}
 				</DetailsContainer>
 			)}
 		</MapContainerStyled>

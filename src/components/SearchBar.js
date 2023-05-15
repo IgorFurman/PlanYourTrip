@@ -6,6 +6,7 @@ import RestaurantSearch from './RestaurantSearch';
 import { Header, Input, ButtonSearch, Logo, ButtonContainer } from '../styles.js';
 import LogoImg from '../images/PlanYourTrip-logo.png';
 
+
 const SearchBar = ({
 	setPlaces,
 	setMapSettings,
@@ -14,7 +15,11 @@ const SearchBar = ({
 	setHotels,
 	setRestaurants,
 	setSelectedPlace,
-	setIsCitySearched
+	setIsCitySearched,
+	addPlaces,
+	isCitySearched,
+	handleShowRestaurants,
+	handleShowHotels,
 }) => {
 	const [search, setSearch] = useState('');
 
@@ -56,6 +61,20 @@ const SearchBar = ({
 				/>
 				<ButtonSearch type="submit">Szukaj</ButtonSearch>
 				
+				<RestaurantSearch
+					lastSearchedCity={search}
+					setRestaurants={setRestaurants}
+					handleShowRestaurants={handleShowRestaurants}
+					addPlaces={addPlaces}
+					isCitySearched={isCitySearched}
+				/>
+				<HotelSearch
+					lastSearchedCity={search}
+					setHotels={setHotels}
+					handleShowHotels={handleShowHotels}
+					addPlaces={addPlaces}
+					isCitySearched={isCitySearched}
+				/>
 			</form>
 			<img className="logo" src={LogoImg} alt="Plan Your Trip logo" />
 		</Header>

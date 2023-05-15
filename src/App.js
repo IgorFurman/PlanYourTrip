@@ -69,89 +69,76 @@ const App = () => {
 	};
 
 	return (
-		<div>
-			<ScrollProvider
-				searchBar={
-					<SearchBar
-						setPlaces={setPlaces}
-						setMapSettings={setMapSettings}
-						setLastSearchedCity={setLastSearchedCity}
-						setLastSearchedCoordinates={setLastSearchedCoordinates}
+    <div>
+      <ScrollProvider
+        searchBar={
+          <SearchBar
+            setPlaces={setPlaces}
+            setMapSettings={setMapSettings}
+            setLastSearchedCity={setLastSearchedCity}
+            setLastSearchedCoordinates={setLastSearchedCoordinates}
             setSelectedPlace={setSelectedPlace}
-            setHotels = {setHotels }
-            setRestaurants = {setRestaurants}
+            setHotels={setHotels}
+            setRestaurants={setRestaurants}
             setIsCitySearched={setIsCitySearched}
-					/>
-				}
-				placeDetails={
-					selectedPlace && (
-						<PlaceDetails
-							place={selectedPlace}
-							addToVisit={addToVisit}
-							removeFromVisit={removeFromVisit}
-							placesToVisit={placesToVisit}
-						/>
-					)
-				}
-				hotelSearch={
-					<HotelSearch
-						setHotels={setHotels}
-						lastSearchedCity={lastSearchedCity}
-						handleShowHotels={handleShowHotels}
-						addPlaces={addPlaces}
-            isCitySearched={isCitySearched}
-					/>
-				}
-				restaurantSearch={
-					<RestaurantSearch
-						setRestaurants={setRestaurants}
-						lastSearchedCity={lastSearchedCity}
-						handleShowRestaurants={handleShowRestaurants}
-						addPlaces={addPlaces}
-            isCitySearched={isCitySearched}
-					/>
-				}
-				placesToVisitList={
-					<PlacesToVisitList
-						placesToVisit={placesToVisit}
-						removeFromVisit={removeFromVisit}
-					/>
-				}
-			>
-				<MapContainer
-					setSelectedPlace={handleSetSelectedPlace}
-					places={places}
-					mapSettings={mapSettings}
-				/>
-				<AttractionsList
-					places={places}
-					setMapSettings={setMapSettings}
-					setSelectedPlace={setSelectedPlace}
-					placesToVisit={placesToVisit}
-					addToVisit={addToVisit}
-					removeFromVisit={removeFromVisit}
-				/>
-				<div ref={hotelsListRef}>
-					<HotelsList
-						hotels={hotels}
-						addToVisit={addToVisit}
-						removeFromVisit={removeFromVisit}
-						setMapSettings={setMapSettings}
-						setSelectedPlace={setSelectedPlace}
-					/>
-				</div>
-				<div ref={restaurantsListRef}>
-					<RestaurantsList
-						restaurants={restaurants}
-						addToVisit={addToVisit}
-						removeFromVisit={removeFromVisit}
-						setMapSettings={setMapSettings}
-						setSelectedPlace={setSelectedPlace}
-					/>
-				</div>
-			</ScrollProvider>
-		</div>
-	);
+            handleShowRestaurants={handleShowRestaurants}
+            handleShowHotels={handleShowHotels}
+            addPlaces={addPlaces}
+	isCitySearched= {isCitySearched}
+          />
+        }
+        placeDetails={
+          selectedPlace && (
+            <PlaceDetails
+              place={selectedPlace}
+              addToVisit={addToVisit}
+              removeFromVisit={removeFromVisit}
+              placesToVisit={placesToVisit}
+            />
+          )
+        }
+        placesToVisitList={
+          <PlacesToVisitList
+            placesToVisit={placesToVisit}
+            removeFromVisit={removeFromVisit}
+						currentCity={lastSearchedCity}
+          />
+        }
+      >
+        <MapContainer
+          setSelectedPlace={handleSetSelectedPlace}
+          places={places}
+          mapSettings={mapSettings}
+        />
+        <AttractionsList
+          places={places}
+          setMapSettings={setMapSettings}
+          setSelectedPlace={setSelectedPlace}
+          placesToVisit={placesToVisit}
+          addToVisit={addToVisit}
+          removeFromVisit={removeFromVisit}
+        />
+        <div ref={hotelsListRef}>
+          <HotelsList
+            hotels={hotels}
+            addToVisit={addToVisit}
+            removeFromVisit={removeFromVisit}
+            setMapSettings={setMapSettings}
+            setSelectedPlace={setSelectedPlace}
+          />
+        </div>
+        <div ref={restaurantsListRef}>
+          <RestaurantsList
+            restaurants={restaurants}
+            addToVisit={addToVisit}
+            removeFromVisit={removeFromVisit}
+            setMapSettings={setMapSettings}
+            setSelectedPlace={setSelectedPlace}
+          />
+        </div>
+      </ScrollProvider>
+    </div>
+  )
 };
 
 export default App;

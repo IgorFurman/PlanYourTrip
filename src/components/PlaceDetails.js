@@ -111,6 +111,7 @@ const PlaceDetails = ({
 						<div>
 							<h3>Opinie:</h3>
 							<Carousel>
+								
 								{detailedPlace.reviews.map((review, index) => (
 									<div key={index}>
 										<p>
