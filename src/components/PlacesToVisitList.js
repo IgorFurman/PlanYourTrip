@@ -12,7 +12,7 @@ const generateDownloadContent = (placesToVisit) => {
 	});
 	return content;
 };
-const PlacesToVisitList = ({ placesToVisit, removeFromVisit, currentCity }) => {
+const PlacesToVisitList = ({ placesToVisit, removeFromVisit, currentCity, style }) => {
 	const downloadContent = generateDownloadContent(placesToVisit);
 	const blob = new Blob([downloadContent], { type: "text/plain" });
 	const downloadUrl = URL.createObjectURL(blob);
@@ -26,7 +26,7 @@ const PlacesToVisitList = ({ placesToVisit, removeFromVisit, currentCity }) => {
 	}
 
 	return (
-		<ListContainer>
+		<ListContainer style={style}>
 			<h2>{currentCity} - Lista miejsc do odwiedzenia</h2>
       <a href={downloadUrl} download={`${currentCity}_places_to_visit.txt`}>
 				Pobierz listę miejsc do odwiedzenia

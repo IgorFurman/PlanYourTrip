@@ -59,6 +59,7 @@ const SearchBar = ({
 					value={search}
 					onChange={(e) => setSearch(e.target.value)}
 				/>
+				<ButtonContainer>
 				<ButtonSearch type="submit">Szukaj</ButtonSearch>
 				
 				<RestaurantSearch
@@ -75,6 +76,7 @@ const SearchBar = ({
 					addPlaces={addPlaces}
 					isCitySearched={isCitySearched}
 				/>
+				</ButtonContainer>
 			</form>
 			<img className="logo" src={LogoImg} alt="Plan Your Trip logo" />
 		</Header>

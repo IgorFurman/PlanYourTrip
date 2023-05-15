@@ -16,9 +16,13 @@ const MapContainer = ({
 	setSelectedPlace,
 	selectedPlace,
 	mapSettings,
+	style,
+	setShouldBounce,
+	shouldBounce
 }) => {
 	const mapRef = useRef();
 	const [detailsPosition, setDetailsPosition] = useState(null);
+	
 
 	const handleMarkerClick = (place, { x, y }) => {
 		setSelectedPlace(place);
@@ -47,7 +51,7 @@ const MapContainer = ({
 		return AttractionsPin;
 	};
 	return (
-		<MapContainerStyled ref={mapRef}>
+		<MapContainerStyled ref={mapRef} style={style}>
 			<MapLegend />
 			<GoogleMapReact
 				bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
@@ -64,7 +68,7 @@ const MapContainer = ({
         handleMarkerClick(place, { x: e.clientX, y: e.clientY })
       }
     >
-      <PinStyled src={getPinForPlace(place)} alt={place.name} />
+      <PinStyled shouldBounce={shouldBounce} src={getPinForPlace(place)} alt={place.name} />
     </Marker>
   ))}
 			</GoogleMapReact>

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Container, ButtonList, Input, List, ListItem } from '../styles';
+import { Container, ButtonList, Input, List, ListItem, ListContainer } from '../styles';
 
 import { ScrollContext } from './ScrollContext';
 
@@ -10,6 +10,8 @@ const AttractionsList = ({
 	placesToVisit,
 	addToVisit,
 	removeFromVisit,
+	style,
+	setShouldBounce
 }) => {
 	const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
 	const [isListVisible, setIsListVisible] = useState(true);
@@ -18,6 +20,7 @@ const AttractionsList = ({
 	const { calculateHeight } = useContext(ScrollContext);
 
 	const handleShowOnMapClick = (place) => {
+		setShouldBounce(true)
 		setSelectedPlace(place);
 		setMapSettings({
 			center: {
@@ -42,7 +45,7 @@ const AttractionsList = ({
 	}
 
 	return (
-		<div>
+		<ListContainer style={style}>
 			<h2>Atrakcje turystyczne:</h2>
 			<ButtonList onClick={handleToggleListVisibility}>
 				{isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
@@ -80,7 +83,7 @@ const AttractionsList = ({
 					<p>{lastSelectedPlace.formatted_address}</p>
 				</div>
 			)}
-		</div>
+		</ListContainer>
 	);
 };
 

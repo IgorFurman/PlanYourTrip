@@ -1,36 +1,73 @@
-import styled from 'styled-components';
+import styled, { keyframes, css }from 'styled-components';
 
-export const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin: 0 auto;
-	max-width: 1200px;
-	padding: 0 15px;
-	box-sizing: border-box;
-	width: 100%;
 
-	@media (max-width: 576px) {
-		padding: 0 5px;
-	}
-	@media (min-width: 576px) {
-		max-width: 540px;
-	}
-	@media (min-width: 768px) {
-		max-width: 720px;
-		flex-direction: row;
-		align-items: start;
-	}
-	@media (min-width: 992px) {
-		max-width: 960px;
-	}
-	@media (min-width: 1200px) {
-		max-width: 1140px;
-	}
+// animation
+const bounce = keyframes`
+ 30% { transform: scale(1.2); }
+  40%, 60% { transform: rotate(-20deg) scale(1.2); }
+  50% { transform: rotate(20deg) scale(1.2); }
+  70% { transform: rotate(0deg) scale(1.2); }
+  100% { transform: scale(1); }
 `;
 
+// main styles
+export const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: 
+    "map map details"
+    "visit visit details"
+    "attractions restaurants hotels";
+    /* "visit visit visit"; */
+  gap: 20px;
+  width: 100%;
+	
+  @media (max-width: 1024px) {
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-areas: 
+      "map map map"
+      "details details details"
+      "details details details"
+      "attractions attractions attractions"
+      "hotels hotels hotels"
+      "restaurants restaurants restaurants"
+      "visit visit visit";
+  }
+	@media (min-width: 768px) and (max-width: 1024px) {
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: auto auto auto auto;
+	grid-template-areas: 
+		"map map map map"
+		"visit visit details details"
+		
+		"attractions attractions attractions attractions"
+		"hotels hotels restaurants restaurants";
+		
+}
+`;
+export const StandardContainer = styled.div`
+  padding: 20px;
+  margin: 10px;
+  @media (max-width: 576px) {
+    padding: 10px;
+    margin: 5px;
+  }
+`;
+// list 
+export const listContainer = styled(StandardContainer)`
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+	
+  overflow: auto;
+  height: 100%;
+
+
+`
+
 export const List = styled.ul`
-	height: 75vh;
+	height: 50vh;
 	width: 100%;
 	list-style: none;
 	padding: 0;
@@ -45,14 +82,14 @@ export const List = styled.ul`
 export const ListItem = styled.li`
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 15px;
+	padding: 15px 10px;
 	margin-bottom: 10px;
 
 	@media (max-width: 576px) {
 		padding: 10px;
 	}
 `;
-
+// btns
 export const ButtonSearch = styled.button`
 	background-color: #007bff;
 	color: white;
@@ -100,21 +137,22 @@ export const Input = styled.input`
 		margin-bottom: 5px;
 	}
 `;
-
-export const MapContainerStyled = styled.div`
+// map
+export const MapContainerStyled = styled(StandardContainer)`
 position: relative;
 	height: 90vh;
 	width: auto;
-	margin: 20px;
+
 	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
 		rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0px 8px 16px),
 		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 
 	@media (max-width: 576px) {
-		margin: 10px;
+		
 		height: 80vh;
 	}
 `;
+// header 
 export const Heading = styled.h2`
 	@media (max-width: 576px) {
 		font-size: 18px;
@@ -129,6 +167,7 @@ export const Header = styled.header`
 	background-color: #203a43;
 	padding: 20px;
 	color: white;
+	margin-bottom: 20px;
 	.logo {
 		width: 100%;
 		max-width: 250px;
@@ -149,50 +188,35 @@ export const Header = styled.header`
 		}
 	}
 `;
+// pins
 export const PinStyled = styled.img`
 	width: 25px;
 	height: 30px;
 	cursor: pointer;
 	z-index: 1;
 	position: relative;
-	transform: translate(-50%, -100%);
-`;
-export const InfoWindowStyled = styled.div`
-	position: absolute;
-	background-color: white;
-	border-radius: 5px;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	padding: 10px;
-	left: 50%;
-	top: 100%;
-	transform: translate(-50%, 0);
-	min-width: 200px;
-	max-width: 300px;
-	z-index: 10;
-	@media (max-width: 576px) {
-		padding: 5px;
-		min-width: 150px;
-		max-width: 250px;
-	}
+	animation: ${props => props.shouldBounce ? css`${bounce} 1s ease-in-out` : 'none'};
 `;
 
-export const DetailsContainer = styled.div`
+// details 
+export const DetailsContainer = styled(StandardContainer)`
 	background-color: white;
 	border-radius: 5px;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	padding: 10px;
+
 	min-width: 200px;
 	max-width: 300px;
 	overflow: hidden;
 	@media (max-width: 576px) {
-		padding: 5px;
+
 		min-width: 150px;
 		max-width: 250px;
 	}
 `;
 export const ButtonContainer = styled.div`
+width: 100%;
 	display: flex;
-	justify-content: space-between;
+	gap: 15px;
 `;
 
 export const ListContainer = styled.div`
@@ -207,7 +231,7 @@ export const ListContainer = styled.div`
 	}
 `;
 
-export const PlaceDetailsStyled = styled.div`
+export const PlaceDetailsStyled = styled(StandardContainer)`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -216,14 +240,16 @@ export const PlaceDetailsStyled = styled.div`
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	padding: 15px;
-	margin: 0 auto;
+
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	width: 90%;
 	@media (max-width: 576px) {
 		padding: 10px;
-		margin: 5px;
+		margin: 20px;
 	}
 `;
+
+// another components 
 
 export const WebsideLink = styled.a`
 	text-decoration: none;
@@ -275,11 +301,12 @@ export const CarouselImage = styled.img`
 // map legend 
 export const LegendContainer = styled.div`
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 25px;
+  left: 25px;
   background-color: white;
   padding: 10px;
-  border-radius: 5px;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
 	z-index: 999;
 `;
 

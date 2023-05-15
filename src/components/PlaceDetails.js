@@ -16,6 +16,7 @@ const PlaceDetails = ({
 	addToVisit,
 	removeFromVisit,
 	placesToVisit,
+	style
 }) => {
 	const [detailedPlace, setDetailedPlace] = useState(null);
 
@@ -40,7 +41,7 @@ const PlaceDetails = ({
 	};
 
 	return (
-		<PlaceDetailsStyled>
+		<PlaceDetailsStyled style={style}>
 			{detailedPlace ? (
 				<>
 					<h2>{detailedPlace.name}</h2>

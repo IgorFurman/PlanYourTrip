@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
-import { Container, ButtonList, Input, List, ListItem } from '../styles';
+import { Container, ButtonList, Input, List, ListItem, ListContainer } from '../styles';
 import { ScrollContext } from './ScrollContext';
 
 
 
-const HotelsList = ({ hotels, setMapSettings, setSelectedPlace}) => {
+const HotelsList = ({ hotels, setMapSettings, setSelectedPlace, style,setShouldBounce}) => {
 	const [isListVisible, setIsListVisible, ] = useState(true);
   const { calculateHeight } = useContext(ScrollContext);
   const handleShowOnMapClick = (hotel) => {
+		setShouldBounce(true);
 		setSelectedPlace(hotel);
 		setMapSettings({
 			center: {
@@ -28,7 +29,7 @@ const HotelsList = ({ hotels, setMapSettings, setSelectedPlace}) => {
 	}
 
 	return (
-		<div>
+		<ListContainer style={style}>
 			<h2>Hotele:</h2>
 			<ButtonList onClick={handleToggleListVisibility}>
 				{isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
@@ -51,7 +52,7 @@ const HotelsList = ({ hotels, setMapSettings, setSelectedPlace}) => {
 					))}
 				</List>
 			)}
-		</div>
+		</ListContainer>
 	);
 };
 
