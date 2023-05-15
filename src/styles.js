@@ -1,6 +1,6 @@
-import styled, { keyframes, css }from 'styled-components';
+import styled, { keyframes, css, createGlobalStyle } from 'styled-components';
 
-
+//
 // animation
 const bounce = keyframes`
  30% { transform: scale(1.2); }
@@ -9,62 +9,63 @@ const bounce = keyframes`
   70% { transform: rotate(0deg) scale(1.2); }
   100% { transform: scale(1); }
 `;
+// global styles
 
+export const GlobalStyle = createGlobalStyle`
+  body {
+		font-family: 'Lato', sans-serif;}
+`;
 // main styles
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto auto auto;
-  grid-template-areas: 
-    "map map details"
-    "visit visit details"
-    "attractions restaurants hotels";
-    /* "visit visit visit"; */
-  gap: 20px;
-  width: 100%;
-	
-  @media (max-width: 1024px) {
-    grid-template-rows: auto auto auto auto auto auto;
-    grid-template-areas: 
-      "map map map"
-      "details details details"
-      "details details details"
-      "attractions attractions attractions"
-      "hotels hotels hotels"
-      "restaurants restaurants restaurants"
-      "visit visit visit";
-  }
-	@media (min-width: 768px) and (max-width: 1024px) {
-	grid-template-columns: repeat(4, 1fr);
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: auto auto auto auto;
-	grid-template-areas: 
-		"map map map map"
-		"visit visit details details"
-		
-		"attractions attractions attractions attractions"
-		"hotels hotels restaurants restaurants";
-		
-}
+	grid-template-areas:
+		'map map details'
+		'visit visit details'
+		'attractions restaurants hotels';
+
+	gap: 20px;
+	width: 100%;
+
+	@media (max-width: 1024px) {
+		grid-template-rows: auto auto auto auto auto auto;
+		grid-template-areas:
+			'map map map'
+			'details details details'
+			'details details details'
+			'attractions attractions attractions'
+			'hotels hotels hotels'
+			'restaurants restaurants restaurants'
+			'visit visit visit';
+	}
+	@media (min-width: 768px) and (max-width: 1024px) {
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: auto auto auto auto;
+		grid-template-areas:
+			'map map map map'
+			'visit visit details details'
+			'attractions attractions attractions attractions'
+			'hotels hotels restaurants restaurants';
+	}
 `;
 export const StandardContainer = styled.div`
-  padding: 20px;
-  margin: 10px;
-  @media (max-width: 576px) {
-    padding: 10px;
-    margin: 5px;
-  }
+	padding: 20px;
+	margin: 10px;
+	@media (max-width: 576px) {
+		padding: 10px;
+		margin: 5px;
+	}
 `;
-// list 
+// list
 export const listContainer = styled(StandardContainer)`
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	
-  overflow: auto;
-  height: 100%;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 
-
-`
+	overflow: auto;
+	height: 100%;
+`;
 
 export const List = styled.ul`
 	height: 50vh;
@@ -139,7 +140,7 @@ export const Input = styled.input`
 `;
 // map
 export const MapContainerStyled = styled(StandardContainer)`
-position: relative;
+	position: relative;
 	height: 90vh;
 	width: auto;
 
@@ -148,11 +149,10 @@ position: relative;
 		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 
 	@media (max-width: 576px) {
-		
 		height: 80vh;
 	}
 `;
-// header 
+// header
 export const Heading = styled.h2`
 	@media (max-width: 576px) {
 		font-size: 18px;
@@ -188,33 +188,22 @@ export const Header = styled.header`
 		}
 	}
 `;
-// pins
-export const PinStyled = styled.img`
-	width: 25px;
-	height: 30px;
-	cursor: pointer;
-	z-index: 1;
-	position: relative;
-	animation: ${props => props.shouldBounce ? css`${bounce} 1s ease-in-out` : 'none'};
-`;
 
-// details 
+// details
 export const DetailsContainer = styled(StandardContainer)`
 	background-color: white;
 	border-radius: 5px;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-
 	min-width: 200px;
 	max-width: 300px;
 	overflow: hidden;
 	@media (max-width: 576px) {
-
 		min-width: 150px;
 		max-width: 250px;
 	}
 `;
 export const ButtonContainer = styled.div`
-width: 100%;
+	width: 100%;
 	display: flex;
 	gap: 15px;
 `;
@@ -239,26 +228,36 @@ export const PlaceDetailsStyled = styled(StandardContainer)`
 	flex-wrap: wrap;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 15px;
-
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	width: 90%;
-	@media (max-width: 576px) {
-		padding: 10px;
-		margin: 20px;
-	}
-`;
 
-// another components 
+`;
+export const OpinionsWrapper = styled.div`
+max-width: 100%
+`
+
+
+// another components
 
 export const WebsideLink = styled.a`
 	text-decoration: none;
-	color: black;
-	transition: color 0.3s;
+	color:	#000033;
+	font-weight: bold;
+	transition: color 0.3s, text-decoration 0.3s;
+	margin-bottom:0;
 	&:hover {
-		color: blue;
+		color: #3300cc;
+		text-decoration: underline;
+	}
+	&:active {
+		color: #3300cc;
 	}
 `;
+
+export const DownloadList = styled(WebsideLink)`
+display: inline-block;
+margin-bottom: 15px;
+`
 
 export const OpeningHours = styled.div`
 	p {
@@ -297,31 +296,40 @@ export const CarouselImage = styled.img`
 	object-fit: cover;
 `;
 
-
-// map legend 
+// map legend
 export const LegendContainer = styled.div`
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  background-color: white;
-  padding: 10px;
+	position: absolute;
+	top: 25px;
+	left: 25px;
+	background-color: white;
+	padding: 10px;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+	border-radius: 10px;
 	z-index: 999;
 `;
 
 export const LegendItem = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 5px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 5px;
 `;
 
 export const LegendPin = styled.img`
-  width: 25px;
-  height: 25px;
-  margin-right: 5px;
+	width: 25px;
+	height: 25px;
+	margin-right: 5px;
 `;
 
 export const LegendLabel = styled.span`
-  font-size: 14px;
+	font-size: 14px;
+`;
+export const PinStyled = styled.img.attrs(props => ({
+  shouldbounce: props.shouldBounce ? 1 : 0,
+}))`
+  width: 25px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  animation: ${props => props.shouldbounce ? css`${bounce} 1s ease-in-out` : 'none'};
 `;

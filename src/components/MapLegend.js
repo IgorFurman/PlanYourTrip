@@ -8,15 +8,15 @@ const MapLegend = () => {
 		<LegendContainer>
 			<LegendItem>
 				<LegendPin src={AttractionsPin} />
-				<LegendLabel>Attractions</LegendLabel>
+				<LegendLabel>- Atrakcje</LegendLabel>
 			</LegendItem>
 			<LegendItem>
 				<LegendPin src={HotelsPin} />
-				<LegendLabel>Hotels</LegendLabel>
+				<LegendLabel>- Hotele</LegendLabel>
 			</LegendItem>
 			<LegendItem>
 				<LegendPin src={RestaurantsPin} />
-				<LegendLabel>Restaurants</LegendLabel>
+				<LegendLabel>- Restauracje</LegendLabel>
 			</LegendItem>
 		</LegendContainer>
 	);

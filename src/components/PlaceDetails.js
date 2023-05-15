@@ -9,6 +9,7 @@ import {
 	CarouselImage,
 	OpeningHours,
 	WebsideLink,
+	OpinionsWrapper
 } from '../styles';
 
 const PlaceDetails = ({
@@ -69,8 +70,8 @@ const PlaceDetails = ({
 					)}
 					{detailedPlace.website && (
 						<p>
-							<WebsideLink href={detailedPlace.website}>
-								Odnośnik do strony internetowej
+							<WebsideLink target="_blank" href={detailedPlace.website} rel="noopener noreferrer">
+								Dowiedz się więcej
 							</WebsideLink>
 						</p>
 					)}
@@ -78,7 +79,7 @@ const PlaceDetails = ({
 						<CarouselWrapper>
 							<Carousel
 								autoPlay
-								// centerMode
+								
 								dynamicHeight
 								emulateTouch
 								infiniteLoop
@@ -109,7 +110,7 @@ const PlaceDetails = ({
 						<p>Ocena ogólna: {detailedPlace.rating}⭐</p>
 					)}
 					{detailedPlace.reviews && detailedPlace.reviews.length > 0 && (
-						<div>
+						<OpinionsWrapper>
 							<h3>Opinie:</h3>
 							<Carousel>
 								
@@ -122,7 +123,7 @@ const PlaceDetails = ({
 									</div>
 								))}
 							</Carousel>
-						</div>
+						</OpinionsWrapper>
 					)}
 					{!isPlaceInVisitList(place.place_id) ? (
 						<ButtonList onClick={() => addToVisit(place)}>

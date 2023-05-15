@@ -9,7 +9,7 @@ import PlacesToVisitList from './components/PlacesToVisitList';
 
 import { ScrollProvider } from './components/ScrollContext';
 
-import { Container } from './styles';
+import { Container, GlobalStyle } from './styles';
 
 const App = () => {
 	const [selectedPlace, setSelectedPlace] = useState(null);
@@ -28,8 +28,6 @@ const App = () => {
 	});
 	const [isCitySearched, setIsCitySearched] = useState(false);
 	const [shouldBounce, setShouldBounce] = useState(false);
-
-	
 
 	const hotelsListRef = useRef(null);
 	const restaurantsListRef = useRef();
@@ -72,17 +70,18 @@ const App = () => {
 	};
 
 	useEffect(() => {
-    if (shouldBounce) {
-        const timer = setTimeout(() => {
-            setShouldBounce(false);
-        }, 1000);  
+		if (shouldBounce) {
+			const timer = setTimeout(() => {
+				setShouldBounce(false);
+			}, 1000);
 
-        return () => clearTimeout(timer);  
-    }
-}, [shouldBounce]);
+			return () => clearTimeout(timer);
+		}
+	}, [shouldBounce]);
 
 	return (
 		<ScrollProvider>
+			<GlobalStyle />
 			<SearchBar
 				setPlaces={setPlaces}
 				setMapSettings={setMapSettings}

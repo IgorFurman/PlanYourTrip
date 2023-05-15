@@ -37,11 +37,9 @@ const RestaurantsList = ({
 		setIsListVisible(!isListVisible);
 	};
 
-	if (!restaurants || restaurants.length === 0) {
-		return <div>Brak restauracji</div>;
-	}
 
-	return (
+
+  return (
 		<ListContainer style={style}>
 			<h2>Restauracje:</h2>
 			<ButtonList onClick={handleToggleListVisibility}>
@@ -49,21 +47,25 @@ const RestaurantsList = ({
 			</ButtonList>
 			{isListVisible && (
 				<List>
-					{restaurants.map((restaurant, index) => (
-						<ListItem key={`${restaurant.place_id}-${index}`}>
-							<div>
-								<strong>{restaurant.name}</strong>
-								<p>Adres: {restaurant.formatted_address}</p>
-								<p>
-									Ocena:{' '}
-									{restaurant.rating ? `${restaurant.rating} ⭐` : 'Brak oceny'}
-								</p>
-								<ButtonList onClick={() => handleShowOnMapClick(restaurant)}>
-									Pokaż na mapie
-								</ButtonList>
-							</div>
-						</ListItem>
-					))}
+					{restaurants.length > 0 ? (
+						restaurants.map((restaurant, index) => (
+							<ListItem key={`${restaurant.place_id}-${index}`}>
+								<div>
+									<strong>{restaurant.name}</strong>
+									<p>Adres: {restaurant.formatted_address}</p>
+									<p>
+										Ocena:{' '}
+										{restaurant.rating ? `${restaurant.rating} ⭐` : 'Brak oceny'}
+									</p>
+									<ButtonList onClick={() => handleShowOnMapClick(restaurant)}>
+										Pokaż na mapie
+									</ButtonList>
+								</div>
+							</ListItem>
+						))
+					) : (
+						<p>Pobierz dostępne restauracje</p>
+					)}
 				</List>
 			)}
 		</ListContainer>

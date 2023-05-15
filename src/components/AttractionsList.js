@@ -40,9 +40,7 @@ const AttractionsList = ({
 		return placesToVisit.some((place) => place.place_id === placeId);
 	};
 
-	if (!places || places.length === 0) {
-		return <div>Brak atrakcji turystycznych</div>;
-	}
+	
 
 	return (
 		<ListContainer style={style}>

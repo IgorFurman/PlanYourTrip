@@ -24,11 +24,8 @@ const HotelsList = ({ hotels, setMapSettings, setSelectedPlace, style,setShouldB
 		setIsListVisible(!isListVisible);
 	};
 
-	if (!hotels || hotels.length === 0) {
-		return <div>Brak hoteli</div>;
-	}
 
-	return (
+return (
 		<ListContainer style={style}>
 			<h2>Hotele:</h2>
 			<ButtonList onClick={handleToggleListVisibility}>
@@ -36,20 +33,24 @@ const HotelsList = ({ hotels, setMapSettings, setSelectedPlace, style,setShouldB
 			</ButtonList>
 			{isListVisible && (
 				<List>
-					{hotels.map((hotel, index) => (
-						<ListItem key={`${hotel.place_id}- ${index}`}>
-							<div>
-								<strong>{hotel.name}</strong>
-								<p>Adres: {hotel.formatted_address}</p>
-								<p>
-									Ocena: {hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}
-								</p>
-								<ButtonList onClick={() => handleShowOnMapClick(hotel)}>
-									Pokaż na mapie
-								</ButtonList>
-							</div>
-						</ListItem>
-					))}
+					{hotels.length > 0 ? (
+						hotels.map((hotel, index) => (
+							<ListItem key={`${hotel.place_id}- ${index}`}>
+								<div>
+									<strong>{hotel.name}</strong>
+									<p>Adres: {hotel.formatted_address}</p>
+									<p>
+										Ocena: {hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}
+									</p>
+									<ButtonList onClick={() => handleShowOnMapClick(hotel)}>
+										Pokaż na mapie
+									</ButtonList>
+								</div>
+							</ListItem>
+						))
+					) : (
+						<p>Pobierz dostępne hotele</p>
+					)}
 				</List>
 			)}
 		</ListContainer>
