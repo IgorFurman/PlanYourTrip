@@ -1,5 +1,7 @@
 import styled, { keyframes, css, createGlobalStyle } from 'styled-components';
 
+import { MDBBtn } from 'mdb-react-ui-kit';
+
 //
 // animation
 const bounce = keyframes`
@@ -13,6 +15,7 @@ const bounce = keyframes`
 
 export const GlobalStyle = createGlobalStyle`
   body {
+	
 		font-family: 'Lato', sans-serif;}
 `;
 // main styles
@@ -92,14 +95,15 @@ export const ListItem = styled.li`
 `;
 // btns
 export const ButtonSearch = styled.button`
-	background-color: #007bff;
-	color: white;
+	background-color: #afa7ba;
+	color: #031316;
 	padding: 10px 20px;
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
+	transition: background-color 0.3s;
 	&:hover {
-		background-color: #0056b3;
+		background-color: #efe6ef;
 	}
 
 	@media (max-width: 576px) {
@@ -164,7 +168,7 @@ export const Header = styled.header`
 	width: 100%;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #203a43;
+	background-color: #031316;
 	padding: 20px;
 	color: white;
 	margin-bottom: 20px;
@@ -177,13 +181,13 @@ export const Header = styled.header`
 		padding: 10px;
 
 		.logo {
-			max-width: 150px;
+			max-width: 250px;
 		}
 		@media (min-width: 768px) {
 			.logo {
 				max-width: 300px;
-				min-height: 200px;
-				max-height: 300px;
+				min-height: 260px;
+				max-height: 320px;
 			}
 		}
 	}
@@ -333,3 +337,50 @@ export const PinStyled = styled.img.attrs(props => ({
   position: relative;
   animation: ${props => props.shouldbounce ? css`${bounce} 1s ease-in-out` : 'none'};
 `;
+
+/* footer */
+
+export const StyledFooter = styled.footer`
+ margin-top: 50px;
+  text-align: center;
+  color: white;
+`;
+
+export const FooterContainer = styled.div`
+display: flex;
+justify-content: space-around;
+text-align: center;
+background-color:#031316;
+  padding: 60px;
+  padding-bottom: 0;
+`;
+
+export const FooterSection = styled.section`
+  margin-bottom: 4rem;
+	
+`;
+
+export const SocialIcon = styled(MDBBtn).attrs({
+  floating: true,
+})`
+  margin: 25px; 
+  font-size: 30px;
+  background-color: none;
+`;
+
+export const FooterCompanyName = styled.div`
+  text-align: center;
+  padding: 3rem;
+  background-color: #303e3c;
+`;
+
+export const LogoContainer = styled.div`
+distplay:flex;
+text-align: center;
+justify-content: center;
+img {
+	width: 100%;
+	height: fit-content;
+	
+}
+`

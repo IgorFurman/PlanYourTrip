@@ -77,7 +77,7 @@ const SearchBar = ({
 					isCitySearched={isCitySearched}
 				/>
 				</ButtonContainer>
-			</form>
+				</form>
 			<img className="logo" src={LogoImg} alt="Plan Your Trip logo" />
 		</Header>
 	);

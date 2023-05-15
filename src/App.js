@@ -6,6 +6,7 @@ import HotelsList from './components/HotelsList';
 import RestaurantsList from './components/RestaurantsList';
 import PlaceDetails from './components/PlaceDetails';
 import PlacesToVisitList from './components/PlacesToVisitList';
+import Footer from './components/Footer';
 
 import { ScrollProvider } from './components/ScrollContext';
 
@@ -151,7 +152,9 @@ const App = () => {
 					currentCity={lastSearchedCity}
 				/>
 			</Container>
+			<Footer />
 		</ScrollProvider>
+		
 	);
 };
 
