@@ -385,11 +385,15 @@ img {
 
 export const WeatherContainer = styled(StandardContainer)`
 ${boxShadow};
-width: 100%;
+grid-area: weather;
+width: 96%;
 display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	> * {
+		width:100%;
+	}
 	img {
 		max-width: 100%;
 	}
