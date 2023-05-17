@@ -65,7 +65,7 @@ const WeatherDisplay = ({ city, style }) => {
 
   return (
     <WeatherContainer>
-      <h2>Pogoda w {capitalizeFirstLetter(city)}</h2>
+      <h2>{capitalizeFirstLetter(city)} pogoda:</h2>
       {weatherData.weather[0] && (
         <img
           src={getWeatherIconUrl(weatherData.weather[0].id)}

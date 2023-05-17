@@ -50,18 +50,20 @@ const PlaceDetails = ({
 
 	return (
 		<PlaceDetailsStyled style={style}>
-			<h2>{detailedPlace ? detailedPlace.name : 'Tutaj zobaczysz szczegóły danej lokalizacji po kliknięciu w pineskę'}</h2>
-
+			<h2>
+				{detailedPlace ? detailedPlace.name : 'Tutaj zobaczysz szczegóły danej lokalizacji po kliknięciu w pineskę'}
+			</h2>
+	
 			<p>
 				<b>Adres: </b>
 				{detailedPlace ? detailedPlace.formatted_address : ''}
 			</p>
-
+	
 			<p>
 				<b>Numer: </b>
 				{detailedPlace && detailedPlace.formatted_phone_number ? detailedPlace.formatted_phone_number : ''}
 			</p>
-
+	
 			{detailedPlace && detailedPlace.opening_hours ? (
 				<OpeningHours>
 					<p>Godziny otwarcia:</p>
@@ -72,7 +74,7 @@ const PlaceDetails = ({
 					</ul>
 				</OpeningHours>
 			) : null}
-
+	
 			{detailedPlace && detailedPlace.website ? (
 				<p>
 					<WebsideLink target="_blank" href={detailedPlace.website} rel="noopener noreferrer">
@@ -80,7 +82,7 @@ const PlaceDetails = ({
 					</WebsideLink>
 				</p>
 			) : null}
-
+	
 			{detailedPlace && detailedPlace.photos && detailedPlace.photos.length > 0 ? (
 				<CarouselWrapper>
 					<Carousel
@@ -108,35 +110,21 @@ const PlaceDetails = ({
 					</Carousel>
 				</CarouselWrapper>
 			) : (
-				<p>Brak zdjęcia</p>)} <p>Ocena ogólna: {detailedPlace && detailedPlace.rating ? detailedPlace.rating : ''}⭐</p>
-
-				{detailedPlace && detailedPlace.reviews && detailedPlace.reviews.length > 0 ? (
-					<OpinionsWrapper>
-						<h3>Opinie:</h3>
-						<Carousel>
-							{detailedPlace.reviews.map((review, index) => (
-								<div key={index}>
-									<p>
-										{review.author_name} ({review.rating}⭐):
-									</p>
-									<p>{review.text}</p>
-								</div>
-							))}
-						</Carousel>
-					</OpinionsWrapper>
-				) : null}
+				<p>Brak zdjęcia</p>
+			)}
 	
-				{!isPlaceInVisitList(place.place_id) ? (
-					<ButtonList onClick={() => addToVisit(place)}>
-						Dodaj do listy do odwiedzenia
-					</ButtonList>
-				) : (
-					<ButtonList onClick={() => removeFromVisit(place.place_id)}>
-						Usuń z listy do odwiedzenia
-					</ButtonList>
-				)}
-			</PlaceDetailsStyled>
-		);
-	};
+			<p>Ocena ogólna: {detailedPlace && detailedPlace.rating ? detailedPlace.rating : ''}⭐</p>
 	
+			{detailedPlace && (
+				<>
+					{!isPlaceInVisitList(place.place_id) ? (
+						<ButtonList onClick={() => addToVisit(place)}>Dodaj do listy do odwiedzenia</ButtonList>
+					) : (
+						<ButtonList onClick={() => removeFromVisit(place.place_id)}>Usuń z listy do odwiedzenia</ButtonList>
+					)}
+				</>
+			)}
+		</PlaceDetailsStyled>
+	);
+					}
 	export default PlaceDetails;

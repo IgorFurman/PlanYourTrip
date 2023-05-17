@@ -19,14 +19,28 @@ export const GlobalStyle = createGlobalStyle`
   }
  body {
 
-		font-family: 'Lato', sans-serif;}
+		font-family: 'Lato', sans-serif;
+		font-size: 18px;
+    
+    @media (max-width: 576px) {
+      font-size: 14px;
+    }
+    
+    @media (min-width: 577px) and (max-width: 1024px) {
+      font-size: 16px;
+    }
+    
+    @media (min-width: 1025px) {
+      font-size: 18px;
+    }
+  }
 `;
 
 // Mixin for repeated styles
 const boxShadow = css`
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+	background-color: white;
+	border-radius: 5px;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 `;
 
 // main styles
@@ -68,18 +82,18 @@ export const Container = styled.div`
 `;
 
 export const StandardContainer = styled.div`
-	padding: 20px;
-	margin: 20px 10px;
+	padding: 1.25rem;
+	margin: 1.25rem 0.625rem;
 	@media (max-width: 576px) {
-		padding: 10px;
-		margin: 10px 5px;
+		padding: 0.625rem;
+		margin: 0.625rem 0.3125rem;
 	}
 `;
 // list
 export const ListContainer = styled(StandardContainer)`
-  ${boxShadow};
-  overflow: auto;
-  height: 90%;
+	${boxShadow};
+	overflow: auto;
+	height: 90%;
 `;
 
 export const List = styled.ul`
@@ -98,18 +112,18 @@ export const List = styled.ul`
 export const ListItem = styled.li`
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 15px 10px;
-	margin-bottom: 10px;
+	padding: 0.9375rem 0.625rem;
+	margin-bottom: 0.625rem;
 
 	@media (max-width: 576px) {
-		padding: 10px;
+		padding: 0.625rem;
 	}
 `;
 // btns
 export const ButtonSearch = styled.button`
 	background-color: #afa7ba;
 	color: #031316;
-	padding: 10px 20px;
+	padding: 0.625rem 1.25rem;
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
@@ -119,40 +133,40 @@ export const ButtonSearch = styled.button`
 	}
 
 	@media (max-width: 576px) {
-		padding: 5px 10px;
+		padding: 0.3125rem 0.625rem;
 	}
 `;
 
 export const ButtonList = styled.button`
 	background-color: #808080;
 	color: white;
-	padding: 5px 10px;
+	padding: 0.3125rem 0.625rem;
 	border-radius: 5px;
-	font-size: 12px;
+	font-size: 0.75rem;
 	border: none;
 	cursor: pointer;
-	
+
 	&:hover {
 		background-color: #a9a9a9;
 	}
 
 	@media (max-width: 576px) {
-		padding: 3px 5px;
-		font-size: 10px;
+		padding: 0.1875rem 0.3125rem;
+		font-size: 0.625rem;
 	}
 `;
 
 export const Input = styled.input`
-	padding: 10px;
+	padding: 0.625rem;
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	width: 100%;
 	box-sizing: border-box;
-	margin-bottom: 10px;
+	margin-bottom: 0.625rem;
 
 	@media (max-width: 576px) {
-		padding: 5px;
-		margin-bottom: 5px;
+		padding: 0.3125rem;
+		margin-bottom: 0.3125rem;
 	}
 `;
 // map
@@ -161,19 +175,13 @@ export const MapContainerStyled = styled(StandardContainer)`
 	height: 90vh;
 	width: 100%;
 
-
-	box-shadow: 
-    rgba(0, 0, 0, 0.07) 0px 1px 2px, 
-    rgba(0, 0, 0, 0.07) 0px 2px 4px,
-    rgba(0, 0, 0, 0.07) 0px 4px 8px, 
-    rgba(0, 0, 0, 0.07) 0px 8px 16px,
-    rgba(0, 0, 0, 0.07) 0px 16px 32px, 
-    rgba(0, 0, 0, 0.07) 0px 32px 64px;
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+		rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 
 	@media (max-width: 576px) {
 		height: 80vh;
 	}
-	
 `;
 // h2 style
 export const Heading = styled.h2`
@@ -188,17 +196,17 @@ export const Header = styled.header`
 	justify-content: space-between;
 	align-items: center;
 	background-color: #031316;
-	padding: 20px;
+	padding: 1.25rem;
 	color: white;
-	margin-bottom: 20px;
-	
+	margin-bottom: 1.25rem;
+
 	.logo {
 		width: 100%;
 		max-width: 250px;
 		height: auto;
 	}
 	@media (max-width: 576px) {
-		padding: 10px;
+		padding: 0.625rem;
 
 		.logo {
 			max-width: 250px;
@@ -213,38 +221,82 @@ export const Header = styled.header`
 	}
 `;
 
+// Check inputs
 
-export const ButtonContainer = styled.div`
-	width: 100%;
+export const CheckBoxWrapper = styled.div`
 	display: flex;
-	gap: 15px;
+	align-items: space-evenly;
+	justify-content: center;
+	margin-bottom: 2em;
 `;
 
+export const CheckBoxLabel = styled.label`
+	position: relative;
+	margin-right: 1em;
+	padding-left: 2em;
+	padding-right: 1em;
+	line-height: 2;
+	cursor: pointer;
 
-// place details 
+	&:before {
+		box-sizing: border-box;
+		content: ' ';
+		position: absolute;
+		top: 0.3em;
+		left: 0.5em;
+		width: 1.4em;
+		height: 1.4em;
+		border: 0.1em solid #757575;
+		border-radius: 0.2em;
+		background: #fff;
+		transition: background 0.3s;
+	}
+
+	transition: 0.25s all ease;
+`;
+
+export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+
+	&:checked + ${CheckBoxLabel} {
+		padding-left: 1em;
+		color: #031316;
+
+		&:before {
+			top: 0;
+			width: 100%;
+			height: 2em;
+			background-color: #fff;
+			border-color: #031316; 
+		}
+	}
+`;
+
+// place details
 export const PlaceDetailsStyled = styled(StandardContainer)`
-${boxShadow}
+	${boxShadow}
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	min-width:50%;
+	min-width: 50%;
 	max-width: 96%;
 `;
 export const OpinionsWrapper = styled.div`
-max-width: 100%
-`
-
+	max-width: 100%;
+`;
 
 // another components
 
 export const WebsideLink = styled.a`
 	text-decoration: none;
-	color:	#000033;
+	color: #000033;
 	font-weight: bold;
 	transition: color 0.3s, text-decoration 0.3s;
-	margin-bottom:0;
+	margin-bottom: 0;
 	&:hover {
 		color: #3300cc;
 		text-decoration: underline;
@@ -255,9 +307,9 @@ export const WebsideLink = styled.a`
 `;
 
 export const DownloadList = styled(WebsideLink)`
-display: inline-block;
-margin-bottom: 15px;
-`
+	display: inline-block;
+	margin-bottom: 1rem;
+`;
 
 export const OpeningHours = styled.div`
 	p {
@@ -278,7 +330,7 @@ export const CarouselWrapper = styled.div`
 	align-items: center;
 	width: 100%;
 	overflow: hidden;
-	padding: 15px 0;
+	padding: 1rem 0;
 `;
 
 export const CarouselItem = styled.div`
@@ -302,7 +354,7 @@ export const LegendContainer = styled.div`
 	top: 25px;
 	left: 25px;
 	background-color: white;
-	padding: 10px;
+	padding: 0.625rem;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
 	z-index: 999;
@@ -311,91 +363,96 @@ export const LegendContainer = styled.div`
 export const LegendItem = styled.div`
 	display: flex;
 	align-items: center;
-	margin-bottom: 5px;
+	margin-bottom: 0.3rem;
 `;
 
 export const LegendPin = styled.img`
 	width: 25px;
 	height: 25px;
-	margin-right: 5px;
+	margin-right: 0.3rem;
 `;
 
 export const LegendLabel = styled.span`
-	font-size: 14px;
+	font-size: 0.875rem;
 `;
-export const PinStyled = styled.img.attrs(props => ({
-  shouldbounce: props.shouldBounce ? 1 : 0,
+export const PinStyled = styled.img.attrs((props) => ({
+	shouldbounce: props.shouldBounce ? 1 : 0,
 }))`
-  width: 25px;
-  height: 30px;
-  cursor: pointer;
-  z-index: 1;
-  position: relative;
-  animation: ${props => props.shouldbounce ? css`${bounce} 1s ease-in-out` : 'none'};
+	width: 25px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 1;
+	position: relative;
+	animation: ${(props) =>
+		props.shouldbounce
+			? css`
+					${bounce} 1s ease-in-out
+			  `
+			: 'none'};
 `;
 
 /* footer */
 
 export const StyledFooter = styled.footer`
- margin-top: 50px;
-  text-align: center;
-  color: white;
+	margin-top: 3.125rem;
+	text-align: center;
+	color: white;
 `;
 
 export const FooterContainer = styled.div`
-display: flex;
-justify-content: space-around;
-text-align: center;
-background-color:#031316;
-  padding: 60px;
-  padding-bottom: 0;
+	display: flex;
+	justify-content: space-around;
+	text-align: center;
+	background-color: #031316;
+	padding: 3.75rem;
+	padding-bottom: 0;
 `;
 
 export const FooterSection = styled.section`
-  margin-bottom: 4rem;
-	
+	margin-bottom: 4rem;
 `;
 
 export const SocialIcon = styled(MDBBtn).attrs({
-  floating: true,
+	floating: true,
 })`
-  margin: 25px; 
-  font-size: 30px;
-  background-color: none;
+	margin: 25px;
+	font-size: 30px;
+	background-color: none;
 `;
 
 export const FooterCompanyName = styled.div`
-  text-align: center;
-  padding: 3rem;
-  background-color: #303e3c;
+	text-align: center;
+	padding: 3rem;
+	background-color: #303e3c;
 `;
 
 export const LogoContainer = styled.div`
-display:flex;
-text-align: center;
-justify-content: center;
-img {
-	width: 100%;
-	height: fit-content;
-	
-}
-`
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	img {
+		width: 100%;
+		height: fit-content;
+	}
+`;
 
 /* weather box */
 
 export const WeatherContainer = styled(StandardContainer)`
-${boxShadow};
-grid-area: weather;
-width: 96%;
-display: flex;
+	${boxShadow};
+	grid-area: weather;
+	width: 96%;
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
 	> * {
-		width:100%;
+		width: 100%;
 	}
 	img {
-		max-width: 100%;
+		max-width: 60%;
+		margin: 0 auto;
 	}
-
+	@media (min-width: 1024px) {
+	}
 `;

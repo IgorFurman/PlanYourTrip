@@ -157,7 +157,7 @@ const App = () => {
 					currentCity={lastSearchedCity}
 				/>
 				<WeatherDisplay
-					style={{ gridArea: 'weather' }}
+					
 					city={lastSearchedCity}
 				/>
 			</Container>
