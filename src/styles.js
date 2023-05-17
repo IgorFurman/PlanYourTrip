@@ -14,10 +14,21 @@ const bounce = keyframes`
 // global styles
 
 export const GlobalStyle = createGlobalStyle`
-  body {
-	
+ *, *::before, *::after {
+    box-sizing: border-box;
+  }
+ body {
+
 		font-family: 'Lato', sans-serif;}
 `;
+
+// Mixin for repeated styles
+const boxShadow = css`
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+`;
+
 // main styles
 export const Container = styled.div`
 	display: grid;
@@ -26,10 +37,11 @@ export const Container = styled.div`
 	grid-template-areas:
 		'map map details'
 		'visit visit details'
+		'weather weather details'
 		'attractions restaurants hotels';
-
-	gap: 20px;
+	gap: 10px;
 	width: 100%;
+	align-items: stretch;
 
 	@media (max-width: 1024px) {
 		grid-template-rows: auto auto auto auto auto auto;
@@ -37,6 +49,7 @@ export const Container = styled.div`
 			'map map map'
 			'details details details'
 			'details details details'
+			'weather weather weather'
 			'attractions attractions attractions'
 			'hotels hotels hotels'
 			'restaurants restaurants restaurants'
@@ -44,30 +57,29 @@ export const Container = styled.div`
 	}
 	@media (min-width: 768px) and (max-width: 1024px) {
 		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: auto auto auto auto;
+		grid-template-rows: auto auto auto auto auto;
 		grid-template-areas:
 			'map map map map'
-			'visit visit details details'
-			'attractions attractions attractions attractions'
+			'details details weather weather'
+			'details details weather weather'
+			'visit visit attractions attractions'
 			'hotels hotels restaurants restaurants';
 	}
 `;
+
 export const StandardContainer = styled.div`
 	padding: 20px;
-	margin: 10px;
+	margin: 20px 10px;
 	@media (max-width: 576px) {
 		padding: 10px;
-		margin: 5px;
+		margin: 10px 5px;
 	}
 `;
 // list
-export const listContainer = styled(StandardContainer)`
-	background: #fff;
-	border-radius: 5px;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-
-	overflow: auto;
-	height: 100%;
+export const ListContainer = styled(StandardContainer)`
+  ${boxShadow};
+  overflow: auto;
+  height: 90%;
 `;
 
 export const List = styled.ul`
@@ -116,9 +128,10 @@ export const ButtonList = styled.button`
 	color: white;
 	padding: 5px 10px;
 	border-radius: 5px;
+	font-size: 12px;
 	border: none;
 	cursor: pointer;
-	font-size: 12px;
+	
 	&:hover {
 		background-color: #a9a9a9;
 	}
@@ -146,23 +159,29 @@ export const Input = styled.input`
 export const MapContainerStyled = styled(StandardContainer)`
 	position: relative;
 	height: 90vh;
-	width: auto;
+	width: 100%;
 
-	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
-		rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0px 8px 16px),
-		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+	box-shadow: 
+    rgba(0, 0, 0, 0.07) 0px 1px 2px, 
+    rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, 
+    rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, 
+    rgba(0, 0, 0, 0.07) 0px 32px 64px;
 
 	@media (max-width: 576px) {
 		height: 80vh;
 	}
+	
 `;
-// header
+// h2 style
 export const Heading = styled.h2`
 	@media (max-width: 576px) {
 		font-size: 18px;
 	}
 `;
-
+// header
 export const Header = styled.header`
 	display: flex;
 	width: 100%;
@@ -172,6 +191,7 @@ export const Header = styled.header`
 	padding: 20px;
 	color: white;
 	margin-bottom: 20px;
+	
 	.logo {
 		width: 100%;
 		max-width: 250px;
@@ -193,48 +213,24 @@ export const Header = styled.header`
 	}
 `;
 
-// details
-export const DetailsContainer = styled(StandardContainer)`
-	background-color: white;
-	border-radius: 5px;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	min-width: 200px;
-	max-width: 300px;
-	overflow: hidden;
-	@media (max-width: 576px) {
-		min-width: 150px;
-		max-width: 250px;
-	}
-`;
+
 export const ButtonContainer = styled.div`
 	width: 100%;
 	display: flex;
 	gap: 15px;
 `;
 
-export const ListContainer = styled.div`
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	padding: 15px;
-	margin: 10px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	@media (max-width: 576px) {
-		padding: 10px;
-		margin: 5px;
-	}
-`;
 
+// place details 
 export const PlaceDetailsStyled = styled(StandardContainer)`
+${boxShadow}
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	width: 90%;
-
+	min-width:50%;
+	max-width: 96%;
 `;
 export const OpinionsWrapper = styled.div`
 max-width: 100%
@@ -375,7 +371,7 @@ export const FooterCompanyName = styled.div`
 `;
 
 export const LogoContainer = styled.div`
-distplay:flex;
+display:flex;
 text-align: center;
 justify-content: center;
 img {
@@ -384,3 +380,18 @@ img {
 	
 }
 `
+
+/* weather box */
+
+export const WeatherContainer = styled(StandardContainer)`
+${boxShadow};
+width: 100%;
+display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	img {
+		max-width: 100%;
+	}
+
+`;

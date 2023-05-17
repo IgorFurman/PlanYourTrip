@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
+import WeatherDisplay from './components/WeatherDisplay';
 import MapContainer from './components/MapContainer';
 import AttractionsList from './components/AttractionsList';
 import HotelsList from './components/HotelsList';
@@ -80,6 +81,9 @@ const App = () => {
 		}
 	}, [shouldBounce]);
 
+	const defaultPlace = {
+		place_id: '0',
+	}
 	return (
 		<ScrollProvider>
 			<GlobalStyle />
@@ -98,6 +102,7 @@ const App = () => {
 				isCitySearched={isCitySearched}
 			/>
 			<Container>
+				
 				<MapContainer
 					style={{ gridArea: 'map' }}
 					setSelectedPlace={handleSetSelectedPlace}
@@ -106,15 +111,15 @@ const App = () => {
 					setShouldBounce={setShouldBounce}
 					shouldBounce={shouldBounce}
 				/>
-				{selectedPlace && (
+				
 					<PlaceDetails
 						style={{ gridArea: 'details' }}
-						place={selectedPlace}
+						place={selectedPlace || defaultPlace}
 						addToVisit={addToVisit}
 						removeFromVisit={removeFromVisit}
 						placesToVisit={placesToVisit}
 					/>
-				)}
+		
 				<AttractionsList
 					style={{ gridArea: 'attractions' }}
 					places={places}
@@ -151,10 +156,13 @@ const App = () => {
 					removeFromVisit={removeFromVisit}
 					currentCity={lastSearchedCity}
 				/>
+				<WeatherDisplay
+					style={{ gridArea: 'weather' }}
+					city={lastSearchedCity}
+				/>
 			</Container>
 			<Footer />
 		</ScrollProvider>
-		
 	);
 };
 

@@ -13,16 +13,23 @@ import {
 } from '../styles';
 
 const PlaceDetails = ({
-	place,
 	addToVisit,
 	removeFromVisit,
 	placesToVisit,
-	style
+	style,
+	place = {
+		place_id: 'default_id',
+		name: 'default_name',
+		formatted_address: 'default_address',
+		formatted_phone_number: 'default_number',}
 }) => {
 	const [detailedPlace, setDetailedPlace] = useState(null);
 
 	useEffect(() => {
 		const fetchPlaceDetails = async () => {
+			if (!place) {
+				return;
+			}
 			try {
 				const response = await fetch(
 					`http://localhost:5000/api/place/details?placeId=${place.place_id}`
@@ -43,103 +50,93 @@ const PlaceDetails = ({
 
 	return (
 		<PlaceDetailsStyled style={style}>
-			{detailedPlace ? (
-				<>
-					<h2>{detailedPlace.name}</h2>
+			<h2>{detailedPlace ? detailedPlace.name : 'Tutaj zobaczysz szczegóły danej lokalizacji po kliknięciu w pineskę'}</h2>
 
-					<p>
-						<b>Adres:</b>
-						{detailedPlace.formatted_address}
-					</p>
+			<p>
+				<b>Adres: </b>
+				{detailedPlace ? detailedPlace.formatted_address : ''}
+			</p>
 
-					{detailedPlace.formatted_phone_number && (
-						<p>
-							<b>Numer: </b>
-							{detailedPlace.formatted_phone_number}
-						</p>
-					)}
-					{detailedPlace.opening_hours && (
-						<OpeningHours>
-							<p>Godziny otwarcia:</p>
-							<ul>
-								{detailedPlace.opening_hours.weekday_text.map((day, index) => (
-									<li key={index}>{day}</li>
-								))}
-							</ul>
-						</OpeningHours>
-					)}
-					{detailedPlace.website && (
-						<p>
-							<WebsideLink target="_blank" href={detailedPlace.website} rel="noopener noreferrer">
-								Dowiedz się więcej
-							</WebsideLink>
-						</p>
-					)}
-					{detailedPlace.photos && detailedPlace.photos.length > 0 ? (
-						<CarouselWrapper>
-							<Carousel
-								autoPlay
-								
-								dynamicHeight
-								emulateTouch
-								infiniteLoop
-								interval={3000}
-								showArrows
-								showStatus={false}
-								showIndicators
-								stopOnHover
-								swipeable
-								transitionTime={350}
-								useKeyboardArrows
-							>
-								{detailedPlace.photos.map((photo, index) => (
-									<CarouselItem key={index}>
-										<CarouselImage
-											src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photo.photo_reference}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`}
-											alt={detailedPlace.name}
-										/>
-									</CarouselItem>
-								))}
-							</Carousel>
-						</CarouselWrapper>
-					) : (
-						<p>Brak zdjęcia</p>
-					)}
+			<p>
+				<b>Numer: </b>
+				{detailedPlace && detailedPlace.formatted_phone_number ? detailedPlace.formatted_phone_number : ''}
+			</p>
 
-					{detailedPlace.rating && (
-						<p>Ocena ogólna: {detailedPlace.rating}⭐</p>
-					)}
-					{detailedPlace.reviews && detailedPlace.reviews.length > 0 && (
-						<OpinionsWrapper>
-							<h3>Opinie:</h3>
-							<Carousel>
-								
-								{detailedPlace.reviews.map((review, index) => (
-									<div key={index}>
-										<p>
-											{review.author_name} ({review.rating}⭐):
-										</p>
-										<p>{review.text}</p>
-									</div>
-								))}
-							</Carousel>
-						</OpinionsWrapper>
-					)}
-					{!isPlaceInVisitList(place.place_id) ? (
-						<ButtonList onClick={() => addToVisit(place)}>
-							Dodaj do listy do odwiedzenia
-						</ButtonList>
-					) : (
-						<ButtonList onClick={() => removeFromVisit(place.place_id)}>
-							Usuń z listy do odwiedzenia
-						</ButtonList>
-					)}
-				</>
+			{detailedPlace && detailedPlace.opening_hours ? (
+				<OpeningHours>
+					<p>Godziny otwarcia:</p>
+					<ul>
+						{detailedPlace.opening_hours.weekday_text.map((day, index) => (
+							<li key={index}>{day}</li>
+						))}
+					</ul>
+				</OpeningHours>
+			) : null}
+
+			{detailedPlace && detailedPlace.website ? (
+				<p>
+					<WebsideLink target="_blank" href={detailedPlace.website} rel="noopener noreferrer">
+						Dowiedz się więcej
+					</WebsideLink>
+				</p>
+			) : null}
+
+			{detailedPlace && detailedPlace.photos && detailedPlace.photos.length > 0 ? (
+				<CarouselWrapper>
+					<Carousel
+						autoPlay
+						dynamicHeight
+						emulateTouch
+						infiniteLoop
+						interval={3000}
+						showArrows
+						showStatus={false}
+						showIndicators
+						stopOnHover
+						swipeable
+						transitionTime={350}
+						useKeyboardArrows
+					>
+						{detailedPlace.photos.map((photo, index) => (
+							<CarouselItem key={index}>
+								<CarouselImage
+									src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photo.photo_reference}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`}
+									alt={detailedPlace.name}
+								/>
+							</CarouselItem>
+						))}
+					</Carousel>
+				</CarouselWrapper>
 			) : (
-				<p>Loading...</p>
-			)}
-		</PlaceDetailsStyled>
-	);
-};
+				<p>Brak zdjęcia</p>)} <p>Ocena ogólna: {detailedPlace && detailedPlace.rating ? detailedPlace.rating : ''}⭐</p>
 
-export default PlaceDetails;
+				{detailedPlace && detailedPlace.reviews && detailedPlace.reviews.length > 0 ? (
+					<OpinionsWrapper>
+						<h3>Opinie:</h3>
+						<Carousel>
+							{detailedPlace.reviews.map((review, index) => (
+								<div key={index}>
+									<p>
+										{review.author_name} ({review.rating}⭐):
+									</p>
+									<p>{review.text}</p>
+								</div>
+							))}
+						</Carousel>
+					</OpinionsWrapper>
+				) : null}
+	
+				{!isPlaceInVisitList(place.place_id) ? (
+					<ButtonList onClick={() => addToVisit(place)}>
+						Dodaj do listy do odwiedzenia
+					</ButtonList>
+				) : (
+					<ButtonList onClick={() => removeFromVisit(place.place_id)}>
+						Usuń z listy do odwiedzenia
+					</ButtonList>
+				)}
+			</PlaceDetailsStyled>
+		);
+	};
+	
+	export default PlaceDetails;

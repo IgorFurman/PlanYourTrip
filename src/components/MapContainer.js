@@ -72,16 +72,7 @@ const MapContainer = ({
     </Marker>
   ))}
 			</GoogleMapReact>
-			{selectedPlace && detailsPosition && (
-				<DetailsContainer
-					style={{
-						position: 'absolute',
-						top: detailsPosition.y,
-						left: detailsPosition.x,
-					}}
-				>
-				</DetailsContainer>
-			)}
+			
 		</MapContainerStyled>
 	);
 };
