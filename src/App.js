@@ -16,11 +16,12 @@ import { Container, GlobalStyle } from './styles';
 const App = () => {
 	const [selectedPlace, setSelectedPlace] = useState(null);
 	const [places, setPlaces] = useState([]);
-	const [lastSearchedCity, setLastSearchedCity] = useState('London');
+	const [lastSearchedCity, setLastSearchedCity] = useState();
 	const [lastSearchedCoordinates, setLastSearchedCoordinates] = useState({
 		lat: 51.509865,
 		lng: -0.118092,
 	});
+	const [weatherCity, setWeatherCity] = useState(null);
 	const [hotels, setHotels] = useState([]);
 	const [restaurants, setRestaurants] = useState([]);
 	const [placesToVisit, setPlacesToVisit] = useState([]);
@@ -45,6 +46,10 @@ const App = () => {
 			zoom: 15,
 		});
 	};
+
+	const handleSearchBarInput = (city) => {
+    setWeatherCity(city);
+  };
 
 	const addToVisit = (place) => {
 		setPlacesToVisit((prevPlaces) => [...prevPlaces, place]);
@@ -90,6 +95,7 @@ const App = () => {
 				addPlaces={addPlaces}
 				isCitySearched={isCitySearched}
 				mapContainerRef={mapContainerRef}
+				handleSearchBarInput={handleSearchBarInput}
 			/>
 			<Container>
 				<MapContainer
@@ -100,6 +106,7 @@ const App = () => {
 					mapSettings={mapSettings}
 					setShouldBounce={setShouldBounce}
 					shouldBounce={shouldBounce}
+					hotels={hotels}
 				/>
 
 				<PlaceDetails
@@ -129,6 +136,9 @@ const App = () => {
 						setMapSettings={setMapSettings}
 						setSelectedPlace={setSelectedPlace}
 						setShouldBounce={setShouldBounce}
+						setHotels={setHotels}
+						currentCity={lastSearchedCity}
+						
 					/>
 				</div>
 				<div ref={restaurantsListRef} style={{ gridArea: 'restaurants' }}>
@@ -139,6 +149,8 @@ const App = () => {
 						setMapSettings={setMapSettings}
 						setSelectedPlace={setSelectedPlace}
 						setShouldBounce={setShouldBounce}
+						currentCity={lastSearchedCity}
+						setRestaurants={setRestaurants}
 					/>
 				</div>
 				<PlacesToVisitList
@@ -147,7 +159,7 @@ const App = () => {
 					removeFromVisit={removeFromVisit}
 					currentCity={lastSearchedCity}
 				/>
-				<WeatherDisplay city={lastSearchedCity} />
+				<WeatherDisplay city={weatherCity} />
 			</Container>
 			<Footer />
 		</ScrollProvider>

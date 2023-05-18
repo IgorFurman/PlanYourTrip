@@ -12,7 +12,7 @@ import sunIcon from '../images/weatherIcons/sun.png';
 import cloudIcon from '../images/weatherIcons/cloud.png';
 import unknownIcon from '../images/weatherIcons/unknown.png';
 
-const WeatherDisplay = ({ city, style }) => {
+const WeatherDisplay = ({ city = null}) => {
   const [weatherData, setWeatherData] = useState(null);
 
 
@@ -21,6 +21,8 @@ const WeatherDisplay = ({ city, style }) => {
 }
 
   useEffect(() => {
+    
+
     const fetchWeather = async () => {
       try {
         const response = await axios.get(
@@ -58,6 +60,14 @@ const WeatherDisplay = ({ city, style }) => {
       return unknownIcon;
     }
   };
+
+  if (!city) {
+    return  <WeatherContainer> <h2>
+      Wpisz miasto aby zobaczyć aktualną pogodę</h2> <img
+          src={unknownIcon}
+          alt="weather icons mix"
+        /> </WeatherContainer>;
+  }
 
   if (!weatherData) {
     return <div>Ładowanie...</div>;
