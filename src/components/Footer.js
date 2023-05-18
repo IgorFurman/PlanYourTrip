@@ -21,19 +21,19 @@ const Footer = () => {
 			<FooterContainer>
 				<FooterSection>
 					<SocialIcon href='#!'>
-						<MDBIcon fab icon='facebook-f' />
+					<MDBIcon fab icon='facebook' style={{ color: '#3b5998' }} />
 					</SocialIcon>
 
 					<SocialIcon href='#!'>
-						<MDBIcon fab icon='twitter' />
+						<MDBIcon fab icon='twitter'  style={{ color: '#1da1f2' }}/>
 					</SocialIcon>
 
 					<SocialIcon href='#!'>
-						<MDBIcon fab icon='google' />
+						<MDBIcon fab icon='google'  style={{ color: '#db4437' }}/>
 					</SocialIcon>
 
 					<SocialIcon href='#!'>
-						<MDBIcon fab icon='instagram' />
+						<MDBIcon fab icon='instagram'  style={{ color: '#c32aa3' }} />
 					</SocialIcon>
 				</FooterSection>
 			</FooterContainer>

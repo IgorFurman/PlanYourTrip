@@ -18,7 +18,7 @@ const RestaurantsList = ({
 }) => {
 	const [isListVisible, setIsListVisible] = useState(true);
 
-	const { calculateHeight } = useContext(ScrollContext);
+	const { handleScroll, resetScroll } = useContext(ScrollContext);
 
 	const handleShowOnMapClick = (restaurant) => {
     setShouldBounce(true)
@@ -30,7 +30,8 @@ const RestaurantsList = ({
 			},
 			zoom: 20,
 		});
-		window.scrollTo({ top: calculateHeight(), behavior: 'smooth' });
+		handleScroll();
+		resetScroll()
 	};
 
 	const handleToggleListVisibility = () => {
@@ -51,10 +52,10 @@ const RestaurantsList = ({
 						restaurants.map((restaurant, index) => (
 							<ListItem key={`${restaurant.place_id}-${index}`}>
 								<div>
-									<strong>{restaurant.name}</strong>
-									<p>Adres: {restaurant.formatted_address}</p>
+									<h3>{restaurant.name}</h3>
+									<p><b>Adres: </b>{restaurant.formatted_address}</p>
 									<p>
-										Ocena:{' '}
+									<b>Ocena: </b>{' '}
 										{restaurant.rating ? `${restaurant.rating} ⭐` : 'Brak oceny'}
 									</p>
 									<ButtonList onClick={() => handleShowOnMapClick(restaurant)}>

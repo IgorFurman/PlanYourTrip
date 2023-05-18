@@ -1,32 +1,33 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 export const ScrollContext = React.createContext();
 
-export const ScrollProvider = ({ searchBar, placeDetails, placesToVisitList, children }) => {
+export const ScrollProvider = ({ children }) => {
   const searchBarRef = useRef(null);
-  const placeDetailsRef = useRef(null);
-  const placesToVisitRef = useRef(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
-  const calculateHeight = () => {
-    const searchBarHeight = searchBarRef.current ? searchBarRef.current.offsetHeight : 0;
-    const placeDetailsHeight = placeDetailsRef.current ? placeDetailsRef.current.offsetHeight : 0;
-    const placesToVisitHeight = placesToVisitRef.current ? placesToVisitRef.current.offsetHeight : 0;
+  const handleScroll = () => {
+    console.log("handleScroll is called!");
+    if (hasScrolled) return;
+    const searchBarHeight = searchBarRef.current.offsetHeight;
+		
+    console.log("searchBarHeight: ", searchBarHeight); 
+		
+    window.scrollTo({
+      top: searchBarHeight,
+      behavior: 'smooth',
+    });
 
-    return searchBarHeight + placeDetailsHeight + placesToVisitHeight;
-  }
+    setHasScrolled(true);
+};
+
+  const resetScroll = () => {
+    setHasScrolled(false);
+  };
 
   return (
-    <ScrollContext.Provider value={{ calculateHeight }}>
-    <div ref={searchBarRef}>
-        {searchBar}
-    </div>
-    <div ref={placeDetailsRef}>
-        {placeDetails}
-    </div>
-    <div ref={placesToVisitRef}>
-        {placesToVisitList}
-    </div>
-    {children} 
-</ScrollContext.Provider>
+    <ScrollContext.Provider value={{ searchBarRef, handleScroll, resetScroll, hasScrolled }}>
+      {children} 
+    </ScrollContext.Provider>
   );
 };

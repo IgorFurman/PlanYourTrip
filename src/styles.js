@@ -138,21 +138,34 @@ export const ButtonSearch = styled.button`
 `;
 
 export const ButtonList = styled.button`
-	background-color: #808080;
+	background-color: #031316;
 	color: white;
-	padding: 0.3125rem 0.625rem;
+	padding: 0.8rem 0.9rem;
 	border-radius: 5px;
-	font-size: 0.75rem;
+	font-size: 0.9rem;
 	border: none;
 	cursor: pointer;
+	
+	
 
 	&:hover {
-		background-color: #a9a9a9;
+		background-color: #303e3c;
 	}
 
 	@media (max-width: 576px) {
-		padding: 0.1875rem 0.3125rem;
-		font-size: 0.625rem;
+		padding: 0.6rem 1.5rem;
+		margin-right: 0.5em;
+		font-size: 0.7rem;
+	}
+	@media (max-width: 768px) {
+		
+		margin-right: 0.7em;
+		font-size: 0.8rem;
+	}
+	@media (min-width: 769px) {
+		margin-right: 0.5em;
+		margin-top: 0.3em;
+		font-size: 0.8rem;
 	}
 `;
 
@@ -193,6 +206,7 @@ export const Heading = styled.h2`
 export const Header = styled.header`
 	display: flex;
 	width: 100%;
+	height: fit-content;
 	justify-content: space-between;
 	align-items: center;
 	background-color: #031316;
@@ -206,10 +220,11 @@ export const Header = styled.header`
 		height: auto;
 	}
 	@media (max-width: 576px) {
-		padding: 0.625rem;
+	
+		padding: 0.65rem;
 
 		.logo {
-			max-width: 250px;
+			opacity: 0;
 		}
 		@media (min-width: 768px) {
 			.logo {
@@ -249,10 +264,10 @@ export const CheckBoxLabel = styled.label`
 		border: 0.1em solid #757575;
 		border-radius: 0.2em;
 		background: #fff;
-		transition: background 0.3s;
+		transition: background 0.3s, border-color 0.3s;
 	}
 
-	transition: 0.25s all ease;
+	transition: color 0.25s ease;
 `;
 
 export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
@@ -261,15 +276,11 @@ export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
 	z-index: -1;
 
 	&:checked + ${CheckBoxLabel} {
-		padding-left: 1em;
-		color: #031316;
+		color: #fff; 
 
 		&:before {
-			top: 0;
-			width: 100%;
-			height: 2em;
-			background-color: #fff;
-			border-color: #031316; 
+			background-color: #031316;
+			border-color: #fff; 
 		}
 	}
 `;
@@ -418,6 +429,7 @@ export const SocialIcon = styled(MDBBtn).attrs({
 	margin: 25px;
 	font-size: 30px;
 	background-color: none;
+	
 `;
 
 export const FooterCompanyName = styled.div`

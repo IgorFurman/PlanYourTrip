@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import MapContainer from './components/MapContainer';
@@ -33,6 +33,7 @@ const App = () => {
 
 	const hotelsListRef = useRef(null);
 	const restaurantsListRef = useRef();
+	const mapContainerRef = useRef(null)
 
 	const handleSetSelectedPlace = (place) => {
 		setSelectedPlace(place);
@@ -55,18 +56,6 @@ const App = () => {
 		);
 	};
 
-	const handleShowHotels = () => {
-		if (hotelsListRef.current) {
-			hotelsListRef.current.scrollIntoView({ behavior: 'smooth' });
-		}
-	};
-
-	const handleShowRestaurants = () => {
-		if (restaurantsListRef.current) {
-			restaurantsListRef.current.scrollIntoView({ behavior: 'smooth' });
-		}
-	};
-
 	const addPlaces = (newPlaces) => {
 		setPlaces((prevPlaces) => [...prevPlaces, ...newPlaces]);
 	};
@@ -83,9 +72,11 @@ const App = () => {
 
 	const defaultPlace = {
 		place_id: '0',
-	}
+	};
+
+
 	return (
-		<ScrollProvider>
+		<ScrollProvider >
 			<GlobalStyle />
 			<SearchBar
 				setPlaces={setPlaces}
@@ -96,14 +87,13 @@ const App = () => {
 				setHotels={setHotels}
 				setRestaurants={setRestaurants}
 				setIsCitySearched={setIsCitySearched}
-				handleShowRestaurants={handleShowRestaurants}
-				handleShowHotels={handleShowHotels}
 				addPlaces={addPlaces}
 				isCitySearched={isCitySearched}
+				mapContainerRef={mapContainerRef}
 			/>
 			<Container>
-				
 				<MapContainer
+					forwardRef={mapContainerRef}
 					style={{ gridArea: 'map' }}
 					setSelectedPlace={handleSetSelectedPlace}
 					places={places}
@@ -111,15 +101,15 @@ const App = () => {
 					setShouldBounce={setShouldBounce}
 					shouldBounce={shouldBounce}
 				/>
-				
-					<PlaceDetails
-						style={{ gridArea: 'details' }}
-						place={selectedPlace || defaultPlace}
-						addToVisit={addToVisit}
-						removeFromVisit={removeFromVisit}
-						placesToVisit={placesToVisit}
-					/>
-		
+
+				<PlaceDetails
+					style={{ gridArea: 'details' }}
+					place={selectedPlace || defaultPlace}
+					addToVisit={addToVisit}
+					removeFromVisit={removeFromVisit}
+					placesToVisit={placesToVisit}
+				/>
+
 				<AttractionsList
 					style={{ gridArea: 'attractions' }}
 					places={places}
@@ -129,6 +119,7 @@ const App = () => {
 					addToVisit={addToVisit}
 					removeFromVisit={removeFromVisit}
 					setShouldBounce={setShouldBounce}
+					mapContainerRef={mapContainerRef}
 				/>
 				<div ref={hotelsListRef} style={{ gridArea: 'hotels' }}>
 					<HotelsList
@@ -156,10 +147,7 @@ const App = () => {
 					removeFromVisit={removeFromVisit}
 					currentCity={lastSearchedCity}
 				/>
-				<WeatherDisplay
-					
-					city={lastSearchedCity}
-				/>
+				<WeatherDisplay city={lastSearchedCity} />
 			</Container>
 			<Footer />
 		</ScrollProvider>

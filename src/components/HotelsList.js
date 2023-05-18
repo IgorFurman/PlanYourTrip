@@ -6,7 +6,7 @@ import { ScrollContext } from './ScrollContext';
 
 const HotelsList = ({ hotels, setMapSettings, setSelectedPlace, style,setShouldBounce}) => {
 	const [isListVisible, setIsListVisible, ] = useState(true);
-  const { calculateHeight } = useContext(ScrollContext);
+	const { handleScroll, resetScroll } = useContext(ScrollContext);
   const handleShowOnMapClick = (hotel) => {
 		setShouldBounce(true);
 		setSelectedPlace(hotel);
@@ -17,7 +17,8 @@ const HotelsList = ({ hotels, setMapSettings, setSelectedPlace, style,setShouldB
 			},
 			zoom: 18,
 		});
-		window.scrollTo({ top: calculateHeight(), behavior: 'smooth' });
+		handleScroll()
+		resetScroll()
 	};
 
 	const handleToggleListVisibility = () => {
@@ -37,10 +38,10 @@ return (
 						hotels.map((hotel, index) => (
 							<ListItem key={`${hotel.place_id}- ${index}`}>
 								<div>
-									<strong>{hotel.name}</strong>
-									<p>Adres: {hotel.formatted_address}</p>
+									<h3>{hotel.name}</h3>
+									<p><b>Adres: </b>{hotel.formatted_address}</p>
 									<p>
-										Ocena: {hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}
+										<b>Ocena: </b>{hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}
 									</p>
 									<ButtonList onClick={() => handleShowOnMapClick(hotel)}>
 										Pokaż na mapie

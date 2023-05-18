@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+
+import { ScrollContext } from './ScrollContext';
 
 import {
 	Header,
 	Input,
 	ButtonSearch,
-	Logo,
 	CheckBoxWrapper,
 	CheckBox,
 	CheckBoxLabel,
@@ -30,10 +31,15 @@ const SearchBar = ({
 	const [showAttractions, setShowAttractions] = useState(false);
 	const [showHotels, setShowHotels] = useState(false);
 	const [showRestaurants, setShowRestaurants] = useState(false);
+	const { handleScroll, resetScroll, searchBarRef } = useContext(ScrollContext);
+
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		resetScroll()
 		try {
+			let shouldScroll = false;
+		
 			if (showAttractions) {
 				const response = await axios.get(
 					`http://localhost:5000/api/place/attractions?query=${search}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`
@@ -45,11 +51,12 @@ const SearchBar = ({
 				) {
 					setPlaces(response.data.results);
 					const { lat, lng } = response.data.results[0].geometry.location;
-					setMapSettings({ center: { lat, lng }, zoom: 15 });
+					setMapSettings({ center: { lat, lng }, zoom: 10 });
 					setLastSearchedCoordinates({ lat, lng });
 					setLastSearchedCity(search);
 					setSelectedPlace(null);
 					setIsCitySearched(true);
+					shouldScroll = true;
 				} else {
 					console.log('No results found.');
 				}
@@ -58,7 +65,7 @@ const SearchBar = ({
 				const responseHotels = await axios.get(
 					`http://localhost:5000/api/place/hotels?query=${search}`
 				);
-
+	
 				if (
 					responseHotels.data &&
 					responseHotels.data.results &&
@@ -66,7 +73,7 @@ const SearchBar = ({
 				) {
 					addPlaces(responseHotels.data.results);
 					setHotels(responseHotels.data.results);
-					handleShowHotels();
+					shouldScroll = true;
 				} else {
 					console.log('No hotels found.');
 					setHotels([]);
@@ -76,7 +83,7 @@ const SearchBar = ({
 				const responseRestaurants = await axios.get(
 					`http://localhost:5000/api/place/restaurants?query=${search}`
 				);
-
+	
 				if (
 					responseRestaurants.data &&
 					responseRestaurants.data.results &&
@@ -84,19 +91,24 @@ const SearchBar = ({
 				) {
 					addPlaces(responseRestaurants.data.results);
 					setRestaurants(responseRestaurants.data.results);
-					handleShowRestaurants();
+					shouldScroll = true;
 				} else {
 					console.log('No restaurants found.');
 					setRestaurants([]);
 				}
 			}
+	
+			if (shouldScroll) {
+				handleScroll();
+			}
 		} catch (error) {
 			console.error('Error searching Google Places API:', error);
 		}
 	};
+	
 
 	return (
-		<Header>
+		<Header ref={searchBarRef}>
 			<form onSubmit={handleSubmit}>
 				<Input
 					type='text'

@@ -15,11 +15,12 @@ const AttractionsList = ({
 }) => {
 	const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
 	const [isListVisible, setIsListVisible] = useState(true);
-	const [isHighestRatedFiltered, setIsHighestRatedFiltered] = useState(false);
 
-	const { calculateHeight } = useContext(ScrollContext);
+
+	const { handleScroll, resetScroll } = useContext(ScrollContext);
 
 	const handleShowOnMapClick = (place) => {
+		
 		setShouldBounce(true)
 		setSelectedPlace(place);
 		setMapSettings({
@@ -29,7 +30,9 @@ const AttractionsList = ({
 			},
 			zoom: 18,
 		});
-		window.scrollTo({ top: calculateHeight(), behavior: 'smooth' });
+		
+		handleScroll();
+    resetScroll();
 	};
 
 	const handleToggleListVisibility = () => {
@@ -43,7 +46,7 @@ const AttractionsList = ({
 	
 
 	return (
-		<ListContainer style={style}>
+		<ListContainer style={style} >
 			<h2>Atrakcje turystyczne:</h2>
 			<ButtonList onClick={handleToggleListVisibility}>
 				{isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
@@ -53,10 +56,10 @@ const AttractionsList = ({
 					{places.map((place, index) => (
 						<ListItem key={`${place.place_id}-${index}`}>
 							<div>
-								<strong>{place.name}</strong>
-								<p>Adres: {place.formatted_address}</p>
+								<h3>{place.name}</h3>
+								<p><b>Adres: </b>{place.formatted_address}</p>
 								<p>
-									Ocena: {place.rating ? `${place.rating} ⭐` : 'Brak oceny'}
+									<b>Ocena: </b>{place.rating ? `${place.rating} ⭐` : 'Brak oceny'}
 								</p>
 								<ButtonList onClick={() => handleShowOnMapClick(place)}>
 									Pokaż na mapie
