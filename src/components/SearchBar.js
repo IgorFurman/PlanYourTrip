@@ -10,6 +10,7 @@ import {
 	CheckBoxWrapper,
 	CheckBox,
 	CheckBoxLabel,
+	Form,
 } from '../styles.js';
 import LogoImg from '../images/PlanYourTrip-logo.png';
 
@@ -109,7 +110,7 @@ const SearchBar = ({
 
 	return (
 		<Header ref={searchBarRef}>
-			<form onSubmit={handleSubmit}>
+			<Form onSubmit={handleSubmit}>
 				<Input
 					type='text'
 					value={search}
@@ -140,7 +141,7 @@ const SearchBar = ({
 					<CheckBoxLabel htmlFor='restaurants'>Restauracje</CheckBoxLabel>
 				</CheckBoxWrapper>
 				<ButtonSearch type='submit'>Szukaj</ButtonSearch>
-			</form>
+			</Form>
 			<img className='logo' src={LogoImg} alt='Plan Your Trip logo' />
 		</Header>
 	);

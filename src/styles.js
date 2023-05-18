@@ -124,6 +124,7 @@ export const ButtonSearch = styled.button`
 	background-color: #afa7ba;
 	color: #031316;
 	padding: 0.625rem 1.25rem;
+	width: 100%;
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
@@ -133,7 +134,9 @@ export const ButtonSearch = styled.button`
 	}
 
 	@media (max-width: 576px) {
-		padding: 0.3125rem 0.625rem;
+		padding: 0.5rem 1rem;
+		
+		font-size: 1.2rem;
 	}
 `;
 
@@ -174,12 +177,14 @@ export const Input = styled.input`
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	width: 100%;
+	
 	box-sizing: border-box;
 	margin-bottom: 0.625rem;
 
 	@media (max-width: 576px) {
-		padding: 0.3125rem;
-		margin-bottom: 0.3125rem;
+		padding: 0.7rem;
+		font-size: 1rem;
+		margin-bottom: 0.8rem;
 	}
 `;
 // map
@@ -218,13 +223,14 @@ export const Header = styled.header`
 		width: 100%;
 		max-width: 250px;
 		height: auto;
+		background: none;
 	}
 	@media (max-width: 576px) {
 	
 		padding: 0.65rem;
 
 		.logo {
-			opacity: 0;
+			display: none
 		}
 		@media (min-width: 768px) {
 			.logo {
@@ -235,54 +241,77 @@ export const Header = styled.header`
 		}
 	}
 `;
-
+export const Form = styled.form`
+display: flex;
+flex-direction: column;
+margin: 0 auto;
+@media (min-width: 768px) {
+	margin-left: 1em;
+}
+`
 // Check inputs
 
 export const CheckBoxWrapper = styled.div`
-	display: flex;
-	align-items: space-evenly;
-	justify-content: center;
-	margin-bottom: 2em;
+  display: flex;
+	
+  align-items: space-around;
+  justify-content: flex-start;
+  margin-bottom: 2em;
 `;
 
 export const CheckBoxLabel = styled.label`
-	position: relative;
-	margin-right: 1em;
-	padding-left: 2em;
-	padding-right: 1em;
-	line-height: 2;
-	cursor: pointer;
+  position: relative;
+  margin-right: 0.5em;
+  padding-left: 0.2em;
+	margin-bottom: 2.2em;
+  cursor: pointer;
+  display: inline-block;
+  width: 90px;
+  height: 34px;
 
-	&:before {
-		box-sizing: border-box;
-		content: ' ';
-		position: absolute;
-		top: 0.3em;
-		left: 0.5em;
-		width: 1.4em;
-		height: 1.4em;
-		border: 0.1em solid #757575;
-		border-radius: 0.2em;
-		background: #fff;
-		transition: background 0.3s, border-color 0.3s;
-	}
+  &:before,
+  &:after {
+    position: absolute;
+		top: 40px;
+		left: 0;
+    content: "";
+    transition: 0.4s;
+  }
 
-	transition: color 0.25s ease;
+  &:before {
+    background-color: #ccc;
+    width: 100%;
+    height: 100%;
+    border-radius: 34px;
+  }
+
+  &:after {
+    background-color: #fff;
+    bottom: 0px;
+		top: 44px;
+    left: 4px;
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+  }
 `;
 
 export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+	
+  z-index: -1;
 
-	&:checked + ${CheckBoxLabel} {
-		color: #fff; 
-
-		&:before {
-			background-color: #031316;
-			border-color: #fff; 
-		}
-	}
+  &:checked + ${CheckBoxLabel} {
+    &:before {
+      background-color: #66bb6a;
+    }
+    &:after {
+      transform: translateX(55px);
+    }
+  }
 `;
 
 // place details
@@ -414,7 +443,7 @@ export const FooterContainer = styled.div`
 	display: flex;
 	justify-content: space-around;
 	text-align: center;
-	background-color: #031316;
+	background-color:  #303e3c;
 	padding: 3.75rem;
 	padding-bottom: 0;
 `;
@@ -435,7 +464,7 @@ export const SocialIcon = styled(MDBBtn).attrs({
 export const FooterCompanyName = styled.div`
 	text-align: center;
 	padding: 3rem;
-	background-color: #303e3c;
+	background-color:#031316;
 `;
 
 export const LogoContainer = styled.div`
@@ -443,7 +472,7 @@ export const LogoContainer = styled.div`
 	text-align: center;
 	justify-content: center;
 	img {
-		width: 100%;
+		width: 50%;
 		height: fit-content;
 	}
 `;
