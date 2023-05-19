@@ -498,5 +498,6 @@ export const WeatherContainer = styled(StandardContainer)`
 		margin: 0 auto;
 	}
 	@media (min-width: 1024px) {
+		width: 97%;
 	}
 `;
