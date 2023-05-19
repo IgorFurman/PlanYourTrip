@@ -1,6 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { Container, ButtonList, Input, List, ListItem, ListContainer } from '../styles';
+import {
+  Container,
+  ButtonList,
+  Input,
+  List,
+  ListItem,
+  ListContainer,
+} from '../styles';
 import { ScrollContext } from './ScrollContext';
 
 const HotelsList = ({
@@ -11,6 +18,7 @@ const HotelsList = ({
   setShouldBounce,
   currentCity,
   setHotels,
+  isCitySearched,
 }) => {
   const [isListVisible, setIsListVisible] = useState(true);
   const { handleScroll, resetScroll } = useContext(ScrollContext);
@@ -44,8 +52,12 @@ const HotelsList = ({
         responseHotels.data.results &&
         responseHotels.data.results.length > 0
       ) {
-        setHotels(responseHotels.data.results);
-        handleScroll();
+        if (
+          JSON.stringify(hotels) !== JSON.stringify(responseHotels.data.results)
+        ) {
+          setHotels(responseHotels.data.results);
+          handleScroll();
+        }
       } else {
         console.log('No hotels found.');
         setHotels([]);
@@ -58,14 +70,18 @@ const HotelsList = ({
   return (
     <ListContainer style={style}>
       <h2>Hotele:</h2>
-      <ButtonList onClick={handleToggleListVisibility}>
-        {isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
-      </ButtonList>
+      {hotels.length > 0 ? (
+        <ButtonList onClick={handleToggleListVisibility}>
+          {isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
+        </ButtonList>
+      ) : (
+        <p>Tutaj zobaczysz listę wyszukanych hoteli.</p>
+      )}
       {isListVisible && (
         <List>
           {hotels.length > 0 ? (
             hotels.map((hotel, index) => (
-              <ListItem key={`${hotel.place_id}- ${index}`}>
+              <ListItem key={`${hotel.place_id}-${index}`}>
                 <div>
                   <h3>{hotel.name}</h3>
                   <p>
@@ -83,13 +99,16 @@ const HotelsList = ({
               </ListItem>
             ))
           ) : (
-            <button onClick={handleShowHotelsClick}>Pobierz dostępne hotele</button>
+            isCitySearched && (
+              <ButtonList onClick={handleShowHotelsClick}>
+                Pokaż dostępne hotele
+              </ButtonList>
+            )
           )}
         </List>
       )}
     </ListContainer>
   );
 };
-
 
 export default HotelsList;

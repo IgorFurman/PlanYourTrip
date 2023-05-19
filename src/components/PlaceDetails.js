@@ -26,61 +26,60 @@ const PlaceDetails = ({
 }) => {
   const [detailedPlace, setDetailedPlace] = useState(null);
 
-	useEffect(() => {
-		const fetchPlaceDetails = async () => {
-			if (!place) {
-				return;
-			}
-			try {
-				const response = await fetch(
-					`http://localhost:5000/api/place/details?placeId=${place.place_id}`
-				);
-	
-				if (!response.ok) {
-					throw new Error('Problem z odpowiedzią serwera');
-				}
-				
-				const data = await response.text();
-				if (!data) {
-					throw new Error('Brak danych do przetworzenia');
-				}
-				
-				const jsonData = JSON.parse(data);
-				setDetailedPlace(jsonData);
-			} catch (error) {
-				console.error('Error fetching place details:', error);
-			}
-		};
-	
-		fetchPlaceDetails();
-	}, [place.place_id]);
-	
+  useEffect(() => {
+    const fetchPlaceDetails = async () => {
+      if (!place) {
+        return;
+      }
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/place/details?placeId=${place.place_id}`
+        );
+
+        if (!response.ok) {
+          throw new Error('Problem z odpowiedzią serwera');
+        }
+
+        const data = await response.text();
+        if (!data) {
+          throw new Error('Brak danych do przetworzenia');
+        }
+
+        const jsonData = JSON.parse(data);
+        setDetailedPlace(jsonData);
+      } catch (error) {
+        console.error('Error fetching place details:', error);
+      }
+    };
+
+    fetchPlaceDetails();
+  }, [place.place_id]);
 
   const isPlaceInVisitList = (placeId) => {
     return placesToVisit.some((place) => place.place_id === placeId);
   };
 
+  if (!detailedPlace) {
+    return (
+      <PlaceDetailsStyled style={style}>
+        <h2>Tutaj zobaczysz szczegóły danej lokalizacji po kliknięciu w pineskę</h2>
+      </PlaceDetailsStyled>
+    );
+  }
+
   return (
     <PlaceDetailsStyled style={style}>
-      <h2>
-        {detailedPlace
-          ? detailedPlace.name
-          : 'Tutaj zobaczysz szczegóły danej lokalizacji po kliknięciu w pineskę'}
-      </h2>
-
+      <h2>{detailedPlace.name}</h2>
       <p>
         <b>Adres: </b>
-        {detailedPlace ? detailedPlace.formatted_address : ''}
+        {detailedPlace.formatted_address}
       </p>
-
       <p>
         <b>Numer: </b>
-        {detailedPlace && detailedPlace.formatted_phone_number
-          ? detailedPlace.formatted_phone_number
-          : ''}
+        {detailedPlace.formatted_phone_number}
       </p>
 
-      {detailedPlace && detailedPlace.opening_hours ? (
+      {detailedPlace.opening_hours && (
         <OpeningHours>
           <p>Godziny otwarcia:</p>
           <ul>
@@ -89,9 +88,9 @@ const PlaceDetails = ({
             ))}
           </ul>
         </OpeningHours>
-      ) : null}
+      )}
 
-      {detailedPlace && detailedPlace.website ? (
+      {detailedPlace.website && (
         <p>
           <WebsideLink
             target="_blank"
@@ -101,9 +100,9 @@ const PlaceDetails = ({
             Dowiedz się więcej
           </WebsideLink>
         </p>
-      ) : null}
+      )}
 
-      {detailedPlace && detailedPlace.photos && detailedPlace.photos.length > 0 ? (
+      {detailedPlace.photos && detailedPlace.photos.length > 0 ? (
         <CarouselWrapper>
           <Carousel
             autoPlay
@@ -118,7 +117,7 @@ const PlaceDetails = ({
             swipeable
             transitionTime={350}
             useKeyboardArrows
-						showThumbs={false}
+            showThumbs={false}
           >
             {detailedPlace.photos.map((photo, index) => (
               <CarouselItem key={index}>
@@ -134,11 +133,11 @@ const PlaceDetails = ({
         <p>Brak zdjęcia</p>
       )}
 
-      <p>
-        Ocena ogólna: {detailedPlace && detailedPlace.rating ? detailedPlace.rating : ''}⭐
-      </p>
+      {detailedPlace.rating && (
+        <p>Ocena ogólna: {detailedPlace.rating}⭐</p>
+      )}
 
-      {detailedPlace && detailedPlace.reviews && detailedPlace.reviews.length > 0 && (
+      {detailedPlace.reviews && detailedPlace.reviews.length > 0 && (
         <OpinionsWrapper>
           <h3>Opinie:</h3>
           <Carousel>
@@ -154,17 +153,18 @@ const PlaceDetails = ({
         </OpinionsWrapper>
       )}
 
-      {detailedPlace && (
-        <>
-          {!isPlaceInVisitList(place.place_id) ? (
-            <ButtonList onClick={() => addToVisit(place)}>Dodaj do listy do odwiedzenia</ButtonList>
-          ) : (
-            <ButtonList onClick={() => removeFromVisit(place.place_id)}>Usuń z listy do odwiedzenia</ButtonList>
-          )}
-        </>
+      {!isPlaceInVisitList(place.place_id) ? (
+        <ButtonList onClick={() => addToVisit(place)}>
+          Dodaj do listy do odwiedzenia
+        </ButtonList>
+      ) : (
+        <ButtonList onClick={() => removeFromVisit(place.place_id)}>
+          Usuń z listy do odwiedzenia
+        </ButtonList>
       )}
     </PlaceDetailsStyled>
   );
 };
 
 export default PlaceDetails;
+

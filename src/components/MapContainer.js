@@ -53,31 +53,27 @@ const MapContainer = ({
     return AttractionsPin;
   };
 
-  const handleFetchHotels = () => {
-    if (hotels.length > 0) {
-      hotels.forEach((hotel) => {
-        const marker = document.createElement('div');
-        marker.style.position = 'absolute';
-        marker.style.left = '-20px';
-        marker.style.top = '-50px';
-        marker.style.transform = 'translate(-50%, -50%)';
-        marker.innerHTML = `<img src=${HotelsPin} alt="Hotel Pin" style="width: 40px; height: 40px;">`;
-        const hotelMarker = new window.google.maps.Marker({
-          position: { lat: hotel.geometry.location.lat, lng: hotel.geometry.location.lng },
-          map: mapRef.current.map_,
-        });
-        hotelMarker.addListener('click', () => {
-          setSelectedPlace(hotel);
-          setDetailsPosition({ x: 0, y: 0 });
-        });
-        hotelMarker.setMap(mapRef.current.map_);
-        hotelMarker.setIcon({
-          url: marker,
-          scaledSize: new window.google.maps.Size(40, 40),
-        });
-      });
-    }
-  };
+	const handleFetchHotels = () => {
+		if (hotels.length > 0) {
+			hotels.forEach((hotel) => {
+				
+				const hotelMarker = new window.google.maps.Marker({
+					position: { lat: hotel.geometry.location.lat, lng: hotel.geometry.location.lng },
+					map: mapRef.current.map_,
+				});
+				hotelMarker.addListener('click', () => {
+					setSelectedPlace(hotel);
+					setDetailsPosition({ x: 0, y: 0 });
+				});
+				hotelMarker.setMap(mapRef.current.map_);
+				
+				hotelMarker.setIcon({
+					url: HotelsPin,
+					scaledSize: new window.google.maps.Size(40, 40),
+				});
+			});
+		}
+	};
 
   useEffect(() => {
     handleFetchHotels();

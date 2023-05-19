@@ -18,6 +18,7 @@ const RestaurantsList = ({
   setShouldBounce,
   currentCity,
   setRestaurants,
+  isCitySearched
 }) => {
   const [isListVisible, setIsListVisible] = useState(true);
   const { handleScroll, resetScroll } = useContext(ScrollContext);
@@ -65,9 +66,13 @@ const RestaurantsList = ({
   return (
     <ListContainer style={style}>
       <h2>Restauracje:</h2>
-      <ButtonList onClick={handleToggleListVisibility}>
-        {isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
-      </ButtonList>
+      {restaurants.length > 0 ? (
+        <ButtonList onClick={handleToggleListVisibility}>
+          {isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
+        </ButtonList>
+      ) : (
+        <p>Tutaj zobaczysz listę wyszukanych restauracji.</p>
+      )}
       {isListVisible && (
         <List>
           {restaurants.length > 0 ? (
@@ -90,9 +95,11 @@ const RestaurantsList = ({
               </ListItem>
             ))
           ) : (
-            <button onClick={handleShowRestaurantsClick}>
-              Pobierz dostępne restauracje
-            </button>
+            isCitySearched && (
+              <ButtonList onClick={handleShowRestaurantsClick}>
+                Pokaż dostępne restauracje
+              </ButtonList>
+            )
           )}
         </List>
       )}

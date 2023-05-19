@@ -20,6 +20,7 @@ const Footer = () => {
 		<StyledFooter>
 			<FooterContainer>
 				<FooterSection>
+					<h2>Znajdź nas na social mediach</h2>
 					<SocialIcon href='#!'>
 					<MDBIcon fab icon='facebook' style={{ color: '#3b5998' }} />
 					</SocialIcon>

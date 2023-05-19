@@ -25,7 +25,7 @@ const PlacesToVisitList = ({ placesToVisit, removeFromVisit, currentCity, style}
 
 	return (
 		<ListContainer style={style}>
-			<h2>{currentCity} - Lista miejsc do odwiedzenia</h2>
+			<h2>{currentCity} lista miejsc do odwiedzenia</h2>
 			{placesToVisit.length > 0 ? (
 				<>
 					<DownloadList href={downloadUrl} download={`${currentCity}_places_to_visit.txt`}>

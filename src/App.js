@@ -138,6 +138,8 @@ const App = () => {
 						setShouldBounce={setShouldBounce}
 						setHotels={setHotels}
 						currentCity={lastSearchedCity}
+						isCitySearched={isCitySearched}
+						 
 						
 					/>
 				</div>
@@ -151,6 +153,7 @@ const App = () => {
 						setShouldBounce={setShouldBounce}
 						currentCity={lastSearchedCity}
 						setRestaurants={setRestaurants}
+						isCitySearched={isCitySearched}
 					/>
 				</div>
 				<PlacesToVisitList

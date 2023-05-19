@@ -450,6 +450,9 @@ export const FooterContainer = styled.div`
 
 export const FooterSection = styled.section`
 	margin-bottom: 4rem;
+	h2 {
+		font-size:1.2rem;
+	}
 `;
 
 export const SocialIcon = styled(MDBBtn).attrs({
@@ -472,7 +475,7 @@ export const LogoContainer = styled.div`
 	text-align: center;
 	justify-content: center;
 	img {
-		width: 50%;
+		max-width: 50%;
 		height: fit-content;
 	}
 `;

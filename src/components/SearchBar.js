@@ -33,6 +33,11 @@ const SearchBar = ({
   const [showRestaurants, setShowRestaurants] = useState(false);
   const { handleScroll, resetScroll, searchBarRef } = useContext(ScrollContext);
 
+	const clearData = () => {
+		setHotels([]);
+		setRestaurants([]);
+	};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     resetScroll();
@@ -57,8 +62,10 @@ const SearchBar = ({
           setSelectedPlace(null);
           setIsCitySearched(true);
           shouldScroll = true;
+					shouldClearData = true;
         } else {
           console.log('No results found.');
+					clearData()
         }
       }
 
@@ -80,7 +87,7 @@ const SearchBar = ({
           shouldScroll = true;
         } else {
           console.log('No hotels found.');
-          setHotels([]);
+          clearData()
         }
       }
 
@@ -111,8 +118,7 @@ const SearchBar = ({
       }
 
       if (shouldClearData) {
-        setHotels([]);
-        setRestaurants([]);
+				clearData()
       }
     } catch (error) {
       console.error('Error searching Google Places API:', error);
