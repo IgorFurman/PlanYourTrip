@@ -10,7 +10,7 @@ import {
   OpeningHours,
   WebsideLink,
   OpinionsWrapper
-} from '../styles';
+} from '../styles/styles';
 
 const PlaceDetails = ({
   addToVisit,

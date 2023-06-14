@@ -1,5 +1,11 @@
 import React from 'react';
-import { List, ListItem, ButtonList, ListContainer, DownloadList } from '../styles';
+import {
+	List,
+	ListItem,
+	ButtonList,
+	ListContainer,
+	DownloadList,
+} from '../styles/styles';
 
 const generateDownloadContent = (placesToVisit) => {
 	let content = '';
@@ -12,23 +18,29 @@ const generateDownloadContent = (placesToVisit) => {
 	});
 	return content;
 };
-const PlacesToVisitList = ({ placesToVisit, removeFromVisit, currentCity, style}) => {
+const PlacesToVisitList = ({
+	placesToVisit,
+	removeFromVisit,
+	currentCity,
+	style,
+}) => {
 	const downloadContent = generateDownloadContent(placesToVisit);
-	const blob = new Blob([downloadContent], { type: "text/plain" });
+	const blob = new Blob([downloadContent], { type: 'text/plain' });
 	const downloadUrl = URL.createObjectURL(blob);
 
 	const handleRemoveFromVisit = (placeId) => {
 		removeFromVisit(placeId);
 	};
 
-	
-
 	return (
 		<ListContainer style={style}>
 			<h2>{currentCity} lista miejsc do odwiedzenia</h2>
 			{placesToVisit.length > 0 ? (
 				<>
-					<DownloadList href={downloadUrl} download={`${currentCity}_places_to_visit.txt`}>
+					<DownloadList
+						href={downloadUrl}
+						download={`${currentCity}_places_to_visit.txt`}
+					>
 						Pobierz listę
 					</DownloadList>
 					<List>
@@ -37,8 +49,12 @@ const PlacesToVisitList = ({ placesToVisit, removeFromVisit, currentCity, style}
 								<div>
 									<strong>{place.name}</strong>
 									<p>Adres: {place.formatted_address}</p>
-									<p>Ocena: {place.rating ? `${place.rating} ⭐` : 'Brak oceny'}</p>
-									<ButtonList onClick={() => handleRemoveFromVisit(place.place_id)}>
+									<p>
+										Ocena: {place.rating ? `${place.rating} ⭐` : 'Brak oceny'}
+									</p>
+									<ButtonList
+										onClick={() => handleRemoveFromVisit(place.place_id)}
+									>
 										Usuń z listy do odwiedzenia
 									</ButtonList>
 								</div>

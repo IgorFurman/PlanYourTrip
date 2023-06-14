@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { WeatherContainer } from '../styles.js';
+import { WeatherContainer } from '../styles/styles.js';
 
 
 import thunderstormIcon from '../images/weatherIcons/thunderstorm.png';

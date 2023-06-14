@@ -1,5 +1,5 @@
 import React from 'react';
-import { LegendContainer, LegendItem, LegendPin, LegendLabel } from '../styles.js'; 
+import { LegendContainer, LegendItem, LegendPin, LegendLabel } from '../styles/styles.js'; 
 import AttractionsPin from '../images/AttractionsPin.png';
 import HotelsPin from '../images/HotelsPin.png';
 import RestaurantsPin from '../images/RestaurantsPin.png';

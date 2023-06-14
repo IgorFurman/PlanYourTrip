@@ -5,7 +5,7 @@ import {
   PinStyled,
   InfoWindowStyled,
   DetailsContainer,
-} from '../styles.js';
+} from '../styles/styles.js';
 import MapLegend from './MapLegend';
 import AttractionsPin from '../images/AttractionsPin.png';
 import HotelsPin from '../images/HotelsPin.png';

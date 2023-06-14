@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import MapContainer from './components/MapContainer';
@@ -9,11 +9,19 @@ import PlaceDetails from './components/PlaceDetails';
 import PlacesToVisitList from './components/PlacesToVisitList';
 import Footer from './components/Footer';
 
-import { ScrollProvider } from './components/ScrollContext';
+import { ScrollProvider } from './utils/scrollContext/ScrollContext';
 
-import { Container, GlobalStyle } from './styles';
+import { Container, GlobalStyle } from './styles/styles';
+
+
+import { useSelector, useDispatch } from 'react-redux'
+import { addToVisit, removeFromVisit } from './redux/placesToVisitSlice' 
 
 const App = () => {
+
+	const dispatch = useDispatch()
+  const placesToVisit = useSelector(state => state.placesToVisit)
+
 	const [selectedPlace, setSelectedPlace] = useState(null);
 	const [places, setPlaces] = useState([]);
 	const [lastSearchedCity, setLastSearchedCity] = useState();
@@ -24,7 +32,7 @@ const App = () => {
 	const [weatherCity, setWeatherCity] = useState(null);
 	const [hotels, setHotels] = useState([]);
 	const [restaurants, setRestaurants] = useState([]);
-	const [placesToVisit, setPlacesToVisit] = useState([]);
+	// const [placesToVisit, setPlacesToVisit] = useState([]);
 	const [mapSettings, setMapSettings] = useState({
 		center: lastSearchedCoordinates,
 		zoom: 15,
@@ -34,7 +42,7 @@ const App = () => {
 
 	const hotelsListRef = useRef(null);
 	const restaurantsListRef = useRef();
-	const mapContainerRef = useRef(null)
+	const mapContainerRef = useRef(null);
 
 	const handleSetSelectedPlace = (place) => {
 		setSelectedPlace(place);
@@ -48,18 +56,26 @@ const App = () => {
 	};
 
 	const handleSearchBarInput = (city) => {
-    setWeatherCity(city);
-  };
-
-	const addToVisit = (place) => {
-		setPlacesToVisit((prevPlaces) => [...prevPlaces, place]);
+		setWeatherCity(city);
 	};
 
-	const removeFromVisit = (placeId) => {
-		setPlacesToVisit((prevPlaces) =>
-			prevPlaces.filter((place) => place.place_id !== placeId)
-		);
-	};
+	const handleAddToVisit = place => {
+    dispatch(addToVisit(place))
+  }
+
+  const handleRemoveFromVisit = placeId => {
+    dispatch(removeFromVisit(placeId))
+  }
+
+	// const addToVisit = (place) => {
+	// 	setPlacesToVisit((prevPlaces) => [...prevPlaces, place]);
+	// };
+
+	// const removeFromVisit = (placeId) => {
+	// 	setPlacesToVisit((prevPlaces) =>
+	// 		prevPlaces.filter((place) => place.place_id !== placeId)
+	// 	);
+	// };
 
 	const addPlaces = (newPlaces) => {
 		setPlaces((prevPlaces) => [...prevPlaces, ...newPlaces]);
@@ -79,9 +95,8 @@ const App = () => {
 		place_id: '0',
 	};
 
-
 	return (
-		<ScrollProvider >
+		<ScrollProvider>
 			<GlobalStyle />
 			<SearchBar
 				setPlaces={setPlaces}
@@ -139,8 +154,6 @@ const App = () => {
 						setHotels={setHotels}
 						currentCity={lastSearchedCity}
 						isCitySearched={isCitySearched}
-						 
-						
 					/>
 				</div>
 				<div ref={restaurantsListRef} style={{ gridArea: 'restaurants' }}>

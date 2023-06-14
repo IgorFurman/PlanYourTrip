@@ -9,7 +9,7 @@ import {
 	FooterCompanyName,
 	StyledFooter,
 	LogoContainer,
-} from '../styles';
+} from '../styles/styles';
 
 import LogoImg from '../images/PlanYourTrip-logo.png';
 
