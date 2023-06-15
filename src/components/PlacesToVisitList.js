@@ -7,6 +7,9 @@ import {
 	DownloadList,
 } from '../styles/styles';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { removeFromVisit } from '../redux/placesToVisitSlice';
+
 const generateDownloadContent = (placesToVisit) => {
 	let content = '';
 	placesToVisit.forEach((place, index) => {
@@ -18,23 +21,22 @@ const generateDownloadContent = (placesToVisit) => {
 	});
 	return content;
 };
-const PlacesToVisitList = ({
-	placesToVisit,
-	removeFromVisit,
-	currentCity,
-	style,
-}) => {
+const PlacesToVisitList = ({ currentCity, style }) => {
+	const dispatch = useDispatch();
+	const placesToVisit = useSelector((state) => state.placesToVisit);
+
+
 	const downloadContent = generateDownloadContent(placesToVisit);
 	const blob = new Blob([downloadContent], { type: 'text/plain' });
 	const downloadUrl = URL.createObjectURL(blob);
 
 	const handleRemoveFromVisit = (placeId) => {
-		removeFromVisit(placeId);
+		dispatch(removeFromVisit(placeId));
 	};
 
 	return (
 		<ListContainer style={style}>
-			<h2>{currentCity} lista miejsc do odwiedzenia</h2>
+			<h2>{currentCity} Lista miejsc do odwiedzenia</h2>
 			{placesToVisit.length > 0 ? (
 				<>
 					<DownloadList

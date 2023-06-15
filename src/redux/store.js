@@ -1,10 +1,22 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
+import { rootSaga } from './sagas'; 
+
 import loadingReducer from './loadingSlice';
-import placesToVisitReducer from './placesToVisitSlice'
+import placesToVisitReducer from './placesToVisitSlice';
+import placesDisplayReducer from './placesDisplaySlice';
+
+
+const sagaMiddleware = createSagaMiddleware();
 
 export default configureStore({
-  reducer: {
-    loading: loadingReducer,
-    placesToVisit: placesToVisitReducer,
-  },
+	reducer: {
+		loading: loadingReducer,
+		placesToVisit: placesToVisitReducer,
+		placesDisplay: placesDisplayReducer,
+	},
+	middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware], 
 });
+
+
+sagaMiddleware.run(rootSaga);

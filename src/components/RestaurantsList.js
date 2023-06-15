@@ -10,18 +10,26 @@ import {
 import { ScrollContext } from '../utils/scrollContext/ScrollContext';
 import axios from 'axios';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { addToVisit } from '../redux/placesToVisitSlice';
+import { setRestaurants } from '../redux/placesDisplaySlice';
+
 const RestaurantsList = ({
-	restaurants,
+
 	setMapSettings,
 	setSelectedPlace,
 	style,
 	setShouldBounce,
-	currentCity,
-	setRestaurants,
+	
+	
 	isCitySearched,
 }) => {
 	const [isListVisible, setIsListVisible] = useState(true);
 	const { handleScroll, resetScroll } = useContext(ScrollContext);
+	const dispatch = useDispatch();
+	const placesToVisit = useSelector((state) => state.placesToVisit);
+	const restaurants = useSelector((state) => state.placesDisplay.restaurants);
+	const currentCity = useSelector((state) => state.placesDisplay.lastSearchedCity);
 
 	const handleShowOnMapClick = (restaurant) => {
 		setShouldBounce(true);
@@ -37,30 +45,15 @@ const RestaurantsList = ({
 		resetScroll();
 	};
 
-	const handleToggleListVisibility = () => {
-		setIsListVisible(!isListVisible);
+	const handleAddToVisit = (restaurant) => {
+		dispatch(addToVisit(restaurant));
+	};
+	const isPlaceInVisitList = (placeId) => {
+		return placesToVisit.some((place) => place.place_id === placeId);
 	};
 
-	const handleShowRestaurantsClick = async () => {
-		try {
-			const responseRestaurants = await axios.get(
-				`http://localhost:5000/api/place/restaurants?query=${currentCity}`
-			);
-
-			if (
-				responseRestaurants.data &&
-				responseRestaurants.data.results &&
-				responseRestaurants.data.results.length > 0
-			) {
-				setRestaurants(responseRestaurants.data.results);
-				handleScroll();
-			} else {
-				console.log('No restaurants found.');
-				setRestaurants([]);
-			}
-		} catch (error) {
-			console.error('Error searching restaurants:', error);
-		}
+	const handleToggleListVisibility = () => {
+		setIsListVisible(!isListVisible);
 	};
 
 	return (
@@ -95,11 +88,17 @@ const RestaurantsList = ({
 										>
 											Pokaż na mapie
 										</ButtonList>
+										<ButtonList
+											onClick={() => handleAddToVisit(restaurant)}
+											disabled={isPlaceInVisitList(restaurant.place_id)}
+										>
+											Dodaj do listy do odwiedzenia
+										</ButtonList>
 									</div>
 								</ListItem>
 						  ))
 						: isCitySearched && (
-								<ButtonList onClick={handleShowRestaurantsClick}>
+								<ButtonList >
 									Pokaż dostępne restauracje
 								</ButtonList>
 						  )}

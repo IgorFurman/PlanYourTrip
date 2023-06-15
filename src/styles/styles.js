@@ -154,6 +154,10 @@ export const ButtonList = styled.button`
 	&:hover {
 		background-color: #303e3c;
 	}
+	&:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
 
 	@media (max-width: 576px) {
 		padding: 0.6rem 1.5rem;

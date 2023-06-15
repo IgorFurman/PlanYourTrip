@@ -9,20 +9,31 @@ import {
 } from '../styles/styles';
 import { ScrollContext } from '../utils/scrollContext/ScrollContext';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+import { addToVisit } from '../redux/placesToVisitSlice';
+
 const AttractionsList = ({
 	places,
 	setMapSettings,
 	setSelectedPlace,
-	placesToVisit,
-	addToVisit,
-	removeFromVisit,
+
+
 	style,
 	setShouldBounce,
 }) => {
+	const dispatch = useDispatch();
+	const placesToVisit = useSelector((state) => state.placesToVisit);
 	const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
 	const [isListVisible, setIsListVisible] = useState(true);
 
 	const { handleScroll, resetScroll } = useContext(ScrollContext);
+
+	const handleAddToVisit = (place) => {
+		dispatch(addToVisit(place));
+	};
+
+	
 
 	const handleShowOnMapClick = (place) => {
 		setShouldBounce(true);
@@ -72,15 +83,11 @@ const AttractionsList = ({
 									<ButtonList onClick={() => handleShowOnMapClick(place)}>
 										Pokaż na mapie
 									</ButtonList>
-									{!isPlaceInVisitList(place.place_id) ? (
-										<ButtonList onClick={() => addToVisit(place)}>
+								
+										<ButtonList onClick={() => handleAddToVisit(place)}>
 											Dodaj do listy do odwiedzenia
 										</ButtonList>
-									) : (
-										<ButtonList onClick={() => removeFromVisit(place.place_id)}>
-											Usuń z listy do odwiedzenia
-										</ButtonList>
-									)}
+									
 								</div>
 							</ListItem>
 						))
