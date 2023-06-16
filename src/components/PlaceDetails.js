@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {
@@ -15,44 +15,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { addToVisit, } from '../redux/placesToVisitSlice';
 
-const PlaceDetails = ({
-	style,
-	
-}) => {
+import { FETCH_PLACE_DETAILS } from '../redux/sagas'; 
+
+const PlaceDetails = ({ style }) => {
 	const dispatch = useDispatch();
 	const placesToVisit = useSelector((state) => state.placesToVisit);
-  const selectedPlace = useSelector(state => state.selectedPlace);
 
-	const [detailedPlace, setDetailedPlace] = useState(null);
-
-	useEffect(() => {
-		const fetchPlaceDetails = async () => {
-			if (!selectedPlace) {
-				return;
-			}
-			try {
-				const response = await fetch(
-					`http://localhost:5000/api/place/details?placeId=${selectedPlace.place_id}`
-				);
-
-				if (!response.ok) {
-					throw new Error('Problem z odpowiedzią serwera');
-				}
-
-				const data = await response.text();
-				if (!data) {
-					throw new Error('Brak danych do przetworzenia');
-				}
-
-				const jsonData = JSON.parse(data);
-				setDetailedPlace(jsonData);
-			} catch (error) {
-				console.error('Error fetching place details:', error);
-			}
-		};
-
-		fetchPlaceDetails();
-	}, [selectedPlace]);
+  const selectedPlace = useSelector(state => state.placesDisplay.selectedPlace);
 
 	const handleAddToVisit = (place) => {
 		dispatch(addToVisit(place));
@@ -60,9 +29,16 @@ const PlaceDetails = ({
 
 	const isPlaceInVisitList = (placeId) => {
 		return placesToVisit.some((place) => place.place_id === placeId);
-	};
+	}
 
-	if (!detailedPlace) {
+	useEffect(() => {
+		if (selectedPlace && selectedPlace.place_id) {
+			dispatch({ type: FETCH_PLACE_DETAILS, payload: selectedPlace.place_id });
+		}
+	}, [selectedPlace?.place_id, dispatch]);
+
+
+	if (!selectedPlace) {
 		return (
 			<PlaceDetailsStyled style={style}>
 				<h2>
@@ -74,32 +50,32 @@ const PlaceDetails = ({
 
 	return (
 		<PlaceDetailsStyled style={style}>
-			<h2>{detailedPlace.name}</h2>
+			<h2>{selectedPlace.name}</h2>
 			<p>
 				<b>Adres: </b>
-				{detailedPlace.formatted_address}
+				{selectedPlace.formatted_address}
 			</p>
 			<p>
 				<b>Numer: </b>
-				{detailedPlace.formatted_phone_number}
+				{selectedPlace.formatted_phone_number}
 			</p>
 
-			{detailedPlace.opening_hours && (
-				<OpeningHours>
-					<p>Godziny otwarcia:</p>
-					<ul>
-						{detailedPlace.opening_hours.weekday_text.map((day, index) => (
-							<li key={index}>{day}</li>
-						))}
-					</ul>
-				</OpeningHours>
-			)}
+			{selectedPlace.opening_hours && selectedPlace.opening_hours.weekday_text && (
+	<OpeningHours>
+		<p>Godziny otwarcia:</p>
+		<ul>
+			{selectedPlace.opening_hours.weekday_text.map((day, index) => (
+				<li key={index}>{day}</li>
+			))}
+		</ul>
+	</OpeningHours>
+)}
 
-			{detailedPlace.website && (
+			{selectedPlace.website && (
 				<p>
 					<WebsideLink
 						target='_blank'
-						href={detailedPlace.website}
+						href={selectedPlace.website}
 						rel='noopener noreferrer'
 					>
 						Dowiedz się więcej
@@ -107,7 +83,7 @@ const PlaceDetails = ({
 				</p>
 			)}
 
-			{detailedPlace.photos && detailedPlace.photos.length > 0 ? (
+			{selectedPlace.photos && selectedPlace.photos.length > 0 ? (
 				<CarouselWrapper>
 					<Carousel
 						autoPlay
@@ -124,11 +100,11 @@ const PlaceDetails = ({
 						useKeyboardArrows
 						showThumbs={false}
 					>
-						{detailedPlace.photos.map((photo, index) => (
+						{selectedPlace.photos.map((photo, index) => (
 							<CarouselItem key={index}>
 								<CarouselImage
 									src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photo.photo_reference}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`}
-									alt={detailedPlace.name}
+									alt={selectedPlace.name}
 								/>
 							</CarouselItem>
 						))}
@@ -138,13 +114,13 @@ const PlaceDetails = ({
 				<p>Brak zdjęcia</p>
 			)}
 
-			{detailedPlace.rating && <p>Ocena ogólna: {detailedPlace.rating}⭐</p>}
+			{selectedPlace.rating && <p>Ocena ogólna: {selectedPlace.rating}⭐</p>}
 
-			{detailedPlace.reviews && detailedPlace.reviews.length > 0 && (
+			{selectedPlace.reviews && selectedPlace.reviews.length > 0 && (
 				<OpinionsWrapper>
 					<h3>Opinie:</h3>
 					<Carousel>
-						{detailedPlace.reviews.map((review, index) => (
+						{selectedPlace.reviews.map((review, index) => (
 							<div key={index}>
 								<p>
 									{review.author_name} ({review.rating}⭐):
@@ -158,7 +134,7 @@ const PlaceDetails = ({
 
 			<ButtonList
 				onClick={() => handleAddToVisit(selectedPlace)}
-				disabled={isPlaceInVisitList(detailedPlace.place_id)}
+				disabled={isPlaceInVisitList(selectedPlace.place_id)}
 			>
 				Dodaj do listy do odwiedzenia
 			</ButtonList>

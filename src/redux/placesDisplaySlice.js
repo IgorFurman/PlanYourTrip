@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, } from '@reduxjs/toolkit';
 
 const initialState = {
 	places: [],
@@ -13,6 +13,9 @@ const initialState = {
 	selectedPlace: null,
 	selectedPlacePosition: null,
 	isFetchingPlaces: false,
+	shouldBounce: false,
+	selectedPinId: null,
+
 };
 
 const placesSlice = createSlice({
@@ -57,6 +60,16 @@ const placesSlice = createSlice({
 		clearRestaurants: (state) => {
       state.restaurants = [];
     },
+		setShouldBounce: (state, action) => {
+      state.shouldBounce = action.payload;
+    },
+    resetShouldBounce: state => {
+      state.shouldBounce = false;
+    },
+		setSelectedPinId: (state, action) => {
+      state.selectedPinId = action.payload;
+    },
+	
 	},
 });
 
@@ -74,6 +87,10 @@ export const {
 	clearPlaces,
 	clearRestaurants,
 	clearHotels,
+	setShouldBounce,
+  resetShouldBounce,
+	setSelectedPinId,
+
 } = placesSlice.actions;
 
 export default placesSlice.reducer;

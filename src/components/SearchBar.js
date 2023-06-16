@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { ScrollContext } from '../utils/scrollContext/ScrollContext';
+import React, { useState, useEffect, useRef } from 'react';
+import ScrollProvider from '../utils/scroll/Scroll';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	Header,
@@ -13,23 +13,34 @@ import {
 import LogoImg from '../images/PlanYourTrip-logo.png';
 import Spinner from './Spinner';
 
-import {  FETCH_PLACES, FETCH_HOTELS, FETCH_RESTAURANTS } from '../redux/sagas';
-import { setFetchingPlaces } from '../redux/placesDisplaySlice';
+import { FETCH_PLACES, FETCH_HOTELS, FETCH_RESTAURANTS } from '../redux/sagas';
+
+import { setFetchingPlaces} from '../redux/placesDisplaySlice'
+
+import { setHasScrolled, setSearchBarHeight} from '../redux/scrollSlice';
+
 
 const SearchBar = ({ handleSearchBarInput }) => {
+
+
+	const ref = useRef(null);
+
 	const [search, setSearch] = useState('');
 	const [showAttractions, setShowAttractions] = useState(true);
 	const [showHotels, setShowHotels] = useState(false);
 	const [showRestaurants, setShowRestaurants] = useState(false);
-	const { handleScroll, resetScroll, searchBarRef } = useContext(ScrollContext);
+	
 
 	const dispatch = useDispatch();
-	const isFetchingPlaces = useSelector((state) => state.placesDisplay.isFetchingPlaces);
+	const isFetchingPlaces = useSelector(
+		(state) => state.placesDisplay.isFetchingPlaces
+	);
+
 
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		resetScroll();
+		;
 	
 
 		if (showAttractions) {
@@ -42,12 +53,15 @@ const SearchBar = ({ handleSearchBarInput }) => {
 			dispatch({ type: FETCH_RESTAURANTS, payload: search });
 		}
 	
-		handleScroll();
-		
+	;
 	};
 
+	useEffect(() => {
+    dispatch(setSearchBarHeight(ref.current.getBoundingClientRect().height));
+  }, [dispatch]);
+
 	return (
-		<Header ref={searchBarRef}>
+		<Header ref={ref}>
 			<Form onSubmit={handleSubmit}>
 				<Input
 					type='text'
@@ -88,7 +102,9 @@ const SearchBar = ({ handleSearchBarInput }) => {
 					<ButtonSearch type='submit'>Szukaj</ButtonSearch>
 				)}
 			</Form>
-			<img className='logo' src={LogoImg} alt='Plan Your Trip logo' />
+			<a href='/' className='logo-link'>
+				<img className='logo' src={LogoImg} alt='Plan Your Trip logo' />
+			</a>
 		</Header>
 	);
 };

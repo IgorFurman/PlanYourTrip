@@ -7,52 +7,33 @@ import {
 	ListItem,
 	ListContainer,
 } from '../styles/styles';
-import { ScrollContext } from '../utils/scrollContext/ScrollContext';
+
+import useMapScroll from '../hooks/useMapScroll';
+
 
 import { useSelector, useDispatch } from 'react-redux';
-
 import { addToVisit } from '../redux/placesToVisitSlice';
+import {
+	setIsListVisible,
+} from '../redux/placesDisplaySlice';
 
-const AttractionsList = ({
-	places,
-	setMapSettings,
-	setSelectedPlace,
-
-
-	style,
-	setShouldBounce,
-}) => {
+const AttractionsList = ({ style }) => {
 	const dispatch = useDispatch();
 	const placesToVisit = useSelector((state) => state.placesToVisit);
-	const [lastSelectedPlace, setLastSelectedPlace] = useState(null);
+	const places = useSelector((state) => state.placesDisplay.places);
+	const selectedPlace = useSelector((state) => state.placesDisplay.selectedPlace);
 	const [isListVisible, setIsListVisible] = useState(true);
-
-	const { handleScroll, resetScroll } = useContext(ScrollContext);
 
 	const handleAddToVisit = (place) => {
 		dispatch(addToVisit(place));
 	};
 
-	
-
-	const handleShowOnMapClick = (place) => {
-		setShouldBounce(true);
-		setSelectedPlace(place);
-		setMapSettings({
-			center: {
-				lat: place.geometry.location.lat,
-				lng: place.geometry.location.lng,
-			},
-			zoom: 18,
-		});
-		handleScroll();
-		resetScroll();
-	};
+	const handleShowOnMapClick = useMapScroll();
 
 	const handleToggleListVisibility = () => {
 		setIsListVisible(!isListVisible);
 	};
-
+	
 	const isPlaceInVisitList = (placeId) => {
 		return placesToVisit.some((place) => place.place_id === placeId);
 	};
@@ -60,10 +41,12 @@ const AttractionsList = ({
 	return (
 		<ListContainer style={style}>
 			<h2>Atrakcje turystyczne:</h2>
-			{places.length > 0 && (
+			{places.length > 0 ? (
 				<ButtonList onClick={handleToggleListVisibility}>
 					{isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
 				</ButtonList>
+			) : (
+				<p>Tutaj zobaczysz listę wyszukanych hoteli.</p>
 			)}
 			{isListVisible && (
 				<List>
@@ -83,11 +66,10 @@ const AttractionsList = ({
 									<ButtonList onClick={() => handleShowOnMapClick(place)}>
 										Pokaż na mapie
 									</ButtonList>
-								
-										<ButtonList onClick={() => handleAddToVisit(place)}>
-											Dodaj do listy do odwiedzenia
-										</ButtonList>
-									
+
+									<ButtonList onClick={() => handleAddToVisit(place)}>
+										Dodaj do listy do odwiedzenia
+									</ButtonList>
 								</div>
 							</ListItem>
 						))
@@ -98,10 +80,10 @@ const AttractionsList = ({
 					)}
 				</List>
 			)}
-			{lastSelectedPlace && (
+			{selectedPlace && (
 				<div>
-					<h3>{lastSelectedPlace.name}</h3>
-					<p>{lastSelectedPlace.formatted_address}</p>
+					<h3>{selectedPlace.name}</h3>
+					<p>{selectedPlace.formatted_address}</p>
 				</div>
 			)}
 		</ListContainer>

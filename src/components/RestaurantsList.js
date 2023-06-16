@@ -7,43 +7,37 @@ import {
 	ListItem,
 	ListContainer,
 } from '../styles/styles';
-import { ScrollContext } from '../utils/scrollContext/ScrollContext';
-import axios from 'axios';
+
 
 import { useDispatch, useSelector } from 'react-redux';
+
+import {APPEND_FETCH_RESTAURANTS} from '../redux/sagas'
 import { addToVisit } from '../redux/placesToVisitSlice';
-import { setRestaurants } from '../redux/placesDisplaySlice';
+
+import useMapScroll from '../hooks/useMapScroll';
+
 
 const RestaurantsList = ({
-
-	setMapSettings,
-	setSelectedPlace,
+	
 	style,
-	setShouldBounce,
-	
-	
-	isCitySearched,
+
 }) => {
 	const [isListVisible, setIsListVisible] = useState(true);
-	const { handleScroll, resetScroll } = useContext(ScrollContext);
 	const dispatch = useDispatch();
 	const placesToVisit = useSelector((state) => state.placesToVisit);
 	const restaurants = useSelector((state) => state.placesDisplay.restaurants);
-	const currentCity = useSelector((state) => state.placesDisplay.lastSearchedCity);
+	const currentCity = useSelector(
+		(state) => state.placesDisplay.lastSearchedCity
+	);
+	const isCitySearched = Boolean(currentCity);
 
-	const handleShowOnMapClick = (restaurant) => {
-		setShouldBounce(true);
-		setSelectedPlace(restaurant);
-		setMapSettings({
-			center: {
-				lat: restaurant.geometry.location.lat,
-				lng: restaurant.geometry.location.lng,
-			},
-			zoom: 20,
-		});
-		handleScroll();
-		resetScroll();
+
+	const handleFetchRestaurants = () => {
+		dispatch({ type: APPEND_FETCH_RESTAURANTS, payload: currentCity });;
 	};
+
+
+	const handleShowOnMapClick = useMapScroll();
 
 	const handleAddToVisit = (restaurant) => {
 		dispatch(addToVisit(restaurant));
@@ -98,9 +92,7 @@ const RestaurantsList = ({
 								</ListItem>
 						  ))
 						: isCitySearched && (
-								<ButtonList >
-									Pokaż dostępne restauracje
-								</ButtonList>
+								<ButtonList onClick={handleFetchRestaurants}>Pokaż dostępne restauracje</ButtonList>
 						  )}
 				</List>
 			)}

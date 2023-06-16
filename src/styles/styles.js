@@ -476,6 +476,11 @@ export const SocialIcon = styled(MDBBtn).attrs({
 	margin: 25px;
 	font-size: 30px;
 	background-color: none;
+	transition: opacity .3s;
+
+	&:hover {
+		opacity:0.8;
+	}
 	
 `;
 
