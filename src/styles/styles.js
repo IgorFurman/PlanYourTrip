@@ -47,17 +47,20 @@ const boxShadow = css`
 export const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
+gap: 2rem;
 	grid-template-rows: auto auto auto auto;
 	grid-template-areas:
 		'map map details'
 		'visit visit details'
 		'weather weather details'
 		'attractions restaurants hotels';
-	gap: 1rem;
+	
 	width: 100%;
 	align-items: stretch;
+	padding: 1rem;
 
 	@media (max-width: 1024px) {
+		
 		grid-template-rows: auto auto auto auto auto auto;
 		grid-template-areas:
 			'map map map'
@@ -71,6 +74,7 @@ export const Container = styled.div`
 			
 	}
 	@media (min-width: 768px) and (max-width: 1024px) {
+		
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: auto auto auto auto auto;
 		grid-template-areas:
@@ -84,7 +88,7 @@ export const Container = styled.div`
 
 export const StandardContainer = styled.div`
 	padding: 1.25rem 1rem;
-	margin: 0.5rem 0rem;
+	margin: 0rem auto;
 	width: 100%;
 
 	@media (max-width: 576px) {
@@ -92,21 +96,14 @@ export const StandardContainer = styled.div`
 		padding: 0.625rem;
 		margin: 0.625rem 0.3125rem;
 	}
-	@media (max-width: 772px) {
-width: 99.5%;
-	}
-	@media (max-width: 992px) {
-		width: 98%;
-		padding: 0.6rem;
-		margin: 0.325rem 0.3125rem;
-	}
+	
 	
 `;
 // list
 export const ListContainer = styled(StandardContainer)`
 	${boxShadow};
 	overflow: auto;
-	height: 90%;
+	height: 100%;
 `;
 
 export const List = styled.ul`
@@ -125,7 +122,7 @@ export const List = styled.ul`
 export const ListItem = styled.li`
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	padding: 0.9375rem 0.625rem;
+	padding: 0.93rem 0.62rem;
 	margin-bottom: 0.625rem;
 
 	@media (max-width: 576px) {

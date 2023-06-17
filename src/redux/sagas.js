@@ -45,7 +45,7 @@ function* fetchPlaces(action) {
     put(clearRestaurants()),
   ]);
   try {
-    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/attractions?query=${action.payload}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`);
+    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/attractions?query=${action.payload}`);
     if (response.data && response.data.results && response.data.results.length > 0) {
       const { lat, lng } = response.data.results[0].geometry.location;
 
@@ -83,7 +83,7 @@ function* fetchHotels(action) {
   ]);
 
   try {
-    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/hotels?query=${action.payload}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`);
+    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/hotels?query=${action.payload}`);
     if (response.data && response.data.results && response.data.results.length > 0) {
       const { lat, lng } = response.data.results[0].geometry.location;
 
@@ -118,7 +118,7 @@ function* fetchRestaurants(action) {
   ]);
 
   try {
-    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/restaurants?query=${action.payload}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`);
+    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/restaurants?query=${action.payload}`);
 
     if (response.data && response.data.results && response.data.results.length > 0) {
       const { lat, lng } = response.data.results[0].geometry.location;
@@ -161,7 +161,7 @@ function* fetchPlaceDetails(action) {
 function* appendFetchPlaces(action) {
   yield put(setFetchingPlaces(true));
   try {
-    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/attractions?query=${action.payload}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`);
+    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/attractions?query=${action.payload}`);
     if (response.data && response.data.results && response.data.results.length > 0) {
       yield put(setPlaces([...yield select(state => state.placesDisplay.places), ...response.data.results]));
     } else {
@@ -175,10 +175,11 @@ function* appendFetchPlaces(action) {
   }
 }
 
+
 function* appendFetchHotels(action) {
   yield put(setFetchingPlaces(true));
   try {
-    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/hotels?query=${action.payload}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`);
+    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/hotels?query=${action.payload}`);
     if (response.data && response.data.results && response.data.results.length > 0) {
       yield put(setHotels([...yield select(state => state.placesDisplay.hotels), ...response.data.results]));
     }
@@ -192,7 +193,8 @@ function* appendFetchHotels(action) {
 function* appendFetchRestaurants(action) {
   yield put(setFetchingPlaces(true));
   try {
-    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/restaurants?query=${action.payload}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`);
+    const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/restaurants?query=${action.payload}`);
+   
     if (response.data && response.data.results && response.data.results.length > 0) {
       yield put(setRestaurants([...yield select(state => state.placesDisplay.restaurants), ...response.data.results]));
     }
@@ -231,6 +233,8 @@ export function* watchAppendFetchHotels() {
 export function* watchAppendFetchRestaurants() {
   yield takeLatest(APPEND_FETCH_RESTAURANTS, appendFetchRestaurants);
 }
+
+
 
 //  root 
 
