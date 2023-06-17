@@ -53,7 +53,7 @@ export const Container = styled.div`
 		'visit visit details'
 		'weather weather details'
 		'attractions restaurants hotels';
-	gap: 10px;
+	gap: 1rem;
 	width: 100%;
 	align-items: stretch;
 
@@ -83,12 +83,24 @@ export const Container = styled.div`
 `;
 
 export const StandardContainer = styled.div`
-	padding: 1.25rem;
-	margin: 1.25rem 0.625rem;
+	padding: 1.25rem 1rem;
+	margin: 0.5rem 0rem;
+	width: 100%;
+
 	@media (max-width: 576px) {
+		width: 100%;
 		padding: 0.625rem;
 		margin: 0.625rem 0.3125rem;
 	}
+	@media (max-width: 772px) {
+width: 99.5%;
+	}
+	@media (max-width: 992px) {
+		width: 98%;
+		padding: 0.6rem;
+		margin: 0.325rem 0.3125rem;
+	}
+	
 `;
 // list
 export const ListContainer = styled(StandardContainer)`
@@ -339,7 +351,7 @@ export const PlaceDetailsStyled = styled(StandardContainer)`
 	align-items: flex-start;
 	flex-wrap: wrap;
 	min-width: 50%;
-	max-width: 96%;
+	max-width: 100%;
 `;
 export const OpinionsWrapper = styled.div`
 	max-width: 100%;
@@ -448,7 +460,7 @@ export const PinStyled = styled(({ shouldBounce, ...props }) => <img {...props} 
 /* footer */
 
 export const StyledFooter = styled.footer`
-	margin-top: 3.125rem;
+	margin-top: 1.125rem;
 	text-align: center;
 	color: white;
 `;
@@ -504,19 +516,18 @@ export const LogoContainer = styled.div`
 export const WeatherContainer = styled(StandardContainer)`
 	${boxShadow};
 	grid-area: weather;
-	width: 96%;
+	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
-	> * {
-		width: 100%;
-	}
+	
 	img {
 		max-width: 60%;
 		margin: 0 auto;
 	}
-	@media (min-width: 1024px) {
-		width: 97%;
+	@media (min-width: 992px) {
+		width: 100%;
 	}
+
 `;
