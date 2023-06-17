@@ -1,18 +1,4 @@
 {
-  "functions": {
-    "api/place/attractions.js": {
-      "runtime": "nodejs14.x"
-    },
-    "api/place/hotels.js": {
-      "runtime": "nodejs14.x"
-    },
-    "api/place/restaurants.js": {
-      "runtime": "nodejs14.x"
-    },
-    "api/place/details.js": {
-      "runtime": "nodejs14.x"
-    }
-  },
   "routes": [
     {
       "src": "/api/place/attractions",
