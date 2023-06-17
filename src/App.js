@@ -13,37 +13,21 @@ import ScrollProvider from './utils/scroll/Scroll';
 
 import { Container, GlobalStyle } from './styles/styles';
 
-
 const App = () => {
-	const [weatherCity, setWeatherCity] = useState(null);
-
-const searchBarRef = useRef(null)
-	const handleSearchBarInput = (city) => {
-		setWeatherCity(city);
-	};
+	const searchBarRef = useRef(null);
 
 	return (
-		<ScrollProvider ref={searchBarRef}  >
+		<ScrollProvider>
 			<GlobalStyle />
-			<SearchBar  handleSearchBarInput={handleSearchBarInput} />
+			<SearchBar ref={searchBarRef} />
 			<Container>
-				<MapContainer 
-				style={{ gridArea: 'map' }} />
-				<PlaceDetails 
-				style={{ gridArea: 'details' }} />
-				<AttractionsList 
-				style={{ gridArea: 'attractions' }} />
-				<div 
-				style={{ gridArea: 'hotels' }}>
-					<HotelsList />
-				</div>
-				<div 
-				style={{ gridArea: 'restaurants' }}>
-					<RestaurantsList />
-				</div>
-				<PlacesToVisitList 
-				style={{ gridArea: 'visit' }} />
-				<WeatherDisplay city={weatherCity} />
+				<MapContainer style={{ gridArea: 'map' }} />
+				<PlaceDetails style={{ gridArea: 'details' }} />
+				<AttractionsList style={{ gridArea: 'attractions' }} />
+				<HotelsList style={{ gridArea: 'hotels' }} />
+				<RestaurantsList style={{ gridArea: 'restaurants' }} />
+				<PlacesToVisitList style={{ gridArea: 'visit' }} />
+				<WeatherDisplay />
 			</Container>
 			<Footer />
 		</ScrollProvider>

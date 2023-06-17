@@ -80,12 +80,7 @@ const AttractionsList = ({ style }) => {
 					)}
 				</List>
 			)}
-			{selectedPlace && (
-				<div>
-					<h3>{selectedPlace.name}</h3>
-					<p>{selectedPlace.formatted_address}</p>
-				</div>
-			)}
+			
 		</ListContainer>
 	);
 };

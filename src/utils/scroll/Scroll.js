@@ -13,9 +13,7 @@ const ScrollProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    console.log('hasScrolled', hasScrolled);
-    console.log('isFetchingPlaces', isFetchingPlaces);
-    console.log(searchBarHeight);
+  
     if (hasScrolled && !isFetchingPlaces) {
       window.scrollTo({
         top: searchBarHeight,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import ScrollProvider from '../utils/scroll/Scroll';
+
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	Header,
@@ -10,22 +10,19 @@ import {
 	CheckBoxLabel,
 	Form,
 } from '../styles/styles.js';
+import { setSearch, selectSearch, setHasSearched } from '../redux/searchSlice';
 import LogoImg from '../images/PlanYourTrip-logo.png';
 import Spinner from './Spinner';
 
 import { FETCH_PLACES, FETCH_HOTELS, FETCH_RESTAURANTS } from '../redux/sagas';
 
-import { setFetchingPlaces} from '../redux/placesDisplaySlice'
+
 
 import { setHasScrolled, setSearchBarHeight} from '../redux/scrollSlice';
 
 
-const SearchBar = ({ handleSearchBarInput }) => {
-
-
-	const ref = useRef(null);
-
-	const [search, setSearch] = useState('');
+const SearchBar = React.forwardRef((props, ref) => {
+	
 	const [showAttractions, setShowAttractions] = useState(true);
 	const [showHotels, setShowHotels] = useState(false);
 	const [showRestaurants, setShowRestaurants] = useState(false);
@@ -35,13 +32,20 @@ const SearchBar = ({ handleSearchBarInput }) => {
 	const isFetchingPlaces = useSelector(
 		(state) => state.placesDisplay.isFetchingPlaces
 	);
+	const search = useSelector(selectSearch);
 
+
+	const handleChange = (e) => {
+    const { value } = e.target;
+    dispatch(setSearch(value));
+    ;
+  };
 
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		;
-	
+		dispatch(setHasSearched(true))
 
 		if (showAttractions) {
 			dispatch({ type: FETCH_PLACES, payload: search });
@@ -63,15 +67,12 @@ const SearchBar = ({ handleSearchBarInput }) => {
 	return (
 		<Header ref={ref}>
 			<Form onSubmit={handleSubmit}>
-				<Input
-					type='text'
-					value={search}
-					onChange={(e) => {
-						setSearch(e.target.value);
-						handleSearchBarInput(e.target.value);
-					}}
-					placeholder='Wpisz miasto...'
-				/>
+			<Input
+          type='text'
+          value={search}
+          onChange={handleChange}
+          placeholder='Wpisz miasto...'
+        />
 				<CheckBoxWrapper>
 					<CheckBox
 						checked={showAttractions}
@@ -107,6 +108,6 @@ const SearchBar = ({ handleSearchBarInput }) => {
 			</a>
 		</Header>
 	);
-};
+});
 
 export default SearchBar;

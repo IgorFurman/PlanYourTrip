@@ -9,10 +9,23 @@ app.use(cors());
 app.get('/api/place/hotels', async (req, res) => {
   try {
     const { query } = req.query;
-    const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+hotels&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`
-    );
-    res.send(response.data);
+    let allResults = [];
+    let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+hotels&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`;
+
+    while (url) {
+      const response = await axios.get(url);
+      allResults.push(...response.data.results);
+
+      if (response.data.next_page_token) {
+        url = `https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=${response.data.next_page_token}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+       
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } else {
+        url = null;
+      }
+    }
+
+    res.send({ results: allResults });
   } catch (error) {
     console.error('Error searching Google Places API:', error);
     res.status(500).send('Error searching Google Places API');
@@ -22,10 +35,23 @@ app.get('/api/place/hotels', async (req, res) => {
 app.get('/api/place/restaurants', async (req, res) => {
   try {
     const { query } = req.query;
-    const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+restaurants&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`
-    );
-    res.send(response.data);
+    let allResults = [];
+    let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+restaurants&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`;
+
+    while (url) {
+      const response = await axios.get(url);
+      allResults.push(...response.data.results);
+
+      if (response.data.next_page_token) {
+        url = `https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=${response.data.next_page_token}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+  
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      } else {
+        url = null;
+      }
+    }
+
+    res.send({ results: allResults });
   } catch (error) {
     console.error('Error searching Google Places API:', error);
     res.status(500).send('Error searching Google Places API');
@@ -39,11 +65,22 @@ app.get('/api/place/attractions', async (req, res) => {
     const allResults = [];
 
     for (let i = 0; i < placeTypes.length; i++) {
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+${placeTypes[i]}&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`
-      );
-      allResults.push(...response.data.results);
+      let url = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}+${placeTypes[i]}&key=${process.env.GOOGLE_MAPS_API_KEY}&language=en`;
+
+      while (url) {
+        const response = await axios.get(url);
+        allResults.push(...response.data.results);
+
+        if (response.data.next_page_token) {
+          url = `https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=${response.data.next_page_token}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
+          
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        } else {
+          url = null;
+        }
+      }
     }
+
     res.send({ results: allResults });
   } catch (error) {
     console.error('Error searching Google Places API:', error);

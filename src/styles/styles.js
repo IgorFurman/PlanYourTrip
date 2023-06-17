@@ -63,11 +63,12 @@ export const Container = styled.div`
 			'map map map'
 			'details details details'
 			'details details details'
+			'visit visit visit'
 			'weather weather weather'
 			'attractions attractions attractions'
 			'hotels hotels hotels'
 			'restaurants restaurants restaurants'
-			'visit visit visit';
+			
 	}
 	@media (min-width: 768px) and (max-width: 1024px) {
 		grid-template-columns: repeat(4, 1fr);
@@ -430,20 +431,18 @@ export const LegendPin = styled.img`
 export const LegendLabel = styled.span`
 	font-size: 0.875rem;
 `;
-export const PinStyled = styled.img.attrs((props) => ({
-	shouldbounce: props.shouldBounce ? 1 : 0,
-}))`
-	width: 25px;
-	height: 30px;
-	cursor: pointer;
-	z-index: 1;
-	position: relative;
-	animation: ${(props) =>
-		props.shouldbounce
-			? css`
-					${bounce} 1s ease-in-out
-			  `
-			: 'none'};
+export const PinStyled = styled(({ shouldBounce, ...props }) => <img {...props} />)`
+  width: 25px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  animation: ${(props) =>
+    props.shouldBounce
+      ? css`
+          ${bounce} 1s ease-in-out
+        `
+      : 'none'};
 `;
 
 /* footer */

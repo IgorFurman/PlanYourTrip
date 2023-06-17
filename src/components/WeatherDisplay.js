@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { WeatherContainer } from '../styles/styles.js';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSearch, selectHasSearched, setHasSearched  } from '../redux/searchSlice';
+
 
 import thunderstormIcon from '../images/weatherIcons/thunderstorm.png';
 import drizzleIcon from '../images/weatherIcons/drizzle.png';
@@ -12,8 +15,11 @@ import sunIcon from '../images/weatherIcons/sun.png';
 import cloudIcon from '../images/weatherIcons/cloud.png';
 import unknownIcon from '../images/weatherIcons/unknown.png';
 
-const WeatherDisplay = ({ city = null}) => {
+const WeatherDisplay = () => {
+  const city = useSelector(selectSearch) || null;
   const [weatherData, setWeatherData] = useState(null);
+  const hasSearched = useSelector(selectHasSearched);
+  const dispatch = useDispatch();
 
 
   function capitalizeFirstLetter(string) {
@@ -36,10 +42,11 @@ const WeatherDisplay = ({ city = null}) => {
       }
     };
 
-    if (city) {
+    if (city && hasSearched) {
       fetchWeather();
+      dispatch(setHasSearched(false))
     }
-  }, [city]);
+  }, [city, hasSearched]);
 
   const getWeatherIconUrl = (weatherId) => {
     if (weatherId >= 200 && weatherId <= 232) {
@@ -70,24 +77,27 @@ const WeatherDisplay = ({ city = null}) => {
   }
 
   if (!weatherData) {
-    return <div>Ładowanie...</div>;
+    return <WeatherContainer> <h2>
+    Wpisz miasto aby zobaczyć aktualną pogodę</h2> <img
+        src={unknownIcon}
+        alt="weather icons mix"
+      /> </WeatherContainer>;;
   }
 
   return (
     <WeatherContainer>
       <h2>{capitalizeFirstLetter(city)} pogoda:</h2>
-      {weatherData.weather[0] && (
+      {weatherData.weather && weatherData.weather[0] && (
         <img
           src={getWeatherIconUrl(weatherData.weather[0].id)}
           alt="weather status"
         />
       )}
-      <p><b>Temperatura: </b>{Math.round(weatherData.main.temp)}°C</p>
-      <p><b>Wilgotność: </b>{weatherData.main.humidity}%</p>
-      <p><b>Wiatr: </b>{weatherData.wind.speed} m/s</p>
+      <p><b>Temperatura: </b>{weatherData.main && Math.round(weatherData.main.temp)}°C</p>
+      <p><b>Wilgotność: </b>{weatherData.main && weatherData.main.humidity}%</p>
+      <p><b>Wiatr: </b>{weatherData.wind && weatherData.wind.speed} m/s</p>
       
     </WeatherContainer>
-  );
-};
+  );}
 
 export default WeatherDisplay;

@@ -35,10 +35,17 @@ const useMapScroll = () => {
     dispatch(setSelectedPinId(place.place_id));
     handleScroll();
 
+    
     setTimeout(() => {
+      dispatch(setShouldBounce(true));
+ 
+    }, 700)
+
+    setTimeout(() => {
+      
       dispatch(resetShouldBounce());
       resetScroll();
-    }, 500);
+    }, 1200);
   };
 
   return handleShowOnMapClick;

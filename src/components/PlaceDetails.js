@@ -36,6 +36,7 @@ const PlaceDetails = ({ style }) => {
 			dispatch({ type: FETCH_PLACE_DETAILS, payload: selectedPlace.place_id });
 		}
 	}, [selectedPlace?.place_id, dispatch]);
+	
 
 
 	if (!selectedPlace) {
@@ -83,54 +84,54 @@ const PlaceDetails = ({ style }) => {
 				</p>
 			)}
 
-			{selectedPlace.photos && selectedPlace.photos.length > 0 ? (
-				<CarouselWrapper>
-					<Carousel
-						autoPlay
-						dynamicHeight
-						emulateTouch
-						infiniteLoop
-						interval={3000}
-						showArrows
-						showStatus={false}
-						showIndicators
-						stopOnHover
-						swipeable
-						transitionTime={350}
-						useKeyboardArrows
-						showThumbs={false}
-					>
-						{selectedPlace.photos.map((photo, index) => (
-							<CarouselItem key={index}>
-								<CarouselImage
-									src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photo.photo_reference}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`}
-									alt={selectedPlace.name}
-								/>
-							</CarouselItem>
-						))}
-					</Carousel>
-				</CarouselWrapper>
-			) : (
-				<p>Brak zdjęcia</p>
-			)}
+{selectedPlace.photos && selectedPlace.photos.length > 0 ? (
+  <CarouselWrapper>
+    <Carousel
+      autoPlay
+      dynamicHeight
+      emulateTouch
+      infiniteLoop
+      interval={3000}
+      showArrows
+      showStatus={false}
+      showIndicators
+      stopOnHover
+      swipeable
+      transitionTime={350}
+      useKeyboardArrows
+      showThumbs={false}
+    >
+      {selectedPlace.photos.map((photo, index) => (
+        <CarouselItem key={index}>
+          <CarouselImage
+            src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photo.photo_reference}&key=${process.env.REACT_APP_GOOGLE_PLACES_API_KEY}`}
+            alt={selectedPlace.name}
+          />
+        </CarouselItem>
+      ))}
+    </Carousel>
+  </CarouselWrapper>
+) : (
+  <p>Brak zdjęcia</p>
+)}
 
 			{selectedPlace.rating && <p>Ocena ogólna: {selectedPlace.rating}⭐</p>}
 
-			{selectedPlace.reviews && selectedPlace.reviews.length > 0 && (
-				<OpinionsWrapper>
-					<h3>Opinie:</h3>
-					<Carousel>
-						{selectedPlace.reviews.map((review, index) => (
-							<div key={index}>
-								<p>
-									{review.author_name} ({review.rating}⭐):
-								</p>
-								<p>{review.text}</p>
-							</div>
-						))}
-					</Carousel>
-				</OpinionsWrapper>
-			)}
+			{selectedPlace.reviews && selectedPlace.reviews.length > 0 ? (
+  <OpinionsWrapper>
+    <h3>Opinie:</h3>
+    {selectedPlace.reviews.map((review, index) => (
+      <div key={index}>
+        <p>
+          {review.author_name} ({review.rating}⭐):
+        </p>
+        <p>{review.text}</p>
+      </div>
+    ))}
+  </OpinionsWrapper>
+) : (
+  <p>Brak opinii</p>
+)}
 
 			<ButtonList
 				onClick={() => handleAddToVisit(selectedPlace)}
