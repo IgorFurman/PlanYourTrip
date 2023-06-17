@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "node server.js",
+    "server": "node pages/api/server.js",
     "dev": "concurrently \"npm run server\" \"npm run start\""
   },
   "eslintConfig": {
