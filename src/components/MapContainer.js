@@ -82,7 +82,7 @@ const MapContainer = ({ style }) => {
 		return AttractionsPin;
 	};
 
-	const handleFetchHotels = () => {
+	const handleFetch = () => {
 		if (hotels.length > 0) {
 			hotels.forEach((hotel) => {
 				const hotelMarker = new window.google.maps.Marker({
@@ -107,8 +107,8 @@ const MapContainer = ({ style }) => {
 	};
 
 	useEffect(() => {
-		handleFetchHotels();
-	}, [hotels]);
+		handleFetch();
+	}, [handleFetch]);
 
 	return (
 		<MapContainerStyled ref={mapRef} style={style}>
@@ -121,7 +121,7 @@ const MapContainer = ({ style }) => {
 				yesIWantToUseGoogleMapApiInternals
 				onGoogleApiLoaded={({ map }) => {
 					mapRef.current = map;
-					handleFetchHotels();
+					handleFetch();
 				}}
 			>
 				{allPlaces.map((place, index) => (

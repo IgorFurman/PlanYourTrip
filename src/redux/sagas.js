@@ -13,6 +13,9 @@ import {
   clearHotels,
   clearRestaurants,
   clearPlaces,
+  setFetchingAttractions,
+  setFetchingHotels,
+  setFetchingRestaurants,
  
 } from './placesDisplaySlice';
 
@@ -160,6 +163,7 @@ function* fetchPlaceDetails(action) {
 
 function* appendFetchPlaces(action) {
   yield put(setFetchingPlaces(true));
+  yield put(setFetchingAttractions(true));
   try {
     const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/attractions?query=${action.payload}`);
     if (response.data && response.data.results && response.data.results.length > 0) {
@@ -171,6 +175,7 @@ function* appendFetchPlaces(action) {
     console.error('Error searching Google Places API:', error);
   } finally {
     yield put(setFetchingPlaces(false));
+    yield put(setFetchingAttractions(false));
 
   }
 }
@@ -178,6 +183,7 @@ function* appendFetchPlaces(action) {
 
 function* appendFetchHotels(action) {
   yield put(setFetchingPlaces(true));
+  yield put(setFetchingHotels(true))
   try {
     const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/hotels?query=${action.payload}`);
     if (response.data && response.data.results && response.data.results.length > 0) {
@@ -187,11 +193,13 @@ function* appendFetchHotels(action) {
     console.error('Error searching Google Places API:', error);
   } finally {
     yield put(setFetchingPlaces(false));
+    yield put(setFetchingHotels(false))
   }
 }
 
 function* appendFetchRestaurants(action) {
   yield put(setFetchingPlaces(true));
+  yield put(setFetchingRestaurants(true))
   try {
     const response = yield call(axios.get, `${process.env.REACT_APP_BACKEND_URL}/api/place/restaurants?query=${action.payload}`);
    
@@ -202,6 +210,7 @@ function* appendFetchRestaurants(action) {
     console.error('Error searching Google Places API:', error);
   } finally {
     yield put(setFetchingPlaces(false));
+    yield put(setFetchingRestaurants(false))
   }
 }
 

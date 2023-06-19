@@ -27,9 +27,9 @@ const RestaurantsList = ({
 
 }) => {
 	const [isListVisible, setIsListVisible] = useState(true);
-	const isLoading = useSelector((state) => state.placesDisplay.fetchingPlaces);
-	console.log(isLoading);
+  
 	const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.placesDisplay.isFetchingRestaurants)
 	const placesToVisit = useSelector((state) => state.placesToVisit);
 	const restaurants = useSelector((state) => state.placesDisplay.restaurants);
 	const currentCity = useSelector(
@@ -39,7 +39,7 @@ const RestaurantsList = ({
 
 
 	const handleFetchRestaurants = () => {
-		dispatch({ type: APPEND_FETCH_RESTAURANTS, payload: currentCity });
+  dispatch({ type: APPEND_FETCH_RESTAURANTS, payload: currentCity });
 	};
 
 

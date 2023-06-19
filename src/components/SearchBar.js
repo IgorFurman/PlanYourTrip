@@ -80,7 +80,7 @@ const SearchBar = React.forwardRef((props, ref) => {
 						id='attractions'
 					/>
 					<CheckBoxLabel htmlFor='attractions'>
-						Atrakcje turystyczne
+						Atrakcje
 					</CheckBoxLabel>
 
 					<CheckBox

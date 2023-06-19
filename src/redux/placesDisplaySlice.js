@@ -13,6 +13,9 @@ const initialState = {
 	selectedPlace: null,
 	selectedPlacePosition: null,
 	isFetchingPlaces: false,
+    isFetchingHotels: false,
+    isFetchingRestaurants: false,
+    isFetchingAttractions: false,
 	shouldBounce: false,
 	selectedPinId: null,
 
@@ -50,6 +53,15 @@ const placesSlice = createSlice({
 		
 		setFetchingPlaces: (state, action) => {
       state.isFetchingPlaces = action.payload;
+    },
+		setFetchingHotels: (state, action) => {
+      state.isFetchingHotels = action.payload;
+    },
+    setFetchingRestaurants: (state, action) => {
+      state.isFetchingRestaurants = action.payload;
+    },
+    setFetchingAttractions: (state, action) => {
+      state.isFetchingAttractions = action.payload;
     },
 		clearPlaces: (state) => {
       state.places = [];
@@ -90,6 +102,9 @@ export const {
 	setShouldBounce,
   resetShouldBounce,
 	setSelectedPinId,
+	setFetchingAttractions,
+	setFetchingHotels,
+	setFetchingRestaurants,
 
 } = placesSlice.actions;
 

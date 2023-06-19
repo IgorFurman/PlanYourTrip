@@ -10,6 +10,7 @@ import PlacesToVisitList from './components/PlacesToVisitList';
 import Footer from './components/Footer';
 
 import ScrollProvider from './utils/scroll/Scroll';
+import {MapRefProvider} from './utils/map/MapRefContext'
 
 import { Container, GlobalStyle } from './styles/styles';
 
@@ -17,6 +18,7 @@ const App = () => {
 	const searchBarRef = useRef(null);
 
 	return (
+		<MapRefProvider>
 		<ScrollProvider>
 			<GlobalStyle />
 			<SearchBar ref={searchBarRef} />
@@ -31,6 +33,7 @@ const App = () => {
 			</Container>
 			<Footer />
 		</ScrollProvider>
+		</MapRefProvider>
 	);
 };
 
