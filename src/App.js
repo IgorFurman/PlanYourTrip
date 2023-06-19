@@ -1,4 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, {useLayoutEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSearchBarAndTitleHeight, setHasScrolled } from './redux/scrollSlice';
+import Title from './components/Title'
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import MapContainer from './components/MapContainer';
@@ -15,13 +18,30 @@ import {MapRefProvider} from './utils/map/MapRefContext'
 import { Container, GlobalStyle } from './styles/styles';
 
 const App = () => {
-	const searchBarRef = useRef(null);
+	const titleRef = useRef(null);
+  const searchBarRef = useRef(null);
+
+  const dispatch = useDispatch();
+ 
+
+	useLayoutEffect(() => {
+		if (titleRef.current && searchBarRef.current) {
+			const height = titleRef.current.offsetHeight + searchBarRef.current.offsetHeight;
+			console.log(titleRef.current.offsetHeight);
+			console.log("Title and SearchBar Height:", height);  
+			dispatch(setSearchBarAndTitleHeight(height));
+		}
+	}, [dispatch]);
+
 
 	return (
 		<MapRefProvider>
 		<ScrollProvider>
 			<GlobalStyle />
-			<SearchBar ref={searchBarRef} />
+			
+				<Title ref={titleRef}/>
+				<SearchBar ref={searchBarRef} />
+			
 			<Container>
 				<MapContainer style={{ gridArea: 'map' }} />
 				<PlaceDetails style={{ gridArea: 'details' }} />

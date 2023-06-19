@@ -10,6 +10,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromVisit } from '../redux/placesToVisitSlice';
 
+import { FaMinusSquare } from 'react-icons/fa';
+import { BsCloudDownloadFill} from "react-icons/bs";
+
 const generateDownloadContent = (placesToVisit) => {
 	let content = '';
 	placesToVisit.forEach((place, index) => {
@@ -43,7 +46,7 @@ const PlacesToVisitList = ({ currentCity, style }) => {
 						href={downloadUrl}
 						download={`${currentCity}_places_to_visit.txt`}
 					>
-						Pobierz listę
+						<BsCloudDownloadFill /> Pobierz listę
 					</DownloadList>
 					<List>
 						{placesToVisit.map((place, index) => (
@@ -57,7 +60,7 @@ const PlacesToVisitList = ({ currentCity, style }) => {
 									<ButtonList
 										onClick={() => handleRemoveFromVisit(place.place_id)}
 									>
-										Usuń z listy do odwiedzenia
+										<FaMinusSquare /> Usuń z listy
 									</ButtonList>
 								</div>
 							</ListItem>

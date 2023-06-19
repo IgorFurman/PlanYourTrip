@@ -16,17 +16,22 @@ import Spinner from './Spinner';
 
 import { FETCH_PLACES, FETCH_HOTELS, FETCH_RESTAURANTS } from '../redux/sagas';
 
+import { FaHotel } from 'react-icons/fa';
+import { FaUtensils } from 'react-icons/fa';
+import { FaLandmark } from 'react-icons/fa';
 
-
-import { setHasScrolled, setSearchBarHeight} from '../redux/scrollSlice';
-
+import {
+	setHasScrolled,
+	setSearchBarAndTitleHeight,
+} from '../redux/scrollSlice';
 
 const SearchBar = React.forwardRef((props, ref) => {
-	
 	const [showAttractions, setShowAttractions] = useState(true);
 	const [showHotels, setShowHotels] = useState(false);
 	const [showRestaurants, setShowRestaurants] = useState(false);
-	
+	const searchBarAndTitleHeight = useSelector(
+		(state) => state.scroll.searchBarAndTitleHeight
+	);
 
 	const dispatch = useDispatch();
 	const isFetchingPlaces = useSelector(
@@ -34,18 +39,15 @@ const SearchBar = React.forwardRef((props, ref) => {
 	);
 	const search = useSelector(selectSearch);
 
-
 	const handleChange = (e) => {
-    const { value } = e.target;
-    dispatch(setSearch(value));
-    ;
-  };
-
+		const { value } = e.target;
+		dispatch(setSearch(value));
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		;
-		dispatch(setHasSearched(true))
+		dispatch(setHasSearched(true));
+		dispatch(setHasScrolled(true));
 
 		if (showAttractions) {
 			dispatch({ type: FETCH_PLACES, payload: search });
@@ -56,46 +58,37 @@ const SearchBar = React.forwardRef((props, ref) => {
 		if (showRestaurants) {
 			dispatch({ type: FETCH_RESTAURANTS, payload: search });
 		}
-	
-	;
 	};
-
-	useEffect(() => {
-    dispatch(setSearchBarHeight(ref.current.getBoundingClientRect().height));
-  }, [dispatch]);
-
 	return (
 		<Header ref={ref}>
 			<Form onSubmit={handleSubmit}>
-			<Input
-          type='text'
-          value={search}
-          onChange={handleChange}
-          placeholder='Wpisz miasto...'
-        />
+				<Input
+					type='text'
+					value={search}
+					onChange={handleChange}
+					placeholder='Wpisz miasto...'
+				/>
 				<CheckBoxWrapper>
 					<CheckBox
 						checked={showAttractions}
 						onChange={(e) => setShowAttractions(e.target.checked)}
 						id='attractions'
 					/>
-					<CheckBoxLabel htmlFor='attractions'>
-						Atrakcje
-					</CheckBoxLabel>
+					<CheckBoxLabel htmlFor='attractions'><FaLandmark /> Atrakcje</CheckBoxLabel>
 
 					<CheckBox
 						checked={showHotels}
 						onChange={(e) => setShowHotels(e.target.checked)}
 						id='hotels'
 					/>
-					<CheckBoxLabel htmlFor='hotels'>Hotele</CheckBoxLabel>
+					<CheckBoxLabel htmlFor='hotels'> <FaHotel /> Hotele</CheckBoxLabel>
 
 					<CheckBox
 						checked={showRestaurants}
 						onChange={(e) => setShowRestaurants(e.target.checked)}
 						id='restaurants'
 					/>
-					<CheckBoxLabel htmlFor='restaurants'>Restauracje</CheckBoxLabel>
+					<CheckBoxLabel htmlFor='restaurants'> <FaUtensils />Restauracje</CheckBoxLabel>
 				</CheckBoxWrapper>
 				{isFetchingPlaces ? (
 					<Spinner />

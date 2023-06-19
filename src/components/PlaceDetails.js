@@ -19,6 +19,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { addToVisit } from '../redux/placesToVisitSlice';
 
+import { AiOutlineLink, AiFillPhone, AiFillHome } from "react-icons/ai";
+import { BiTimeFive, BiShow } from "react-icons/bi"; 
+
 import { FETCH_PLACE_DETAILS } from '../redux/sagas';
 
 const PlaceDetails = ({ style }) => {
@@ -118,13 +121,13 @@ const PlaceDetails = ({ style }) => {
 		<PlaceDetailsStyled style={style}>
 			<h2>{selectedPlace.name}</h2>
 			<p>
-				<b>Adres: </b>
+				<b><AiFillHome/> Adres: </b>
 				{selectedPlace.formatted_address
 					? selectedPlace.formatted_address
 					: 'Brak adresu'}
 			</p>
 			<p>
-				<b>Numer: </b>
+				<b> <AiFillPhone/> Numer: </b>
 				{selectedPlace.formatted_phone_number
 					? selectedPlace.formatted_phone_number
 					: 'Brak numeru'}
@@ -133,7 +136,7 @@ const PlaceDetails = ({ style }) => {
 			{selectedPlace.opening_hours &&
 				selectedPlace.opening_hours.weekday_text && (
 					<OpeningHours>
-						<p>Godziny otwarcia:</p>
+						<p><BiTimeFive/ > Godziny otwarcia:</p>
 						<ul>
 							{selectedPlace.opening_hours.weekday_text.map((day, index) => (
 								<li key={index}>{day}</li>
@@ -149,7 +152,7 @@ const PlaceDetails = ({ style }) => {
 						href={selectedPlace.website}
 						rel='noopener noreferrer'
 					>
-						Poznaj więcej szczegółów...
+						<AiOutlineLink/ >Poznaj więcej szczegółów...
 					</WebsideLink>
 				</p>
 			)}

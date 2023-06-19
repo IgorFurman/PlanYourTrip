@@ -13,6 +13,10 @@ import useMapScroll from '../hooks/useMapScroll';
 
 import Spinner from './Spinner'
 
+import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPlusSquare } from 'react-icons/fa';
+import {  BiShow } from "react-icons/bi";
+
 import { APPEND_FETCH_PLACES } from '../redux/sagas';
 
 
@@ -80,21 +84,21 @@ const AttractionsList = ({ style }) => {
 												<b>Ocena: </b>
 												{place.rating ? `${place.rating} ⭐` : 'Brak oceny'}
 											</p>
-											<ButtonList onClick={() => handleShowOnMapClick(place)}>
-												Pokaż na mapie
+											<ButtonList style={{marginBottom:'2px'}}onClick={() => handleShowOnMapClick(place)}>
+											<FaMapMarkerAlt /> Pokaż na mapie
 											</ButtonList>
 											<ButtonList
 												onClick={() => handleAddToVisit(place)}
 												disabled={isPlaceInVisitList(place.place_id)}
 											>
-												Dodaj do listy do odwiedzenia
+												<FaPlusSquare />Dodaj do listy do odwiedzenia
 											</ButtonList>
 										</div>
 									</ListItem>
 								))
 							)  : isCitySearched ? (
 								<ButtonList onClick={handleShowAttractions}>
-									Pokaż dostępne atrakcje turystyczne
+									<BiShow/> Pokaż dostępne atrakcje
 								</ButtonList>
 							): null}
 						</List>

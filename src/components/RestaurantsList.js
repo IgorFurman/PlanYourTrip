@@ -12,7 +12,9 @@ import {
 
 import Spinner from './Spinner'
 
-
+import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPlusSquare } from 'react-icons/fa';
+import {  BiShow } from "react-icons/bi";
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -88,23 +90,23 @@ const RestaurantsList = ({
                             ? `${restaurant.rating} ⭐`
                             : 'Brak oceny'}
                         </p>
-                        <ButtonList
+                        <ButtonList style={{marginBottom:'2px'}}
                           onClick={() => handleShowOnMapClick(restaurant)}
                         >
-                          Pokaż na mapie
+                          <FaMapMarkerAlt />Pokaż na mapie
                         </ButtonList>
                         <ButtonList
                           onClick={() => handleAddToVisit(restaurant)}
                           disabled={isPlaceInVisitList(restaurant.place_id)}
                         >
-                          Dodaj do listy do odwiedzenia
+                          	<FaPlusSquare /> Dodaj do listy do odwiedzenia
                         </ButtonList>
                       </div>
                     </ListItem>
                   ))
                 : isCitySearched && (
                     <ButtonList onClick={handleFetchRestaurants}>
-                      Pokaż dostępne restauracje
+                      <BiShow/> Pokaż dostępne restauracje
                     </ButtonList>
                   )}
             </List>

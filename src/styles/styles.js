@@ -2,6 +2,7 @@ import styled, { keyframes, css, createGlobalStyle } from 'styled-components';
 
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { colors } from './colors';
+
 //
 // animation
 const bounce = keyframes`
@@ -24,14 +25,15 @@ export const GlobalStyle = createGlobalStyle`
  body {
 	  color: ${colors.main};
 		font-family: 'Lato', sans-serif;
+		font-size: 14px;
 
     
-    @media (max-width: 576px) {
-      font-size: 14px;
+    @media (min-width: 576px) {
+			font-size: 15px;
     }
     
-    @media (min-width: 577px) and (max-width: 1024px) {
-      font-size: 16px;
+    @media (min-width: 577px) {
+			font-size: 16px;
     }
     
     @media (min-width: 1025px) {
@@ -90,18 +92,18 @@ export const Container = styled.div`
 `;
 
 export const StandardContainer = styled.div`
-	padding: 1.15rem 1rem;
-	margin: 0 auto;
-	width: 100%;
+	width: 99%;
+	padding: 0.625rem;
+	margin: 0.625rem 0.3125rem;
 
-	h2 {
-		margin: 1rem 0 0 0;
-	}
-
-	@media (max-width: 576px) {
+	@media (min-width: 576px) {
+		padding: 1.15rem 1rem;
+		margin: 0 auto;
 		width: 100%;
-		padding: 0.625rem;
-		margin: 0.625rem 0.3125rem;
+
+		h2 {
+			margin: 1rem 0 0 0;
+		}
 	}
 `;
 // list
@@ -112,15 +114,14 @@ export const ListContainer = styled(StandardContainer)`
 `;
 
 export const List = styled.ul`
-	height: 50vh;
-	width: 100%;
+	height: 60vh;
 	list-style: none;
 	padding: 0;
 	margin: 0;
 	overflow: auto;
-
-	@media (max-width: 576px) {
-		height: 60vh;
+	@media (min-width: 576px) {
+		height: 50vh;
+		width: 100%;
 	}
 `;
 
@@ -130,7 +131,7 @@ export const ListItem = styled.li`
 	padding: 0.93rem 0.62rem;
 	margin-bottom: 0.625rem;
 
-	@media (max-width: 576px) {
+	@media (min-width: 576px) {
 		padding: 0.625rem;
 	}
 `;
@@ -139,32 +140,33 @@ export const ButtonSearch = styled.button`
 	background-color: ${colors.buttonBackground};
 	color: ${colors.main};
 	padding: 0.625rem 1.25rem;
-	margin: 0 auto;
+	margin-bottom: 1rem;
 	width: 100%;
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
 	transition: background-color 0.3s;
-	&:hover {
-		background-color: ${colors.buttonHover};
-	}
 
-	@media (max-width: 576px) {
+	@media (min-width: 576px) {
 		padding: 0.5rem 1rem;
-
 		font-size: 1.2rem;
+		margin: 0 auto;
+
+		&:hover {
+			background-color: ${colors.buttonHover};
+		}
 	}
 `;
 
 export const ButtonList = styled.button`
 	background-color: ${colors.main};
 	color: ${colors.bgWhite};
-	padding: 0.8rem 0.9rem;
-	border-radius: 5px;
-	font-size: 0.9rem;
-	
+	padding: 0.6rem 1.2rem;
+	margin-right: 0.5rem;
+	font-size: 0.7rem;
 	border: none;
 	cursor: pointer;
+	transition: background-color 0.3s;
 
 	&:hover {
 		background-color: ${colors.buttonHoverSecondary};
@@ -174,13 +176,12 @@ export const ButtonList = styled.button`
 		cursor: not-allowed;
 	}
 
-	@media (max-width: 576px) {
-		padding: 0.6rem 1.5rem;
-		margin-right: 0.5em;
-		font-size: 0.7rem;
+	@media (min-width: 576px) {
+		padding: 0.8rem 0.9rem;
+		border-radius: 5px;
+		font-size: 0.9rem;
 	}
-	@media (max-width: 768px) {
-		margin-right: 0.7em;
+	@media (mix-width: 768px) {
 		font-size: 0.8rem;
 	}
 	@media (min-width: 769px) {
@@ -193,39 +194,35 @@ export const ButtonToggleShowList = styled.button`
 	position: relative;
 	background-color: ${colors.bgWhite};
 	color: ${colors.main};
-	width: 30%;
-	padding: 0.5rem 0.5rem 0.5rem 0.1rem;
+	width: 25%;
+	padding: 0.3rem 1rem 0.3rem 0;
 	margin: 1rem 0;
 	border-radius: 5px;
 	text-align: left;
 	font-weight: bold;
 	border: none;
 	cursor: pointer;
-	transition: .3s color;
-  
-	&:hover {
-color: ${colors.buttonHoverSecondary}
+	transition: 0.3s color;
 
+	&:hover {
+		color: ${colors.buttonHoverSecondary};
 	}
-	@media (max-width: 576px) {
-		width: 25%;
-		padding: 0.3rem 1rem 0.3rem 0;
+	@media (min-width: 576px) {
+		width: 30%;
+		padding: 0.5rem 0.5rem 0.5rem 0.1rem;
 	}
 `;
 
 export const Input = styled.input`
-	padding: 0.625rem;
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	width: 100%;
+	padding: 0.625rem;
+	margin-bottom: 0.8rem;
 
-	box-sizing: border-box;
-	margin-bottom: 0.625rem;
-
-	@media (max-width: 576px) {
+	@media (min-width: 576px) {
 		padding: 0.7rem;
 		font-size: 1rem;
-		margin-bottom: 0.8rem;
 	}
 `;
 // map
@@ -242,8 +239,96 @@ export const MapContainerStyled = styled(StandardContainer)`
 		height: 80vh;
 	}
 `;
+
+// title
+
+export const TitleContainer = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 20vh;
+	background-image: linear-gradient(
+		to top,
+		${colors.main},
+		${colors.secondary}
+	);
+	margin: 0;
+	padding: 20px 0;
+	color: ${colors.bgWhite};
+
+	@media (min-width: 772px) {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 20vh;
+		background-image: linear-gradient(
+			to top,
+			${colors.main},
+			${colors.secondary}
+		);
+		margin: 0;
+		padding: 60px 0;
+		color: ${colors.bgWhite};
+	}
+`;
+
+export const PalmIslands = styled.div`
+img {
+		display: none;
+		@media (min-width: 772px) {
+			display:inline-block;
+			position: absolute;
+			width: 10rem;
+			height: 10rem;
+			bottom: -0.2rem;
+			right: 2rem;
+		}
+	}
+`
+
+export const Suitcase = styled.div`
+	img {
+		display: none;
+		@media (min-width: 772px) {
+			display:inline-block;
+			position: absolute;
+			rotate: 25deg;
+			width: 10rem;
+			height: 10rem;
+			bottom: -0.2rem;
+			left: 2rem;
+		}
+	}
+`;
+
+export const TitleStyled = styled.h1`
+	font-size: 1.4rem;
+	font-weight: bold;
+	color: ${colors.light};
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	@media (min-width: 772px) {
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+`;
+
+export const Slogan = styled.p`
+	margin: 0 auto;
+	text-align: center;
+	font-size: 0.9rem;
+	font-style: italic;
+	color: ${colors.light};
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+`;
+
 // h2 style
-export const Heading = styled.h2`
+export const Headings = styled.h2`
 	@media (max-width: 576px) {
 		font-size: 18px;
 	}
@@ -256,27 +341,26 @@ export const Header = styled.header`
 	justify-content: space-between;
 	align-items: center;
 	background-color: ${colors.main};
-	padding: 1.25rem;
+	padding: 1.25rem auto;
 	color: ${colors.bgWhite};
 	margin-bottom: 1.25rem;
-
 	.logo {
-		width: 100%;
-		max-width: 250px;
-		height: auto;
-		background: none;
+		display: none;
 	}
-	@media (max-width: 576px) {
+	@media (min-width: 576px) {
 		padding: 0.65rem;
 
-		.logo {
-			display: none;
-		}
 		@media (min-width: 768px) {
+			color: ${colors.bgWhite};
+			margin-bottom: 1.5rem;
+
 			.logo {
-				max-width: 300px;
-				min-height: 260px;
-				max-height: 320px;
+				display: flex;
+				flex: 1;
+				width: 100%;
+				max-width: 250px;
+				height: auto;
+				background: none;
 			}
 		}
 	}
@@ -284,10 +368,13 @@ export const Header = styled.header`
 export const Form = styled.form`
 	display: flex;
 	flex-direction: column;
+	font-size: 1.2rem;
 
 	margin: 0 auto;
 	@media (min-width: 768px) {
 		margin-left: 1em;
+		font-size: 1rem;
+		max-width: 50%;
 	}
 `;
 // Check inputs
@@ -309,6 +396,7 @@ export const CheckBoxLabel = styled.label`
 	display: inline-block;
 	width: 120px;
 	height: 34px;
+	font-size: 1.2rem;
 
 	&:before,
 	&:after {
@@ -381,7 +469,7 @@ export const OpinionsWrapper = styled.div`
 // another components
 
 export const WebsideLink = styled.a`
-position: relative;
+	position: relative;
 	text-decoration: none;
 	color: ${colors.link};
 	font-weight: bold;
@@ -420,8 +508,8 @@ position: relative;
 	}
 
 	&:hover::before {
-    opacity: 1;
-  }
+		opacity: 1;
+	}
 `;
 
 export const DownloadList = styled(WebsideLink)`
@@ -521,7 +609,11 @@ export const FooterContainer = styled.div`
 	display: flex;
 	justify-content: space-around;
 	text-align: center;
-	background-color: #303e3c;
+	background-image: linear-gradient(
+		to top,
+		${colors.main},
+		${colors.secondary}
+	);
 	padding: 3.75rem;
 	padding-bottom: 0;
 `;
@@ -549,7 +641,7 @@ export const SocialIcon = styled(MDBBtn).attrs({
 export const FooterCompanyName = styled.div`
 	text-align: center;
 	padding: 3rem;
-	background-color: #031316;
+	background-color: ${colors.main};
 `;
 
 export const LogoContainer = styled.div`

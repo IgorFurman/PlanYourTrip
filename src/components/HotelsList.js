@@ -10,6 +10,10 @@ import {
 } from '../styles/styles';
 
 
+import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPlusSquare } from 'react-icons/fa';
+import {  BiShow } from "react-icons/bi";
+
 import Spinner from './Spinner'
 
 import useMapScroll from '../hooks/useMapScroll';
@@ -76,21 +80,21 @@ const isCitySearched = Boolean(currentCity);
                         <b>Ocena: </b>
                         {hotel.rating ? `${hotel.rating} ⭐` : 'Brak oceny'}
                       </p>
-                      <ButtonList onClick={() => handleShowOnMapClick(hotel)}>
-                        Pokaż na mapie
+                      <ButtonList style={{marginBottom:'2px'}} onClick={() => handleShowOnMapClick(hotel)}>
+                      <FaMapMarkerAlt /> Pokaż na mapie 
                       </ButtonList>
                       <ButtonList
                         onClick={() => handleAddToVisit(hotel)}
                         disabled={isPlaceInVisitList(hotel.place_id)}
                       >
-                        Dodaj do listy do odwiedzenia
+                        <FaPlusSquare /> Dodaj do listy do odwiedzenia
                       </ButtonList>
                     </div>
                   </ListItem>
                 ))
               ) : isCitySearched ? (
                 <ButtonList onClick={handleShowHotelsClick}>
-                  Pokaż dostępne hotele
+                  <BiShow/> Pokaż dostępne hotele
                 </ButtonList>
               ) : null 
               }
