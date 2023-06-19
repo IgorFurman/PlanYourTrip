@@ -87,15 +87,16 @@ const WeatherDisplay = () => {
   return (
     <WeatherContainer>
       <h2>{capitalizeFirstLetter(city)} pogoda:</h2>
+      
+      <p><b>Temperatura: </b>{weatherData.main && Math.round(weatherData.main.temp)}°C</p>
+      <p><b>Wilgotność: </b>{weatherData.main && weatherData.main.humidity}%</p>
+      <p><b>Wiatr: </b>{weatherData.wind && weatherData.wind.speed} m/s</p>
       {weatherData.weather && weatherData.weather[0] && (
         <img
           src={getWeatherIconUrl(weatherData.weather[0].id)}
           alt="weather status"
         />
       )}
-      <p><b>Temperatura: </b>{weatherData.main && Math.round(weatherData.main.temp)}°C</p>
-      <p><b>Wilgotność: </b>{weatherData.main && weatherData.main.humidity}%</p>
-      <p><b>Wiatr: </b>{weatherData.wind && weatherData.wind.speed} m/s</p>
       
     </WeatherContainer>
   );}

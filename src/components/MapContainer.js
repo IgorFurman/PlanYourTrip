@@ -16,10 +16,13 @@ import {
 	setSelectedPinId,
 } from '../redux/placesDisplaySlice';
 
+import { useMapRef } from '../utils/map/MapRefContext';
+
+
 const MapContainer = ({ style }) => {
 	
 	const dispatch = useDispatch();
-	const mapRef = useRef();
+	const mapRef = useMapRef();
 
 	const places = useSelector((state) => state.placesDisplay.places);
 	const selectedPlace = useSelector(
@@ -111,37 +114,37 @@ const MapContainer = ({ style }) => {
 	}, [handleFetch]);
 
 	return (
-		<MapContainerStyled ref={mapRef} style={style}>
-			<MapLegend />
-			<GoogleMapReact
-				bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
-				center={mapSettings.center}
-				zoom={mapSettings.zoom}
-				onClick={({ x, y }) => dispatch(setSelectedPlacePosition({ x, y }))}
-				yesIWantToUseGoogleMapApiInternals
+    <MapContainerStyled style={style}>
+      <MapLegend />
+      <GoogleMapReact
+        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
+        center={mapSettings.center}
+        zoom={mapSettings.zoom}
+        onClick={({ x, y }) => dispatch(setSelectedPlacePosition({ x, y }))}
+        yesIWantToUseGoogleMapApiInternals
 				onGoogleApiLoaded={({ map }) => {
 					mapRef.current = map;
 					handleFetch();
-				}}
-			>
-				{allPlaces.map((place, index) => (
-    <Marker
-        key={`${place.place_id}-${index}`}
-        lat={place.geometry.location.lat}
-        lng={place.geometry.location.lng}
-        onClick={(e) => handleMarkerClick(place, { x: e.clientX, y: e.clientY })}
-    >
-        <PinStyled
+			}}
+      >
+        {allPlaces.map((place, index) => (
+          <Marker
+            key={`${place.place_id}-${index}`}
+            lat={place.geometry.location.lat}
+            lng={place.geometry.location.lng}
             onClick={(e) => handleMarkerClick(place, { x: e.clientX, y: e.clientY })}
-            shouldBounce={shouldBounce && selectedPinId === place.place_id}
-            src={getPinForPlace(place)}
-            alt={place.name}
-        />
-    </Marker>
-))}
-			</GoogleMapReact>
-		</MapContainerStyled>
-	);
+          >
+            <PinStyled
+              onClick={(e) => handleMarkerClick(place, { x: e.clientX, y: e.clientY })}
+              shouldBounce={shouldBounce && selectedPinId === place.place_id}
+              src={getPinForPlace(place)}
+              alt={place.name}
+            />
+          </Marker>
+        ))}
+      </GoogleMapReact>
+    </MapContainerStyled>
+  );
 };
 
 export default MapContainer;
