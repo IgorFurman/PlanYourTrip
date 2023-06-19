@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/PlanYourTrip/static/css/main.f060c482.css",
-    "main.js": "/PlanYourTrip/static/js/main.d488c7ac.js",
+    "main.css": "/PlanYourTrip/static/css/main.5f4bdd2f.css",
+    "main.js": "/PlanYourTrip/static/js/main.b406d4eb.js",
     "static/media/unknown.png": "/PlanYourTrip/static/media/unknown.bbe513687816a0913d88.png",
     "static/media/thunderstorm.png": "/PlanYourTrip/static/media/thunderstorm.ee7c55b827155b0ca041.png",
     "static/media/fog.png": "/PlanYourTrip/static/media/fog.9821e1041c12fb7cbc86.png",
@@ -14,12 +14,16 @@
     "static/media/HotelsPin.png": "/PlanYourTrip/static/media/HotelsPin.8e35126e5f35a59e40c4.png",
     "static/media/AttractionsPin.png": "/PlanYourTrip/static/media/AttractionsPin.4a41852262cf6c43e19c.png",
     "static/media/RestaurantsPin.png": "/PlanYourTrip/static/media/RestaurantsPin.62203080231df7212b15.png",
+    "static/media/slick.svg": "/PlanYourTrip/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/PlanYourTrip/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/PlanYourTrip/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/PlanYourTrip/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/PlanYourTrip/index.html",
-    "main.f060c482.css.map": "/PlanYourTrip/static/css/main.f060c482.css.map",
-    "main.d488c7ac.js.map": "/PlanYourTrip/static/js/main.d488c7ac.js.map"
+    "main.5f4bdd2f.css.map": "/PlanYourTrip/static/css/main.5f4bdd2f.css.map",
+    "main.b406d4eb.js.map": "/PlanYourTrip/static/js/main.b406d4eb.js.map"
   },
   "entrypoints": [
-    "static/css/main.f060c482.css",
-    "static/js/main.d488c7ac.js"
+    "static/css/main.5f4bdd2f.css",
+    "static/js/main.b406d4eb.js"
   ]
 }
