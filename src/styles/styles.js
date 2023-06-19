@@ -1,7 +1,7 @@
 import styled, { keyframes, css, createGlobalStyle } from 'styled-components';
 
 import { MDBBtn } from 'mdb-react-ui-kit';
-
+import { colors } from './colors';
 //
 // animation
 const bounce = keyframes`
@@ -18,9 +18,9 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
  body {
-
+	color: ${colors.main};
 		font-family: 'Lato', sans-serif;
-		font-size: 18px;
+
     
     @media (max-width: 576px) {
       font-size: 14px;
@@ -38,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
 
 // Mixin for repeated styles
 const boxShadow = css`
-	background-color: white;
+	background-color: ${colors.bgWhite};
 	border-radius: 5px;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 `;
@@ -131,16 +131,17 @@ export const ListItem = styled.li`
 `;
 // btns
 export const ButtonSearch = styled.button`
-	background-color: #afa7ba;
-	color: #031316;
+background-color: ${colors.buttonBackground};
+	color: ${colors.main};
 	padding: 0.625rem 1.25rem;
+margin: 0 auto;
 	width: 100%;
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
 	transition: background-color 0.3s;
 	&:hover {
-		background-color: #efe6ef;
+		background-color: ${colors.buttonHover};
 	}
 
 	@media (max-width: 576px) {
@@ -151,8 +152,8 @@ export const ButtonSearch = styled.button`
 `;
 
 export const ButtonList = styled.button`
-	background-color: #031316;
-	color: white;
+	background-color: ${colors.main};
+	color: ${colors.bgWhite};
 	padding: 0.8rem 0.9rem;
 	border-radius: 5px;
 	font-size: 0.9rem;
@@ -162,10 +163,10 @@ export const ButtonList = styled.button`
 	
 
 	&:hover {
-		background-color: #303e3c;
+		background-color: ${colors.buttonHoverSecondary};
 	}
 	&:disabled {
-    background-color: #cccccc;
+		background-color: ${colors.buttonDisabled};
     cursor: not-allowed;
   }
 
@@ -228,9 +229,9 @@ export const Header = styled.header`
 	height: fit-content;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #031316;
+	background-color: ${colors.main};
 	padding: 1.25rem;
-	color: white;
+	color: ${colors.bgWhite};
 	margin-bottom: 1.25rem;
 
 	.logo {
@@ -258,6 +259,7 @@ export const Header = styled.header`
 export const Form = styled.form`
 display: flex;
 flex-direction: column;
+
 margin: 0 auto;
 @media (min-width: 768px) {
 	margin-left: 1em;
@@ -280,7 +282,7 @@ export const CheckBoxLabel = styled.label`
 	margin-bottom: 2.2em;
   cursor: pointer;
   display: inline-block;
-  width: 90px;
+  width: 120px;
   height: 34px;
 
   &:before,
@@ -293,14 +295,14 @@ export const CheckBoxLabel = styled.label`
   }
 
   &:before {
-    background-color: #ccc;
+    background-color: ${colors.border};
     width: 100%;
     height: 100%;
     border-radius: 34px;
   }
 
   &:after {
-    background-color: #fff;
+		background-color: ${colors.bgWhite};
     bottom: 0px;
 		top: 44px;
     left: 4px;
@@ -320,10 +322,10 @@ export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
 
   &:checked + ${CheckBoxLabel} {
     &:before {
-      background-color: #66bb6a;
+      background-color: ${colors.checkBoxChecked};
     }
     &:after {
-      transform: translateX(55px);
+      transform: translateX(85px);
     }
   }
 `;
@@ -358,16 +360,16 @@ export const OpinionsWrapper = styled.div`
 
 export const WebsideLink = styled.a`
 	text-decoration: none;
-	color: #000033;
+	color: ${colors.link};
 	font-weight: bold;
 	transition: color 0.3s, text-decoration 0.3s;
 	margin-bottom: 0;
 	&:hover {
-		color: #3300cc;
+		color: ${colors.linkHover};
 		text-decoration: underline;
 	}
 	&:active {
-		color: #3300cc;
+		color: ${colors.linkHover};
 	}
 `;
 
@@ -418,7 +420,7 @@ export const LegendContainer = styled.div`
 	position: absolute;
 	top: 25px;
 	left: 25px;
-	background-color: white;
+	background-color: ${colors.bgWhite};
 	padding: 0.625rem;
 	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
@@ -459,7 +461,7 @@ export const PinStyled = styled(({ shouldBounce, ...props }) => <img {...props} 
 export const StyledFooter = styled.footer`
 	margin-top: 1.125rem;
 	text-align: center;
-	color: white;
+	color: ${colors.bgWhite};
 `;
 
 export const FooterContainer = styled.div`
@@ -513,7 +515,6 @@ export const LogoContainer = styled.div`
 export const WeatherContainer = styled(StandardContainer)`
 	${boxShadow};
 	grid-area: weather;
-	
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
