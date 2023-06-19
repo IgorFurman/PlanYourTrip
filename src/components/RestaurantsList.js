@@ -3,6 +3,7 @@ import {
 	Container,
 	ButtonList,
 	Input,
+  ButtonToggleShowList,
 	List,
 	ListItem,
 	ListContainer,
@@ -64,9 +65,9 @@ const RestaurantsList = ({
       ) : (
         <>
           {restaurants.length > 0 ? (
-            <ButtonList onClick={handleToggleListVisibility}>
+            <ButtonToggleShowList onClick={handleToggleListVisibility}>
               {isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
-            </ButtonList>
+            </ButtonToggleShowList>
           ) : (
             <p>Tutaj zobaczysz listę wyszukanych restauracji.</p>
           )}

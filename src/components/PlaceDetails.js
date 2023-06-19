@@ -69,7 +69,7 @@ const PlaceDetails = ({ style }) => {
 					lineHeight: "1",
 					position: "absolute",
 					top: "50%",
-					left: "-36px",
+					left: "-34px",
 					transform: "translateY(-50%)",
 					cursor: "pointer",
 				}}
@@ -93,7 +93,7 @@ const PlaceDetails = ({ style }) => {
 					lineHeight: "1",
 					position: "absolute",
 					top: "50%",
-					right: "-2px",
+					right: "2px",
 					transform: "translateY(-50%)",
 					cursor: "pointer",
 				}}
@@ -149,7 +149,7 @@ const PlaceDetails = ({ style }) => {
 						href={selectedPlace.website}
 						rel='noopener noreferrer'
 					>
-						Odwiedź stronę internetową
+						Poznaj więcej szczegółów...
 					</WebsideLink>
 				</p>
 			)}

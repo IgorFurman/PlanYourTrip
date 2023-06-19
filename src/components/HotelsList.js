@@ -3,7 +3,7 @@ import axios from 'axios';
 import {
 
 	ButtonList,
-
+  ButtonToggleShowList,
 	List,
 	ListItem,
 	ListContainer,
@@ -55,9 +55,9 @@ const isCitySearched = Boolean(currentCity);
       ) : (
         <>
           {hotels.length > 0 ? (
-            <ButtonList onClick={handleToggleListVisibility}>
+            <ButtonToggleShowList onClick={handleToggleListVisibility}>
               {isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
-            </ButtonList>
+            </ButtonToggleShowList>
           ) : (
             <p>Tutaj zobaczysz listę wyszukanych hoteli.</p>
           )}

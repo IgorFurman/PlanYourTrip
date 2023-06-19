@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import {
 	Container,
 	ButtonList,
+	ButtonToggleShowList,
 	Input,
 	List,
 	ListItem,
@@ -58,9 +59,9 @@ const AttractionsList = ({ style }) => {
 			) : (
 				<>
 					{places.length > 0 ? (
-						<ButtonList onClick={handleToggleListVisibility}>
+						<ButtonToggleShowList onClick={handleToggleListVisibility}>
 							{isListVisible ? 'Zwiń listę' : 'Rozwiń listę'}
-						</ButtonList>
+						</ButtonToggleShowList>
 					) : (
 						<p>Tutaj zobaczysz listę wyszukanych atrakcji turystycznych.</p>
 					)}

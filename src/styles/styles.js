@@ -11,6 +11,10 @@ const bounce = keyframes`
   70% { transform: rotate(0deg) scale(1.2); }
   100% { transform: scale(1); }
 `;
+const lineAnimation = keyframes`
+  0% {width: 0%;}
+  100% {width: 100%;}
+`;
 // global styles
 
 export const GlobalStyle = createGlobalStyle`
@@ -18,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
  body {
-	color: ${colors.main};
+	  color: ${colors.main};
 		font-family: 'Lato', sans-serif;
 
     
@@ -34,6 +38,8 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 18px;
     }
   }
+
+
 `;
 
 // Mixin for repeated styles
@@ -47,20 +53,19 @@ const boxShadow = css`
 export const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-gap: 2rem;
+	gap: 2rem;
 	grid-template-rows: auto auto auto auto;
 	grid-template-areas:
 		'map map details'
 		'visit visit details'
 		'weather weather details'
 		'attractions restaurants hotels';
-	
+
 	width: 100%;
 	align-items: stretch;
 	padding: 1rem;
 
 	@media (max-width: 1024px) {
-		
 		grid-template-rows: auto auto auto auto auto auto;
 		grid-template-areas:
 			'map map map'
@@ -70,11 +75,9 @@ gap: 2rem;
 			'weather weather weather'
 			'attractions attractions attractions'
 			'hotels hotels hotels'
-			'restaurants restaurants restaurants'
-			
+			'restaurants restaurants restaurants';
 	}
 	@media (min-width: 768px) and (max-width: 1024px) {
-		
 		grid-template-columns: repeat(4, 1fr);
 		grid-template-rows: auto auto auto auto auto;
 		grid-template-areas:
@@ -87,17 +90,19 @@ gap: 2rem;
 `;
 
 export const StandardContainer = styled.div`
-	padding: 1.25rem 1rem;
-	margin: 0rem auto;
+	padding: 1.15rem 1rem;
+	margin: 0 auto;
 	width: 100%;
+
+	h2 {
+		margin: 1rem 0 0 0;
+	}
 
 	@media (max-width: 576px) {
 		width: 100%;
 		padding: 0.625rem;
 		margin: 0.625rem 0.3125rem;
 	}
-	
-	
 `;
 // list
 export const ListContainer = styled(StandardContainer)`
@@ -131,10 +136,10 @@ export const ListItem = styled.li`
 `;
 // btns
 export const ButtonSearch = styled.button`
-background-color: ${colors.buttonBackground};
+	background-color: ${colors.buttonBackground};
 	color: ${colors.main};
 	padding: 0.625rem 1.25rem;
-margin: 0 auto;
+	margin: 0 auto;
 	width: 100%;
 	border-radius: 5px;
 	border: none;
@@ -146,7 +151,7 @@ margin: 0 auto;
 
 	@media (max-width: 576px) {
 		padding: 0.5rem 1rem;
-		
+
 		font-size: 1.2rem;
 	}
 `;
@@ -157,18 +162,17 @@ export const ButtonList = styled.button`
 	padding: 0.8rem 0.9rem;
 	border-radius: 5px;
 	font-size: 0.9rem;
+	
 	border: none;
 	cursor: pointer;
-	
-	
 
 	&:hover {
 		background-color: ${colors.buttonHoverSecondary};
 	}
 	&:disabled {
 		background-color: ${colors.buttonDisabled};
-    cursor: not-allowed;
-  }
+		cursor: not-allowed;
+	}
 
 	@media (max-width: 576px) {
 		padding: 0.6rem 1.5rem;
@@ -176,7 +180,6 @@ export const ButtonList = styled.button`
 		font-size: 0.7rem;
 	}
 	@media (max-width: 768px) {
-		
 		margin-right: 0.7em;
 		font-size: 0.8rem;
 	}
@@ -186,13 +189,36 @@ export const ButtonList = styled.button`
 		font-size: 0.8rem;
 	}
 `;
+export const ButtonToggleShowList = styled.button`
+	position: relative;
+	background-color: ${colors.bgWhite};
+	color: ${colors.main};
+	width: 30%;
+	padding: 0.5rem 0.5rem 0.5rem 0.1rem;
+	margin: 1rem 0;
+	border-radius: 5px;
+	text-align: left;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	transition: .3s color;
+  
+	&:hover {
+color: ${colors.buttonHoverSecondary}
+
+	}
+	@media (max-width: 576px) {
+		width: 25%;
+		padding: 0.3rem 1rem 0.3rem 0;
+	}
+`;
 
 export const Input = styled.input`
 	padding: 0.625rem;
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	width: 100%;
-	
+
 	box-sizing: border-box;
 	margin-bottom: 0.625rem;
 
@@ -241,11 +267,10 @@ export const Header = styled.header`
 		background: none;
 	}
 	@media (max-width: 576px) {
-	
 		padding: 0.65rem;
 
 		.logo {
-			display: none
+			display: none;
 		}
 		@media (min-width: 768px) {
 			.logo {
@@ -257,89 +282,86 @@ export const Header = styled.header`
 	}
 `;
 export const Form = styled.form`
-display: flex;
-flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-margin: 0 auto;
-@media (min-width: 768px) {
-	margin-left: 1em;
-}
-`
+	margin: 0 auto;
+	@media (min-width: 768px) {
+		margin-left: 1em;
+	}
+`;
 // Check inputs
 
 export const CheckBoxWrapper = styled.div`
-  display: flex;
-	
-  align-items: space-around;
-  justify-content: flex-start;
-  margin-bottom: 2em;
+	display: flex;
+
+	align-items: space-around;
+	justify-content: flex-start;
+	margin-bottom: 2em;
 `;
 
 export const CheckBoxLabel = styled.label`
-  position: relative;
-  margin-right: 0.5em;
-  padding-left: 0.2em;
+	position: relative;
+	margin-right: 0.5em;
+	padding-left: 0.2em;
 	margin-bottom: 2.2em;
-  cursor: pointer;
-  display: inline-block;
-  width: 120px;
-  height: 34px;
+	cursor: pointer;
+	display: inline-block;
+	width: 120px;
+	height: 34px;
 
-  &:before,
-  &:after {
-    position: absolute;
+	&:before,
+	&:after {
+		position: absolute;
 		top: 40px;
 		left: 0;
-    content: "";
-    transition: 0.4s;
-  }
+		content: '';
+		transition: 0.4s;
+	}
 
-  &:before {
-    background-color: ${colors.border};
-    width: 100%;
-    height: 100%;
-    border-radius: 34px;
-  }
+	&:before {
+		background-color: ${colors.border};
+		width: 100%;
+		height: 100%;
+		border-radius: 34px;
+	}
 
-  &:after {
+	&:after {
 		background-color: ${colors.bgWhite};
-    bottom: 0px;
+		bottom: 0px;
 		top: 44px;
-    left: 4px;
-    height: 26px;
-    width: 26px;
-    border-radius: 50%;
-  }
+		left: 4px;
+		height: 26px;
+		width: 26px;
+		border-radius: 50%;
+	}
 `;
 
 export const CheckBox = styled.input.attrs({ type: 'checkbox' })`
-  position: absolute;
-  width: 0;
-  height: 0;
-  opacity: 0;
-	
-  z-index: -1;
+	position: absolute;
+	width: 0;
+	height: 0;
+	opacity: 0;
 
-  &:checked + ${CheckBoxLabel} {
-    &:before {
-      background-color: ${colors.checkBoxChecked};
-    }
-    &:after {
-      transform: translateX(85px);
-    }
-  }
+	z-index: -1;
+
+	&:checked + ${CheckBoxLabel} {
+		&:before {
+			background-color: ${colors.checkBoxChecked};
+		}
+		&:after {
+			transform: translateX(85px);
+		}
+	}
 `;
-// loading spinner 
+// loading spinner
 
-
-
-	export const SpinnerContainer = styled.div`
-
+export const SpinnerContainer = styled.div`
 	display: flex;
 	align-items: center;
-  justify-content: center;
-  padding: 0rem;
-	`
+	justify-content: center;
+	padding: 0rem;
+`;
 
 // place details
 export const PlaceDetailsStyled = styled(StandardContainer)`
@@ -359,18 +381,47 @@ export const OpinionsWrapper = styled.div`
 // another components
 
 export const WebsideLink = styled.a`
+position: relative;
 	text-decoration: none;
 	color: ${colors.link};
 	font-weight: bold;
 	transition: color 0.3s, text-decoration 0.3s;
 	margin-bottom: 0;
-	&:hover {
-		color: ${colors.linkHover};
-		text-decoration: underline;
-	}
+
 	&:active {
 		color: ${colors.linkHover};
 	}
+	&::before {
+		content: '';
+		color: ${colors.main};
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		transition: opacity 0s;
+		opacity: 0;
+		border-radius: 5px;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background-color: ${colors.main};
+		transition: width 0s;
+	}
+
+	&:hover::after {
+		animation: ${lineAnimation} 2s forwards;
+	}
+
+	&:hover::before {
+    opacity: 1;
+  }
 `;
 
 export const DownloadList = styled(WebsideLink)`
@@ -442,18 +493,20 @@ export const LegendPin = styled.img`
 export const LegendLabel = styled.span`
 	font-size: 0.875rem;
 `;
-export const PinStyled = styled(({ shouldBounce, ...props }) => <img {...props} />)`
-  width: 25px;
-  height: 30px;
-  cursor: pointer;
-  z-index: 1;
-  position: relative;
-  animation: ${(props) =>
-    props.shouldBounce
-      ? css`
-          ${bounce} 1s ease-in-out
-        `
-      : 'none'};
+export const PinStyled = styled(({ shouldBounce, ...props }) => (
+	<img {...props} />
+))`
+	width: 25px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 1;
+	position: relative;
+	animation: ${(props) =>
+		props.shouldBounce
+			? css`
+					${bounce} 1s ease-in-out
+			  `
+			: 'none'};
 `;
 
 /* footer */
@@ -468,7 +521,7 @@ export const FooterContainer = styled.div`
 	display: flex;
 	justify-content: space-around;
 	text-align: center;
-	background-color:  #303e3c;
+	background-color: #303e3c;
 	padding: 3.75rem;
 	padding-bottom: 0;
 `;
@@ -476,7 +529,7 @@ export const FooterContainer = styled.div`
 export const FooterSection = styled.section`
 	margin-bottom: 4rem;
 	h2 {
-		font-size:1.2rem;
+		font-size: 1.2rem;
 	}
 `;
 
@@ -486,18 +539,17 @@ export const SocialIcon = styled(MDBBtn).attrs({
 	margin: 25px;
 	font-size: 30px;
 	background-color: none;
-	transition: opacity .3s;
+	transition: opacity 0.3s;
 
 	&:hover {
-		opacity:0.8;
+		opacity: 0.8;
 	}
-	
 `;
 
 export const FooterCompanyName = styled.div`
 	text-align: center;
 	padding: 3rem;
-	background-color:#031316;
+	background-color: #031316;
 `;
 
 export const LogoContainer = styled.div`
@@ -516,16 +568,26 @@ export const WeatherContainer = styled(StandardContainer)`
 	${boxShadow};
 	grid-area: weather;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	
-	img {
-		max-width: 60%;
-		margin: 0 auto;
-	}
-	@media (min-width: 992px) {
-		width: 100%;
-	}
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+`;
 
+export const WeatherInfo = styled.div`
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding-right: 10px;
+`;
+
+export const WeatherImg = styled.div`
+	flex: 1;
+	display: flex;
+	justify-content: center;
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
 `;
