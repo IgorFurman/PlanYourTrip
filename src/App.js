@@ -22,16 +22,25 @@ const App = () => {
   const searchBarRef = useRef(null);
 
   const dispatch = useDispatch();
+
  
 
-	useLayoutEffect(() => {
+	const updateHeight = () => {
 		if (titleRef.current && searchBarRef.current) {
 			const height = titleRef.current.offsetHeight + searchBarRef.current.offsetHeight;
-			console.log(titleRef.current.offsetHeight);
-			console.log("Title and SearchBar Height:", height);  
 			dispatch(setSearchBarAndTitleHeight(height));
 		}
-	}, [dispatch]);
+	};
+
+	useLayoutEffect(() => {
+		window.addEventListener("resize", updateHeight);
+		updateHeight(); 
+
+		return () => {
+			window.removeEventListener("resize", updateHeight);
+		}
+	}, []);
+
 
 
 	return (
@@ -39,7 +48,7 @@ const App = () => {
 		<ScrollProvider>
 			<GlobalStyle />
 			
-				<Title ref={titleRef}/>
+				<Title ref={titleRef} />
 				<SearchBar ref={searchBarRef} />
 			
 			<Container>

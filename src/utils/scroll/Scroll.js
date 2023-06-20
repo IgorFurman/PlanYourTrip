@@ -2,28 +2,21 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectHasScrolled, setHasScrolled } from '../../redux/scrollSlice';
 
-
-
 const ScrollProvider = ({ children }) => {
-  const searchBarHeight = useSelector(state => state.scroll.searchBarHeight);
+  const searchBarAndTitleHeight = useSelector(state => state.scroll.searchBarAndTitleHeight);
   const hasScrolled = useSelector(selectHasScrolled);
   const dispatch = useDispatch();
-  const isFetchingPlaces = useSelector(
-    (state) => state.placesDisplay.isFetchingPlaces
-  );
 
   useEffect(() => {
-  
-    if (hasScrolled && !isFetchingPlaces) {
+    if (hasScrolled) {
+      console.log("Scrolling to:", searchBarAndTitleHeight); 
       window.scrollTo({
-        top: searchBarHeight,
+        top: searchBarAndTitleHeight,
         behavior: 'smooth',
       });
-      dispatch(setHasScrolled(false)) 
-     
-      
+      dispatch(setHasScrolled(false));
     }
-  }, [hasScrolled, isFetchingPlaces, dispatch]);
+  }, [hasScrolled, searchBarAndTitleHeight, dispatch]);
   return <div>{children}</div>;
 };
 

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   hasScrolled: false,
-  searchBarHeight: 0,
+  searchBarAndTitleHeight: 0
 };
 
 const scrollSlice = createSlice({
@@ -13,13 +13,14 @@ const scrollSlice = createSlice({
       state.hasScrolled = action.payload;
     },
    
-    setSearchBarHeight: (state, action) => { 
-      state.searchBarHeight = action.payload;
-    },
+    setSearchBarAndTitleHeight: (state, action) => {
+      state.searchBarAndTitleHeight = action.payload;
+    }
+
   },
 });
 
-export const { setHasScrolled, setSearchBarHeight  } = scrollSlice.actions;
+export const { setHasScrolled, setSearchBarAndTitleHeight  } = scrollSlice.actions;
 
 export const selectHasScrolled = (state) => state.scroll.hasScrolled;
 
