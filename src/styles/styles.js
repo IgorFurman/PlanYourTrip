@@ -3,53 +3,9 @@ import styled, { keyframes, css, createGlobalStyle } from 'styled-components';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { colors } from './colors';
 
-//
-// animation
-const bounce = keyframes`
- 30% { transform: scale(1.2); }
-  40%, 60% { transform: rotate(-20deg) scale(1.2); }
-  50% { transform: rotate(20deg) scale(1.2); }
-  70% { transform: rotate(0deg) scale(1.2); }
-  100% { transform: scale(1); }
-`;
-const lineAnimation = keyframes`
-  0% {width: 0%;}
-  100% {width: 100%;}
-`;
-// global styles
+import { bounce, lineAnimation } from './animations';
 
-export const GlobalStyle = createGlobalStyle`
- *, *::before, *::after {
-    box-sizing: border-box;
-  }
- body {
-	  color: ${colors.main};
-		font-family: 'Lato', sans-serif;
-		font-size: 14px;
-
-    
-    @media (min-width: 576px) {
-			font-size: 15px;
-    }
-    
-    @media (min-width: 577px) {
-			font-size: 16px;
-    }
-    
-    @media (min-width: 1025px) {
-      font-size: 18px;
-    }
-  }
-
-
-`;
-
-// Mixin for repeated styles
-const boxShadow = css`
-	background-color: ${colors.bgWhite};
-	border-radius: 5px;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-`;
+import { boxShadow } from './mixins';
 
 // main styles
 export const Container = styled.div`
@@ -190,6 +146,7 @@ export const ButtonList = styled.button`
 		font-size: 0.8rem;
 	}
 `;
+
 export const ButtonToggleShowList = styled.button`
 	position: relative;
 	background-color: ${colors.bgWhite};
@@ -213,32 +170,10 @@ export const ButtonToggleShowList = styled.button`
 	}
 `;
 
-export const Input = styled.input`
-	border-radius: 5px;
-	border: 1px solid #ccc;
-	width: 100%;
-	padding: 0.625rem;
-	margin-bottom: 0.8rem;
 
-	@media (min-width: 576px) {
-		padding: 0.7rem;
-		font-size: 1rem;
-	}
-`;
-// map
-export const MapContainerStyled = styled(StandardContainer)`
-	position: relative;
-	height: 90vh;
-	width: 100%;
 
-	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
-		rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
-		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 
-	@media (max-width: 576px) {
-		height: 80vh;
-	}
-`;
+
 
 // title
 
@@ -256,7 +191,7 @@ export const TitleContainer = styled.div`
 		${colors.secondary}
 	);
 	margin: 0;
-	padding: 20px 0;
+	padding: 5rem 0;
 	color: ${colors.bgWhite};
 
 	@media (min-width: 772px) {
@@ -273,16 +208,16 @@ export const TitleContainer = styled.div`
 			${colors.secondary}
 		);
 		margin: 0;
-		padding: 60px 0;
+		padding: 6rem 0;
 		color: ${colors.bgWhite};
 	}
 `;
 
 export const PalmIslands = styled.div`
-img {
+	img {
 		display: none;
 		@media (min-width: 772px) {
-			display:inline-block;
+			display: inline-block;
 			position: absolute;
 			width: 10rem;
 			height: 10rem;
@@ -290,13 +225,13 @@ img {
 			right: 2rem;
 		}
 	}
-`
+`;
 
 export const Suitcase = styled.div`
 	img {
 		display: none;
 		@media (min-width: 772px) {
-			display:inline-block;
+			display: inline-block;
 			position: absolute;
 			rotate: 25deg;
 			width: 10rem;
@@ -307,7 +242,7 @@ export const Suitcase = styled.div`
 	}
 `;
 
-export const TitleStyled = styled.h1`
+export const TitleStyled = styled.div`
 	font-size: 1.4rem;
 	font-weight: bold;
 	color: ${colors.light};
@@ -315,22 +250,6 @@ export const TitleStyled = styled.h1`
 	@media (min-width: 772px) {
 		font-size: 1.5rem;
 		font-weight: bold;
-	}
-`;
-
-export const Slogan = styled.p`
-	margin: 0 auto;
-	text-align: center;
-	font-size: 0.9rem;
-	font-style: italic;
-	color: ${colors.light};
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-`;
-
-// h2 style
-export const Headings = styled.h2`
-	@media (max-width: 576px) {
-		font-size: 18px;
 	}
 `;
 // header
@@ -375,6 +294,19 @@ export const Form = styled.form`
 		margin-left: 1em;
 		font-size: 1rem;
 		max-width: 50%;
+	}
+`;
+
+export const Input = styled.input`
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	width: 100%;
+	padding: 0.625rem;
+	margin-bottom: 0.8rem;
+
+	@media (min-width: 576px) {
+		padding: 0.7rem;
+		font-size: 1rem;
 	}
 `;
 // Check inputs
@@ -450,6 +382,64 @@ export const SpinnerContainer = styled.div`
 	justify-content: center;
 	padding: 0rem;
 `;
+// map
+
+export default styled(StandardContainer)`
+	position: relative;
+	height: 90vh;
+	width: 100%;
+
+	box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+		rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+		rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+
+	@media (max-width: 576px) {
+		height: 80vh;
+	}
+`;
+// map legend
+
+export const LegendContainer = styled.div`
+	position: absolute;
+	top: 25px;
+	left: 25px;
+	background-color: ${colors.bgWhite};
+	padding: 0.625rem;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	z-index: 999;
+`;
+
+export const LegendItem = styled.div`
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.3rem;
+`;
+
+export const LegendPin = styled.img`
+	width: 25px;
+	height: 25px;
+	margin-right: 0.3rem;
+`;
+
+export const LegendLabel = styled.span`
+	font-size: 0.875rem;
+`;
+export const PinStyled = styled(({ shouldBounce, ...props }) => (
+	<img {...props} />
+))`
+	width: 25px;
+	height: 30px;
+	cursor: pointer;
+	z-index: 1;
+	position: relative;
+	animation: ${(props) =>
+		props.shouldBounce
+			? css`
+					${bounce} 1s ease-in-out
+			  `
+			: 'none'};
+`;
 
 // place details
 export const PlaceDetailsStyled = styled(StandardContainer)`
@@ -465,8 +455,6 @@ export const PlaceDetailsStyled = styled(StandardContainer)`
 export const OpinionsWrapper = styled.div`
 	max-width: 100%;
 `;
-
-// another components
 
 export const WebsideLink = styled.a`
 	position: relative;
@@ -554,47 +542,34 @@ export const CarouselImage = styled.img`
 	object-fit: cover;
 `;
 
-// map legend
-export const LegendContainer = styled.div`
-	position: absolute;
-	top: 25px;
-	left: 25px;
-	background-color: ${colors.bgWhite};
-	padding: 0.625rem;
-	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
-	border-radius: 10px;
-	z-index: 999;
-`;
+/* weather box */
 
-export const LegendItem = styled.div`
+export const WeatherContainer = styled(StandardContainer)`
+	${boxShadow};
+	grid-area: weather;
 	display: flex;
+	width: 100%;
+	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 0.3rem;
 `;
 
-export const LegendPin = styled.img`
-	width: 25px;
-	height: 25px;
-	margin-right: 0.3rem;
+export const WeatherInfo = styled.div`
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding-right: 10px;
 `;
 
-export const LegendLabel = styled.span`
-	font-size: 0.875rem;
-`;
-export const PinStyled = styled(({ shouldBounce, ...props }) => (
-	<img {...props} />
-))`
-	width: 25px;
-	height: 30px;
-	cursor: pointer;
-	z-index: 1;
-	position: relative;
-	animation: ${(props) =>
-		props.shouldBounce
-			? css`
-					${bounce} 1s ease-in-out
-			  `
-			: 'none'};
+export const WeatherImg = styled.div`
+	flex: 1;
+	display: flex;
+	justify-content: center;
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
 `;
 
 /* footer */
@@ -654,32 +629,3 @@ export const LogoContainer = styled.div`
 	}
 `;
 
-/* weather box */
-
-export const WeatherContainer = styled(StandardContainer)`
-	${boxShadow};
-	grid-area: weather;
-	display: flex;
-	width: 100%;
-	justify-content: space-between;
-	align-items: center;
-`;
-
-export const WeatherInfo = styled.div`
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	padding-right: 10px;
-`;
-
-export const WeatherImg = styled.div`
-	flex: 1;
-	display: flex;
-	justify-content: center;
-
-	img {
-		max-width: 100%;
-		max-height: 100%;
-		object-fit: contain;
-	}
-`;
