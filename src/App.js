@@ -15,8 +15,8 @@ import Footer from './components/Footer';
 import ScrollProvider from './utils/scroll/Scroll';
 import {MapRefProvider} from './utils/map/MapRefContext'
 
-import { Container, GlobalStyle } from './styles/styles';
-
+import { Container } from './styles/styles';
+import {  GlobalStyle } from './styles/global'
 const App = () => {
 	const titleRef = useRef(null);
   const searchBarRef = useRef(null);
