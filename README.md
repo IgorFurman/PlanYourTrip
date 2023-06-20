@@ -8,11 +8,11 @@ The project is structured into several components, hooks and utility functions:
 
 - **App**: The App component is the main component of the application. It is responsible for rendering other components, managing scroll-related state, and handling window resize events.
 
--**AttractionsList** component is responsible for displaying a list of tourist attractions. It receives data from the Redux store and handles user interactions such as adding attractions to a visit list or showing attractions on the map.
+- **AttractionsList** component is responsible for displaying a list of tourist attractions. It receives data from the Redux store and handles user interactions such as adding attractions to a visit list or showing attractions on the map.
 
 - **HotelsList** component is responsible for displaying a list of hotels. It receives data from the Redux store and handles user interactions such as adding hotels to a visit list or showing hotels on the map.
 
--**RestaurantsList** component is responsible for displaying a list of restaurants based on the user's search in a specific city. It includes the name, address, and rating of each restaurant. The component also provides options to show the restaurants on the map, add them to the "places to visit" list, and toggle the visibility of the list.
+- **RestaurantsList** component is responsible for displaying a list of restaurants based on the user's search in a specific city. It includes the name, address, and rating of each restaurant. The component also provides options to show the restaurants on the map, add them to the "places to visit" list, and toggle the visibility of the list.
 
 - **MapContainer** component is responsible for displaying the Google Map and rendering markers for different places such as attractions, hotels, and restaurants. It utilizes the Google Maps API and interacts with the Redux store to manage the map state and selected places.
 
@@ -28,30 +28,30 @@ The project is structured into several components, hooks and utility functions:
 
 ## Utils and hooks
 
--**MapContext and MapRefProvider**: The MapContext and MapRefProvider are used to create and manage a context for a Map object. The context is created using React's createContext method and a React ref (mapRef) is used to hold the reference to the Map object
+- **MapContext and MapRefProvider**: The MapContext and MapRefProvider are used to create and manage a context for a Map object. The context is created using React's createContext method and a React ref (mapRef) is used to hold the reference to the Map object
 
--**ScrollProvider**: The ScrollProvider is a utility component that provides scroll functionality to its child components.
+- **ScrollProvider**: The ScrollProvider is a utility component that provides scroll functionality to its child components.
 
--**The useMapScroll**: hook is a custom React hook designed to handle specific map interactions related to scrolling and place selection. It interacts with the Redux store by dispatching actions and leverages the Google Maps JavaScript API.
+- **The useMapScroll**: hook is a custom React hook designed to handle specific map interactions related to scrolling and place selection. It interacts with the Redux store by dispatching actions and leverages the Google Maps JavaScript API.
 
 ## Redux Data Management
 
 The data in the application is managed using Redux, which acts as a centralized store for all the application state.
 
--**Slices of State** the state in Redux is divided into "slices", with each slice being managed by its own reducer. For this application, there are four slices of state: 'placesToVisit', 'placesDisplay', 'scroll', and 'search'.
+- **Slices of State** the state in Redux is divided into "slices", with each slice being managed by its own reducer. For this application, there are four slices of state: 'placesToVisit', 'placesDisplay', 'scroll', and 'search'.
 'placesToVisit': Manages the state related to places marked to be visited by the user. Actions include adding and removing places from the list.
 
--**placesToVisit**: Manages the state related to places marked to be visited by the user. Actions include adding and removing places from the list.
+ - **placesToVisit**: Manages the state related to places marked to be visited by the user. Actions include adding and removing places from the list.
 
--**placesDisplay**: Manages the state related to places being displayed. It includes information about places, map settings, fetching status of places, hotels, restaurants, and attractions. It also manages the state related to selected place and position, bouncing animation status and the ID of the selected pin.
+ - **placesDisplay**: Manages the state related to places being displayed. It includes information about places, map settings, fetching status of places, hotels, restaurants, and attractions. It also manages the state related to selected place and position, bouncing animation status and the ID of the selected pin.
 
--**scroll**: Manages the state related to scrolling behaviour of the page, including the scroll status and the combined height of the search bar and title.
+ - **scroll**: Manages the state related to scrolling behaviour of the page, including the scroll status and the combined height of the search bar and title.
 
--**search**: Manages the state related to search functionality, including the current search value and the status of whether a search has been performed.
+ - **search**: Manages the state related to search functionality, including the current search value and the status of whether a search has been performed.
 
--**Reducers and Actions**: Each slice of state has a corresponding Redux 'slice' created using Redux Toolkit's createSlice function, which automatically generates the reducer and actions based on the provided initialState and reducer functions.
+- **Reducers and Actions**: Each slice of state has a corresponding Redux 'slice' created using Redux Toolkit's createSlice function, which automatically generates the reducer and actions based on the provided initialState and reducer functions.
 
--**Saga**: This collection of Redux Saga functions handles asynchronous actions and side effects related to fetching places data from the backend API and managing the application state. The functions include fetching places, hotels, restaurants, and place details. As well as appending additional places, hotels, and restaurants whose are used for fetching when city is searched and user don't need to clear other data. The corresponding watcher functions listen for specific actions and invoke the appropriate Redux Saga functions. The rootSaga function combines all the Redux Saga functions and runs them concurrently to initialize the Redux Saga middleware. Overall, these functions facilitate smooth data fetching and state management within the Redux architecture.
+- **Saga**: This collection of Redux Saga functions handles asynchronous actions and side effects related to fetching places data from the backend API and managing the application state. The functions include fetching places, hotels, restaurants, and place details. As well as appending additional places, hotels, and restaurants whose are used for fetching when city is searched and user don't need to clear other data. The corresponding watcher functions listen for specific actions and invoke the appropriate Redux Saga functions. The rootSaga function combines all the Redux Saga functions and runs them concurrently to initialize the Redux Saga middleware. Overall, these functions facilitate smooth data fetching and state management within the Redux architecture.
 
 ## How to Run
 
