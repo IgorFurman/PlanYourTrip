@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/PlanYourTrip/static/css/main.5f4bdd2f.css",
-    "main.js": "/PlanYourTrip/static/js/main.0e972b41.js",
+    "main.js": "/PlanYourTrip/static/js/main.c6ebd16f.js",
     "static/media/suitcase-title.png": "/PlanYourTrip/static/media/suitcase-title.ca5747bb465d9c39ce91.png",
     "static/media/island-title.png": "/PlanYourTrip/static/media/island-title.e5a799459273e4372b78.png",
     "static/media/unknown.png": "/PlanYourTrip/static/media/unknown.bbe513687816a0913d88.png",
@@ -23,10 +23,10 @@
     "static/media/slick.woff": "/PlanYourTrip/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/PlanYourTrip/index.html",
     "main.5f4bdd2f.css.map": "/PlanYourTrip/static/css/main.5f4bdd2f.css.map",
-    "main.0e972b41.js.map": "/PlanYourTrip/static/js/main.0e972b41.js.map"
+    "main.c6ebd16f.js.map": "/PlanYourTrip/static/js/main.c6ebd16f.js.map"
   },
   "entrypoints": [
     "static/css/main.5f4bdd2f.css",
-    "static/js/main.0e972b41.js"
+    "static/js/main.c6ebd16f.js"
   ]
 }
