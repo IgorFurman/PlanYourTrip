@@ -1,11 +1,14 @@
 {
   "files": {
     "main.css": "/PlanYourTrip/static/css/main.5f4bdd2f.css",
-    "main.js": "/PlanYourTrip/static/js/main.b406d4eb.js",
+    "main.js": "/PlanYourTrip/static/js/main.0e972b41.js",
+    "static/media/suitcase-title.png": "/PlanYourTrip/static/media/suitcase-title.ca5747bb465d9c39ce91.png",
+    "static/media/island-title.png": "/PlanYourTrip/static/media/island-title.e5a799459273e4372b78.png",
     "static/media/unknown.png": "/PlanYourTrip/static/media/unknown.bbe513687816a0913d88.png",
     "static/media/thunderstorm.png": "/PlanYourTrip/static/media/thunderstorm.ee7c55b827155b0ca041.png",
     "static/media/fog.png": "/PlanYourTrip/static/media/fog.9821e1041c12fb7cbc86.png",
     "static/media/rain.png": "/PlanYourTrip/static/media/rain.d0e6de001fdde211be31.png",
+    "static/media/airplane.png": "/PlanYourTrip/static/media/airplane.136396d40f6a68ab5133.png",
     "static/media/sun.png": "/PlanYourTrip/static/media/sun.9f5fc1c8d96c797c5e0e.png",
     "static/media/drizzle.png": "/PlanYourTrip/static/media/drizzle.d44aa707c6dd8a647e5a.png",
     "static/media/cloud.png": "/PlanYourTrip/static/media/cloud.11461593f6551283ce4b.png",
@@ -20,10 +23,10 @@
     "static/media/slick.woff": "/PlanYourTrip/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/PlanYourTrip/index.html",
     "main.5f4bdd2f.css.map": "/PlanYourTrip/static/css/main.5f4bdd2f.css.map",
-    "main.b406d4eb.js.map": "/PlanYourTrip/static/js/main.b406d4eb.js.map"
+    "main.0e972b41.js.map": "/PlanYourTrip/static/js/main.0e972b41.js.map"
   },
   "entrypoints": [
     "static/css/main.5f4bdd2f.css",
-    "static/js/main.b406d4eb.js"
+    "static/js/main.0e972b41.js"
   ]
 }
