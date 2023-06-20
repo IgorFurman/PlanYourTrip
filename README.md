@@ -1,4 +1,6 @@
-# README - Product Sorting and Filtering in React
+# Plan Your Trip app
+
+Check how it works here: https://igorfurman.github.io/PlanYourTrip/
 
 This project is an trip planning application made using React. The main functionality of the application is to provide an interface for displaying attractions, hotels, restaruatns for serached city. Because of the cors limitations and safety data from GOOGLE API is fetched from custom backend API. Backend for this app is here https://github.com/IgorFurman/plan-your-trip-backend.git. User may add those places to list and download it. Except that the app shows the current weather. Below is a brief summary of the structure and functionality of the application.
 
@@ -41,13 +43,13 @@ The data in the application is managed using Redux, which acts as a centralized 
 - **Slices of State** the state in Redux is divided into "slices", with each slice being managed by its own reducer. For this application, there are four slices of state: 'placesToVisit', 'placesDisplay', 'scroll', and 'search'.
 'placesToVisit': Manages the state related to places marked to be visited by the user. Actions include adding and removing places from the list.
 
- - **placesToVisit**: Manages the state related to places marked to be visited by the user. Actions include adding and removing places from the list.
+  - **placesToVisit**: Manages the state related to places marked to be visited by the user. Actions include adding and removing places from the list.
 
- - **placesDisplay**: Manages the state related to places being displayed. It includes information about places, map settings, fetching status of places, hotels, restaurants, and attractions. It also manages the state related to selected place and position, bouncing animation status and the ID of the selected pin.
+  - **placesDisplay**: Manages the state related to places being displayed. It includes information about places, map settings, fetching status of places, hotels, restaurants, and attractions. It also manages the state related to selected place and position, bouncing animation status and the ID of the selected pin.
 
- - **scroll**: Manages the state related to scrolling behaviour of the page, including the scroll status and the combined height of the search bar and title.
+  - **scroll**: Manages the state related to scrolling behaviour of the page, including the scroll status and the combined height of the search bar and title.
 
- - **search**: Manages the state related to search functionality, including the current search value and the status of whether a search has been performed.
+  - **search**: Manages the state related to search functionality, including the current search value and the status of whether a search has been performed.
 
 - **Reducers and Actions**: Each slice of state has a corresponding Redux 'slice' created using Redux Toolkit's createSlice function, which automatically generates the reducer and actions based on the provided initialState and reducer functions.
 
