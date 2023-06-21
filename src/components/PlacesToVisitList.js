@@ -8,10 +8,10 @@ import {
 } from '../styles/styles';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromVisit } from '../redux/placesToVisitSlice';
+import { removeFromVisit } from '../redux&saga/placesToVisitSlice';
 
 import { FaMinusSquare } from 'react-icons/fa';
-import { BsCloudDownloadFill} from "react-icons/bs";
+import { BsCloudDownloadFill } from 'react-icons/bs';
 
 const generateDownloadContent = (placesToVisit) => {
 	let content = '';
@@ -27,7 +27,6 @@ const generateDownloadContent = (placesToVisit) => {
 const PlacesToVisitList = ({ currentCity, style }) => {
 	const dispatch = useDispatch();
 	const placesToVisit = useSelector((state) => state.placesToVisit);
-
 
 	const downloadContent = generateDownloadContent(placesToVisit);
 	const blob = new Blob([downloadContent], { type: 'text/plain' });

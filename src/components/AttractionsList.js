@@ -11,29 +11,31 @@ import {
 
 import useMapScroll from '../hooks/useMapScroll';
 
-import Spinner from './Spinner'
+import Spinner from './Spinner';
 
-import { FaMapMarkerAlt } from 'react-icons/fa'
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaPlusSquare } from 'react-icons/fa';
-import {  BiShow } from "react-icons/bi";
+import { BiShow } from 'react-icons/bi';
 
-import { APPEND_FETCH_PLACES } from '../redux/sagas';
-
-
+import { APPEND_FETCH_PLACES } from '../redux&saga/sagas';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addToVisit } from '../redux/placesToVisitSlice';
-import {
-	setIsListVisible,
-} from '../redux/placesDisplaySlice';
+import { addToVisit } from '../redux&saga/placesToVisitSlice';
+import { setIsListVisible } from '../redux&saga/placesDisplaySlice';
 
 const AttractionsList = ({ style }) => {
 	const dispatch = useDispatch();
 	const placesToVisit = useSelector((state) => state.placesToVisit);
 	const places = useSelector((state) => state.placesDisplay.places);
-	const selectedPlace = useSelector((state) => state.placesDisplay.selectedPlace);
-	const currentCity = useSelector((state) => state.placesDisplay.lastSearchedCity);
-	const isLoading = useSelector((state) => state.placesDisplay.isFetchingAttractions)
+	const selectedPlace = useSelector(
+		(state) => state.placesDisplay.selectedPlace
+	);
+	const currentCity = useSelector(
+		(state) => state.placesDisplay.lastSearchedCity
+	);
+	const isLoading = useSelector(
+		(state) => state.placesDisplay.isFetchingAttractions
+	);
 	const [isListVisible, setIsListVisible] = useState(true);
 	const isCitySearched = Boolean(currentCity);
 
@@ -46,7 +48,7 @@ const AttractionsList = ({ style }) => {
 	const handleToggleListVisibility = () => {
 		setIsListVisible(!isListVisible);
 	};
-	
+
 	const isPlaceInVisitList = (placeId) => {
 		return placesToVisit.some((place) => place.place_id === placeId);
 	};
@@ -84,23 +86,27 @@ const AttractionsList = ({ style }) => {
 												<b>Ocena: </b>
 												{place.rating ? `${place.rating} ⭐` : 'Brak oceny'}
 											</p>
-											<ButtonList style={{marginBottom:'2px'}}onClick={() => handleShowOnMapClick(place)}>
-											<FaMapMarkerAlt /> Pokaż na mapie
+											<ButtonList
+												style={{ marginBottom: '2px' }}
+												onClick={() => handleShowOnMapClick(place)}
+											>
+												<FaMapMarkerAlt /> Pokaż na mapie
 											</ButtonList>
 											<ButtonList
 												onClick={() => handleAddToVisit(place)}
 												disabled={isPlaceInVisitList(place.place_id)}
 											>
-												<FaPlusSquare />Dodaj do listy do odwiedzenia
+												<FaPlusSquare />
+												Dodaj do listy do odwiedzenia
 											</ButtonList>
 										</div>
 									</ListItem>
 								))
-							)  : isCitySearched ? (
+							) : isCitySearched ? (
 								<ButtonList onClick={handleShowAttractions}>
-									<BiShow/> Pokaż dostępne atrakcje
+									<BiShow /> Pokaż dostępne atrakcje
 								</ButtonList>
-							): null}
+							) : null}
 						</List>
 					)}
 				</>

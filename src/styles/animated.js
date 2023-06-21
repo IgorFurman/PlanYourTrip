@@ -15,12 +15,12 @@ export const AnimatedAirplane = styled(animated.div)`
 `;
 
 export const AnimatedTitle = styled(animated.h1)`
-	font-size: 1.2rem;
+	font-size: 3rem;
 	font-weight: bold;
 	color: ${colors.light};
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	@media (min-width: 772px) {
-		font-size: 1.5rem;
+		font-size: 3.2rem;
 		font-weight: bold;
 	}
 `;
@@ -28,7 +28,7 @@ export const AnimatedTitle = styled(animated.h1)`
 export const AnimatedSlogan = styled(animated.p)`
  margin: 0 auto;
 	text-align: center;
-	font-size: 0.9rem;
+	font-size: 0.8em;
 	font-style: italic;
 	color: ${colors.light};
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);

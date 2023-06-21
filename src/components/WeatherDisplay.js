@@ -7,7 +7,7 @@ import {
 	selectSearch,
 	selectHasSearched,
 	setHasSearched,
-} from '../redux/searchSlice';
+} from '../redux&saga/searchSlice.js';
 
 import thunderstormIcon from '../images/weatherIcons/thunderstorm.png';
 import drizzleIcon from '../images/weatherIcons/drizzle.png';
@@ -75,12 +75,12 @@ const WeatherDisplay = () => {
 		return (
 			<WeatherContainer>
 				{' '}
-        <WeatherInfo>
-				<h2>Wyszukaj miasto aby zobaczyć aktualną pogodę</h2>{' '}
-        </WeatherInfo>
-        <WeatherImg>
-				<img src={unknownIcon} alt='weather icons mix' />{' '}
-        </WeatherImg>
+				<WeatherInfo>
+					<h2>Wyszukaj miasto aby zobaczyć aktualną pogodę</h2>{' '}
+				</WeatherInfo>
+				<WeatherImg>
+					<img src={unknownIcon} alt='weather icons mix' />{' '}
+				</WeatherImg>
 			</WeatherContainer>
 		);
 	}
@@ -89,12 +89,12 @@ const WeatherDisplay = () => {
 		return (
 			<WeatherContainer>
 				{' '}
-        <WeatherInfo>
-				<h2>Wyszukaj miasto aby zobaczyć aktualną pogodę</h2>{' '}
-        </WeatherInfo>
-        <WeatherImg>
-				<img src={unknownIcon} alt='weather icons mix' />{' '}
-        </WeatherImg>
+				<WeatherInfo>
+					<h2>Wyszukaj miasto aby zobaczyć aktualną pogodę</h2>{' '}
+				</WeatherInfo>
+				<WeatherImg>
+					<img src={unknownIcon} alt='weather icons mix' />{' '}
+				</WeatherImg>
 			</WeatherContainer>
 		);
 	}

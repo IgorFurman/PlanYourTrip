@@ -10,11 +10,19 @@ import {
 	CheckBoxLabel,
 	Form,
 } from '../styles/styles.js';
-import { setSearch, selectSearch, setHasSearched } from '../redux/searchSlice';
+import {
+	setSearch,
+	selectSearch,
+	setHasSearched,
+} from '../redux&saga/searchSlice.js';
 import LogoImg from '../images/PlanYourTrip-logo.png';
 import Spinner from './Spinner';
 
-import { FETCH_PLACES, FETCH_HOTELS, FETCH_RESTAURANTS } from '../redux/sagas';
+import {
+	FETCH_PLACES,
+	FETCH_HOTELS,
+	FETCH_RESTAURANTS,
+} from '../redux&saga/sagas.js';
 
 import { FaHotel } from 'react-icons/fa';
 import { FaUtensils } from 'react-icons/fa';
@@ -23,7 +31,7 @@ import { FaLandmark } from 'react-icons/fa';
 import {
 	setHasScrolled,
 	setSearchBarAndTitleHeight,
-} from '../redux/scrollSlice';
+} from '../redux&saga/scrollSlice.js';
 
 const SearchBar = React.forwardRef((props, ref) => {
 	const [showAttractions, setShowAttractions] = useState(true);
@@ -66,7 +74,7 @@ const SearchBar = React.forwardRef((props, ref) => {
 					type='text'
 					value={search}
 					onChange={handleChange}
-					placeholder='Wpisz miasto...'
+					placeholder='Gdzie sie wybierasz?'
 				/>
 				<CheckBoxWrapper>
 					<CheckBox
@@ -74,21 +82,30 @@ const SearchBar = React.forwardRef((props, ref) => {
 						onChange={(e) => setShowAttractions(e.target.checked)}
 						id='attractions'
 					/>
-					<CheckBoxLabel htmlFor='attractions'><FaLandmark /> Atrakcje</CheckBoxLabel>
+					<CheckBoxLabel htmlFor='attractions'>
+						<FaLandmark /> Atrakcje
+					</CheckBoxLabel>
 
 					<CheckBox
 						checked={showHotels}
 						onChange={(e) => setShowHotels(e.target.checked)}
 						id='hotels'
 					/>
-					<CheckBoxLabel htmlFor='hotels'> <FaHotel /> Hotele</CheckBoxLabel>
+					<CheckBoxLabel htmlFor='hotels'>
+						{' '}
+						<FaHotel /> Hotele
+					</CheckBoxLabel>
 
 					<CheckBox
 						checked={showRestaurants}
 						onChange={(e) => setShowRestaurants(e.target.checked)}
 						id='restaurants'
 					/>
-					<CheckBoxLabel htmlFor='restaurants'> <FaUtensils />Restauracje</CheckBoxLabel>
+					<CheckBoxLabel htmlFor='restaurants'>
+						{' '}
+						<FaUtensils />
+						Restauracje
+					</CheckBoxLabel>
 				</CheckBoxWrapper>
 				{isFetchingPlaces ? (
 					<Spinner />

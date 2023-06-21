@@ -185,6 +185,7 @@ export const TitleContainer = styled.div`
 	align-items: center;
 	width: 100%;
 	height: 20vh;
+	overflow: hidden;
 	background-image: linear-gradient(
 		to top,
 		${colors.main},
@@ -243,7 +244,7 @@ export const Suitcase = styled.div`
 `;
 
 export const TitleStyled = styled.div`
-	font-size: 1.4rem;
+	font-size: 1.2rem;
 	font-weight: bold;
 	color: ${colors.light};
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -301,7 +302,8 @@ export const Input = styled.input`
 	border-radius: 5px;
 	border: 1px solid #ccc;
 	width: 100%;
-	padding: 0.625rem;
+	padding: 0.7rem;
+	margin-top: 0.2rem;
 	margin-bottom: 0.8rem;
 
 	@media (min-width: 576px) {

@@ -12,7 +12,7 @@ import {
 	AnimatedSlogan,
 } from '../styles/animated';
 
-import { animated, useSpring } from 'react-spring';
+import { useSpring } from 'react-spring';
 import AirplanePNG from '../images/airplane.png';
 import SuitcasePNG from '../images/suitcase-title.png';
 import PalmIslandPNG from '../images/island-title.png';

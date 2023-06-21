@@ -14,7 +14,7 @@ import {
 	setShouldBounce,
 	resetShouldBounce,
 	setSelectedPinId,
-} from '../redux/placesDisplaySlice';
+} from '../redux&saga/placesDisplaySlice.js';
 
 import { useMapRef } from '../utils/map/MapRefContext';
 
