@@ -45,6 +45,12 @@ Plan Your Trip is a comprehensive application for travel planning, developed wit
 - `scroll`: Manages the state related to scrolling behaviour of the page.
 - `search`: Manages the state of the search bar.
 
+--- 
+### 🔄 Redux Saga
+
+Redux Saga is used in the application to manage side effects. The main sagas include fetching places, hotels, and restaurants based on the city search. It also includes sagas to append to the lists without clearing other lists. Sagas are used to handle the asynchronous actions of fetching data from the backend API, making the application more robust and manageable.
+
+
 ---
 
 ## 🚀 Installation and Usage
@@ -56,6 +62,8 @@ git clone https://github.com/IgorFurman/PlanYourTrip.git
 cd PlanYourTrip
 npm install
 npm start
+``
 
+You can simply copy this content and paste it into your README.md file. 
 
-You can simply copy this content and paste it into your README.md file. **Please remeber to create .env file and and pase your own API request link**
+**Please remeber to create .env file and and pase your own API request link**
