@@ -62,6 +62,4 @@ npm install
 npm start
 ```
 
-You can simply copy this content and paste it into your README.md file. 
-
-**Please remeber to create .env file and and pase your own API request link**
+**If you want to use it please remeber to create .env file and and pase your own API request link and of course have npm installed**
