@@ -54,12 +54,23 @@ Plan Your Trip is a comprehensive application for travel planning, developed wit
 
 ## 🚀 Installation and Usage
 
+If you want to try out the project locally, follow these steps:
 
+**Clone the repository**
 ```bash
 git clone https://github.com/IgorFurman/PlanYourTrip.git
-cd PlanYourTrip
+```
+**Navigate to the project directory**
+```bash
+cd <project-directory>
+```
+**Install dependencies**
+```bash
 npm install
+```
+**Run the project**
+```bash
 npm start
 ```
 
-**If you want to use it please remeber to create .env file and and pase your own API request link and of course have npm installed**
+**If you want to use it please remeber to create .env file and and pase your own API request link diecting to your backend (you can clone mine, link at the top) where you have to pase your own API keys**
